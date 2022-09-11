@@ -45,8 +45,8 @@ class TopAppBar extends StatelessWidget {
           Expanded(
             child: _nameAndProfilePicture(
               context,
-              "Emily Smith",
-              "https://image.freepik.com/free-photo/dreamy-girl-biting-sunglasses-looking-away-with-dreamy-face-purple-background_197531-7085.jpg",
+              "Hayat",
+              "https://cdn.dribbble.com/users/5732576/avatars/normal/f23206671000d3a678c6cae19c1e3535.png",
             ),
           ),
         ],

@@ -28,7 +28,7 @@ class _NavigationPanelState extends State<NavigationPanel> {
           ? Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.asset("assets/logo.png", height: 50),
+                Image.asset("assets/migo_logo.png", height: 50),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: NavigationItems.values
@@ -51,7 +51,6 @@ class _NavigationPanelState extends State<NavigationPanel> {
           : Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.asset("assets/logo.png", height: 20),
                 Row(
                   children: NavigationItems.values
                       .map(

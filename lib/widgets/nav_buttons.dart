@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:migo/utils/styles.dart';
 
 class NavigationButton extends StatelessWidget {
   const NavigationButton({
@@ -18,9 +17,7 @@ class NavigationButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       decoration: BoxDecoration(
-        color: isActive
-            ? Styles.defaultYellowColor
-            : Styles.defaultLightWhiteColor,
+        color: isActive ? const Color(0xff90BAF9) : Colors.white,
         shape: BoxShape.circle,
       ),
       child: IconButton(
@@ -28,7 +25,7 @@ class NavigationButton extends StatelessWidget {
         icon: Icon(
           icon,
           size: 20,
-          color: isActive ? Colors.black : Colors.grey,
+          color: isActive ? const Color(0xff0C0D16) : Colors.grey,
         ),
       ),
     );

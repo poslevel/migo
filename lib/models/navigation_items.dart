@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 enum NavigationItems {
   home,
@@ -11,15 +12,15 @@ extension NavigationItemsExtensions on NavigationItems {
   IconData get icon {
     switch (this) {
       case NavigationItems.home:
-        return Icons.home;
+        return Iconsax.home;
       case NavigationItems.panel:
-        return Icons.bar_chart;
+        return Iconsax.chart;
       case NavigationItems.pieChart:
-        return Icons.pie_chart;
+        return Iconsax.chart_square;
       case NavigationItems.users:
-        return Icons.person;
+        return Iconsax.user;
       default:
-        return Icons.person;
+        return Iconsax.add;
     }
   }
 }
