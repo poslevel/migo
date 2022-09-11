@@ -1,28 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:insync/utils/constants.dart';
-
-// enum MyTheme { system, light, dark }
-
-// class ThemeNotifier extends ChangeNotifier{
-// int? theme = await Constants.retrievethemePref();
-// static List<ThemeData> themes = [
-//   lighttheme,
-//   darktheme,
-// ];
-// MyTheme _current = (theme == 1)
-//     ? MyTheme.light
-//     : MyTheme.dark;
-// ThemeData _currentTheme =
-//     (theme == 2) ? themes[0] : themes[1];
-// set currentTheme(theme) {
-//   if (theme != null) {
-//     _current = theme;
-//     _currentTheme = _current == MyTheme.Light ? themes[0] : themes[1];
-//     notifyListeners();
-//   }
-// }
-// }
 
 List<ThemeData> getThemes() {
   return [

@@ -58,10 +58,10 @@ class _LoginViewState extends State<LoginView> {
         Expanded(
           flex: 4,
           child: RotatedBox(
-            quarterTurns: 3,
+            quarterTurns: 0,
             child: Image.asset(
               'assets/lorempicsum.jpg',
-              height: size.height * 0.3,
+              height: size.height * 1,
               width: double.infinity,
               fit: BoxFit.fill,
             ),
@@ -105,10 +105,9 @@ class _LoginViewState extends State<LoginView> {
         size.width > 600
             ? Container()
             : Image.asset(
-                'assets/lorempicsum.jpg',
+                'assets/migo_logo.png',
                 height: size.height * 0.2,
                 width: size.width,
-                fit: BoxFit.fill,
               ),
         SizedBox(
           height: size.height * 0.03,

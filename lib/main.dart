@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:migo/layout/layout.dart';
 import 'package:migo/utils/styles.dart';
+import 'package:migo/utils/theme_config.dart';
 import 'package:migo/view/auth/login.dart';
 import 'package:migo/view/responsive.dart';
 
@@ -15,11 +16,9 @@ class MiGo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MiGo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: lighttheme,
       home: const LoginView(),
     );
   }
