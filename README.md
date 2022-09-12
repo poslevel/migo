@@ -1,16 +1,27 @@
-# migo
+<p align="center">
+<img src="./assets/migo_logo.png" alt="Project logo"></a>
+</p>
+<h1 align="center">MiGo</h1>
 
-A new Flutter project.
+<p  align="center">A POS Software that works everywhere seamlessly</p>
 
-## Getting Started
+<div align="center">
 
-This project is a starting point for a Flutter application.
+[![Hackathon](https://img.shields.io/badge/hackathon-Ode2Create%202.0-orange.svg)](https://hacknu2-0.github.io/)
 
-A few resources to get you started if this is your first Flutter project:
+</div>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 👷‍♂️ Usage
+
+```sh
+flutter run
+```
+
+## ✨ Format code
+
+```sh
+flutter format .
+```
+
