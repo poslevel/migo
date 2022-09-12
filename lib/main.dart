@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:migo/utils/theme_config.dart';
 import 'package:migo/view/auth/login.dart';
-import 'package:migo/view/homepage.dart';
 
 main() async {
   await GetStorage.init();

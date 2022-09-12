@@ -18,17 +18,17 @@ class _NavigationPanelState extends State<NavigationPanel> {
     return Container(
       constraints: const BoxConstraints(minWidth: 80),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xff1F212E),
         borderRadius: BorderRadius.circular(20),
       ),
       margin: Responsive.isDesktop(context)
-          ? const EdgeInsets.symmetric(horizontal: 30, vertical: 20)
+          ? const EdgeInsets.all(16)
           : const EdgeInsets.all(10),
       child: widget.axis == Axis.vertical
           ? Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.asset("assets/migo_logo.png", height: 50),
+                Image.asset("assets/logo.png"),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: NavigationItems.values

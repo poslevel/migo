@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/simple_ui_controller.dart';
@@ -245,31 +244,6 @@ class _LoginViewState extends State<LoginView> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  // Login Button
-  Widget loginButton(Size size) {
-    return SizedBox(
-      width: size.width,
-      height: 55,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-          ),
-        ),
-        onPressed: () {
-          // Validate returns true if the form is valid, or false otherwise.
-          if (_formKey.currentState!.validate()) {
-            // ... Navigate To your Home Page
-          }
-        },
-        child: const Text('Login'),
       ),
     );
   }

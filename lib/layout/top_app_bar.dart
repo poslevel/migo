@@ -46,7 +46,7 @@ class TopAppBar extends StatelessWidget {
             child: _nameAndProfilePicture(
               context,
               "Hayat",
-              "https://cdn.dribbble.com/users/5732576/avatars/normal/f23206671000d3a678c6cae19c1e3535.png",
+              "./assets/avatar.png",
             ),
           ),
         ],
@@ -78,7 +78,7 @@ class TopAppBar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: CircleAvatar(
-              backgroundImage: NetworkImage(imageUrl),
+              backgroundImage: AssetImage(imageUrl),
             ),
           ),
         ),

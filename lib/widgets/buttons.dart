@@ -36,7 +36,7 @@ class PrimaryButton extends StatelessWidget {
             EdgeInsets.symmetric(vertical: vertPad, horizontal: horzPad)),
         shape: MaterialStateProperty.resolveWith<OutlinedBorder>((_) {
           return RoundedRectangleBorder(
-              side: border, borderRadius: BorderRadius.circular(12));
+              side: border, borderRadius: BorderRadius.circular(8));
         }),
         elevation: MaterialStateProperty.all<double>(0),
       ),

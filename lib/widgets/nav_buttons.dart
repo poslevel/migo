@@ -15,16 +15,17 @@ class NavigationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: isActive ? const Color(0xff90BAF9) : Colors.white,
+        color: isActive ? const Color(0xff90BAF9) : const Color(0xff0C0D16),
         shape: BoxShape.circle,
       ),
       child: IconButton(
         onPressed: onPressed,
         icon: Icon(
           icon,
-          size: 20,
+          size: 24,
           color: isActive ? const Color(0xff0C0D16) : Colors.grey,
         ),
       ),
