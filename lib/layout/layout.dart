@@ -39,10 +39,7 @@ class AppLayout extends StatelessWidget {
         mobile: Column(
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: content,
-              ),
+              child: content,
             ),
           ],
         ),
@@ -62,7 +59,7 @@ class AppLayout extends StatelessWidget {
                     TopAppBar(
                       pageName: pageName,
                     ),
-                    SingleChildScrollView(child: content),
+                    Expanded(child: content),
                   ],
                 ),
               ],
