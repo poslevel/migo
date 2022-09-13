@@ -5,41 +5,49 @@ import 'package:migo/view/responsive.dart';
 
 class AppLayout extends StatelessWidget {
   final Widget content;
-
-  const AppLayout({Key? key, required this.content}) : super(key: key);
+  final String pageName;
+  final int activeTab;
+  const AppLayout(
+      {Key? key,
+      required this.content,
+      required this.pageName,
+      required this.activeTab})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Responsive(
       mobile: Column(
         children: [
-          const TopAppBar(),
+          TopAppBar(
+            pageName: pageName,
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: content,
             ),
           ),
-          const NavigationPanel(
+          NavigationPanel(
             axis: Axis.horizontal,
+            activeTab: activeTab,
           ),
         ],
       ),
       desktop: Row(
         children: [
-          const NavigationPanel(
+          NavigationPanel(
             axis: Axis.vertical,
+            activeTab: activeTab,
           ),
           Expanded(
-            flex: 5,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10.0, bottom: 20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(height: 100, child: TopAppBar()),
-                  Expanded(child: content),
-                ],
-              ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TopAppBar(
+                  pageName: pageName,
+                ),
+                Expanded(child: content),
+              ],
             ),
           ),
         ],

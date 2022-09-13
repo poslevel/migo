@@ -3,8 +3,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:migo/view/responsive.dart';
 
 class TopAppBar extends StatefulWidget {
-  const TopAppBar({Key? key}) : super(key: key);
+  const TopAppBar({Key? key, required this.pageName}) : super(key: key);
 
+  final String pageName;
   @override
   State<TopAppBar> createState() => _TopAppBarState();
 }
@@ -83,11 +84,11 @@ class _TopAppBarState extends State<TopAppBar> {
         children: [
           Visibility(
             visible: Responsive.isDesktop(context),
-            child: const Padding(
-              padding: EdgeInsets.only(right: 32.0),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 32.0),
               child: Text(
-                "Home",
-                style: TextStyle(
+                widget.pageName,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 36,
                 ),

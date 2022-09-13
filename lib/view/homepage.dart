@@ -11,13 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int activeTab = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: AppLayout(
+          activeTab: 0,
+          pageName: "Home",
           content: Row(
             children: [
               // Main Panel
