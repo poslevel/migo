@@ -6,6 +6,7 @@ import 'package:migo/view/products/billing.dart';
 import 'package:migo/view/products/product_replacement.dart';
 import 'package:migo/view/products/sales_history.dart';
 import 'package:migo/view/products/warranty_claim.dart';
+import 'package:migo/view/responsive.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -44,9 +45,11 @@ class CTARow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Flex(
+      direction:
+          Responsive.isDesktop(context) ? Axis.horizontal : Axis.vertical,
       mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const ProductCard(
             toPage: Billing(),
