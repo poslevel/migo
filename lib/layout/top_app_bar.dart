@@ -2,11 +2,59 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/view/responsive.dart';
 
-class TopAppBar extends StatelessWidget {
+class TopAppBar extends StatefulWidget {
   const TopAppBar({Key? key}) : super(key: key);
 
   @override
+  State<TopAppBar> createState() => _TopAppBarState();
+}
+
+class _TopAppBarState extends State<TopAppBar> {
+  @override
   Widget build(BuildContext context) {
+    String? chosenDropdownOption;
+    var profileDropdown = DropdownButton(
+      hint: _nameAndProfilePicture(
+        context,
+        "Hayat",
+        "./assets/avatar.png",
+      ),
+      elevation: 8,
+      value: chosenDropdownOption,
+      icon: const Icon(Iconsax.arrow_circle_down),
+      borderRadius: BorderRadius.circular(20),
+      items: const [
+        DropdownMenuItem(
+          value: "Notifications",
+          child: Text(
+            "Notifications",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        DropdownMenuItem(
+          value: "Logout",
+          child: Text(
+            "Logout",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+      onChanged: (value) {
+        setState(
+          () {
+            chosenDropdownOption = value;
+            // print(value);
+          },
+        );
+      },
+    );
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -44,12 +92,8 @@ class TopAppBar extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: _nameAndProfilePicture(
-              context,
-              "Hayat",
-              "./assets/avatar.png",
-            ),
+          DropdownButtonHideUnderline(
+            child: profileDropdown,
           ),
         ],
       ),
@@ -76,10 +120,6 @@ class TopAppBar extends StatelessWidget {
               fontSize: 16,
             ),
           ),
-        ),
-        const Icon(
-          Iconsax.arrow_bottom,
-          size: 24,
         ),
       ],
     );
