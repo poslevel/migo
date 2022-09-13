@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/simple_ui_controller.dart';
 import 'package:migo/view/auth/signup.dart';
 import 'package:migo/view/homepage.dart';
+import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/buttons.dart';
 
 class LoginView extends StatefulWidget {
@@ -35,14 +36,9 @@ class _LoginViewState extends State<LoginView> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth > 600) {
-                return _buildLargeScreen(size, simpleUIController);
-              } else {
-                return _buildSmallScreen(size, simpleUIController);
-              }
-            },
+          child: Responsive(
+            desktop: _buildLargeScreen(size, simpleUIController),
+            mobile: _buildSmallScreen(size, simpleUIController),
           ),
         ),
       ),
@@ -57,20 +53,14 @@ class _LoginViewState extends State<LoginView> {
     return Row(
       children: [
         Expanded(
-          flex: 4,
-          child: RotatedBox(
-            quarterTurns: 0,
-            child: Image.asset(
-              'assets/lorempicsum.jpg',
-              height: size.height * 1,
-              width: double.infinity,
-              fit: BoxFit.fill,
-            ),
+          child: Image.asset(
+            'assets/lorempicsum.jpg',
+            height: size.height * 1,
+            width: double.infinity,
+            fit: BoxFit.cover,
           ),
         ),
-        SizedBox(width: size.width * 0.06),
         Expanded(
-          flex: 5,
           child: _buildMainBody(
             size,
             simpleUIController,
@@ -100,21 +90,14 @@ class _LoginViewState extends State<LoginView> {
   ) {
     return SafeArea(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: size.width > 600
-            ? MainAxisAlignment.center
-            : MainAxisAlignment.center,
         children: [
-          if (size.width > 600)
-            Container()
-          else
-            Padding(
-              padding: const EdgeInsets.only(top: 24.0, left: 24),
-              child: Image.asset(
-                'assets/migo_logo.png',
-                width: size.width / 2,
-              ),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Image.asset(
+              'assets/migo_logo.png',
+              width: size.width / 2,
             ),
+          ),
           const SizedBox(
             height: 10,
           ),
@@ -199,16 +182,13 @@ class _LoginViewState extends State<LoginView> {
                   const SizedBox(height: 16),
 
                   /// Login Button
-                  // loginButton(size),
                   PrimaryButton(
                     buttonTitle: "Login",
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
                         // ... Navigate To your Home Page
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ));
+                        Get.to(() => const HomePage());
                       }
                     },
                   ),
@@ -219,13 +199,11 @@ class _LoginViewState extends State<LoginView> {
                   /// Navigate To Login Screen
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const Signup(),
-                      ));
                       usernameController.clear();
                       passwordController.clear();
                       _formKey.currentState?.reset();
                       simpleUIController.isObscure.value = true;
+                      Get.to(() => const Signup());
                     },
                     child: RichText(
                       text: TextSpan(

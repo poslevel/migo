@@ -8,9 +8,9 @@ ThemeData mainTheme = ThemeData(
     color: Color(0xff1F212E),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(20)),
-      side: BorderSide(color: Color(0xff111111), width: 2),
+      side: BorderSide(color: Colors.transparent, width: 2),
     ),
-    elevation: 10,
+    elevation: 0,
   ),
   listTileTheme: const ListTileThemeData(iconColor: Colors.white),
   scaffoldBackgroundColor: const Color(0xff0C0D16),

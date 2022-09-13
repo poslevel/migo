@@ -34,21 +34,25 @@ class AppLayout extends StatelessWidget {
         ],
       ),
       desktop: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           NavigationPanel(
             axis: Axis.vertical,
             activeTab: activeTab,
           ),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TopAppBar(
-                  pageName: pageName,
-                ),
-                Expanded(child: content),
-              ],
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TopAppBar(
+                    pageName: pageName,
+                  ),
+                  SingleChildScrollView(child: content),
+                ],
+              ),
+            ],
           ),
         ],
       ),

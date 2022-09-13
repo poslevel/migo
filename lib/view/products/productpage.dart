@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:migo/layout/layout.dart';
+import 'package:migo/view/homepage.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -16,18 +18,135 @@ class _ProductsPageState extends State<ProductsPage> {
         activeTab: 1,
         pageName: "Products",
         content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
           children: [
-            InkWell(
-              onTap: () {},
-              child: Card(
-                child: Column(
-                  children: const [
-                    Text("Product page"),
-                  ],
+            const ProductCard(
+                caption: "Create Bill",
+                image: "assets/create_bill_ill.png",
+                cardColor: Color(0xffDAEEB8)),
+            const ProductCard(
+                caption: "View Sales History",
+                image: "assets/view_sales_history.png",
+                cardColor: Color(0xffFFD58E)),
+            const ProductCard(
+                caption: "Order a Product",
+                image: "assets/order_a_product.png",
+                cardColor: Color(0xffBEE4FF)),
+            Column(
+              children: [
+                InkWell(
+                  onTap: () {
+                    Get.to(() => const HomePage(),
+                        transition: Transition.noTransition);
+                  },
+                  borderRadius: BorderRadius.circular(20),
+                  child: Card(
+                    color: const Color(0xffB9B7FF),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            "Product Replacement",
+                            style: TextStyle(
+                              color: Color(0xff0c0d16),
+                              fontWeight: FontWeight.w800,
+                              fontSize: 24,
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xff6C6BA9),
+                                borderRadius: BorderRadius.circular(8)),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 8),
+                            margin: const EdgeInsets.only(top: 8),
+                            child: const Text(
+                              "< 7 days of delivery",
+                              style: TextStyle(
+                                color: Color(0xffffffff),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                InkWell(
+                  onTap: () {
+                    Get.to(() => const HomePage(),
+                        transition: Transition.noTransition);
+                  },
+                  borderRadius: BorderRadius.circular(20),
+                  child: const Card(
+                    color: Color(0xffB9B7FF),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 24.0, vertical: 24),
+                      child: Text(
+                        "Product Replacement",
+                        style: TextStyle(
+                          color: Color(0xff0c0d16),
+                          fontWeight: FontWeight.w800,
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final Widget toPage;
+  final String caption;
+  final String image;
+  final Color? cardColor;
+  const ProductCard({
+    Key? key,
+    this.toPage = const HomePage(),
+    required this.caption,
+    required this.image,
+    required this.cardColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Get.to(() => toPage, transition: Transition.noTransition);
+      },
+      borderRadius: BorderRadius.circular(20),
+      child: Card(
+        color: cardColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(image),
+              Text(
+                caption,
+                style: const TextStyle(
+                  color: Color(0xff0c0d16),
+                  fontWeight: FontWeight.w800,
+                  fontSize: 24,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

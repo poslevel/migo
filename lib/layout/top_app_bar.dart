@@ -80,28 +80,27 @@ class _TopAppBarState extends State<TopAppBar> {
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Row(
-        children: [
-          Visibility(
-            visible: Responsive.isDesktop(context),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 32.0),
-              child: Text(
-                widget.pageName,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 36,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width - 112,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Visibility(
+              visible: Responsive.isDesktop(context),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 32.0),
+                child: Text(
+                  widget.pageName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 36,
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-              ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 2,
               child: const TextField(
                 decoration: InputDecoration(
                   fillColor: Colors.transparent,
@@ -114,11 +113,11 @@ class _TopAppBarState extends State<TopAppBar> {
                 ),
               ),
             ),
-          ),
-          DropdownButtonHideUnderline(
-            child: profileDropdown,
-          ),
-        ],
+            DropdownButtonHideUnderline(
+              child: profileDropdown,
+            ),
+          ],
+        ),
       ),
     );
   }
