@@ -13,7 +13,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AppLayout(
-        activeTab: 4,
+        activeTab: 5,
         pageName: "Settings",
         content: Row(
           children: [

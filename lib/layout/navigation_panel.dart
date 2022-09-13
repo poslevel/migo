@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/models/navigation_items.dart';
 import 'package:migo/view/analytics/analyticspage.dart';
@@ -38,7 +39,14 @@ class _NavigationPanelState extends State<NavigationPanel> {
           ? Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.asset("assets/logo.png"),
+                GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        () => const HomePage(),
+                        transition: Transition.noTransition,
+                      );
+                    },
+                    child: Image.asset("assets/logo.png")),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: NavigationItems.values
@@ -46,63 +54,27 @@ class _NavigationPanelState extends State<NavigationPanel> {
                         (e) => NavigationButton(
                           onPressed: () {
                             if (e.index == 0) {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a, b) {
-                                    return const HomePage();
-                                  },
-                                  transitionsBuilder:
-                                      (context, anim, b, child) =>
-                                          FadeTransition(
-                                              opacity: anim, child: child),
-                                  transitionDuration:
-                                      const Duration(milliseconds: 20),
-                                ),
+                              Get.to(
+                                () => const HomePage(),
+                                transition: Transition.noTransition,
                               );
                             }
                             if (e.index == 1) {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a, b) {
-                                    return const ProductsPage();
-                                  },
-                                  transitionsBuilder:
-                                      (context, anim, b, child) =>
-                                          FadeTransition(
-                                              opacity: anim, child: child),
-                                  transitionDuration:
-                                      const Duration(milliseconds: 20),
-                                ),
+                              Get.to(
+                                () => const ProductsPage(),
+                                transition: Transition.noTransition,
                               );
                             }
                             if (e.index == 2) {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a, b) {
-                                    return const AnalyticsPage();
-                                  },
-                                  transitionsBuilder:
-                                      (context, anim, b, child) =>
-                                          FadeTransition(
-                                              opacity: anim, child: child),
-                                  transitionDuration:
-                                      const Duration(milliseconds: 20),
-                                ),
+                              Get.to(
+                                () => const AnalyticsPage(),
+                                transition: Transition.noTransition,
                               );
                             }
                             if (e.index == 3) {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a, b) {
-                                    return const EmployeesPage();
-                                  },
-                                  transitionsBuilder:
-                                      (context, anim, b, child) =>
-                                          FadeTransition(
-                                              opacity: anim, child: child),
-                                  transitionDuration:
-                                      const Duration(milliseconds: 20),
-                                ),
+                              Get.to(
+                                () => const EmployeesPage(),
+                                transition: Transition.noTransition,
                               );
                             }
                           },
@@ -114,15 +86,9 @@ class _NavigationPanelState extends State<NavigationPanel> {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      PageRouteBuilder(
-                        pageBuilder: (context, a, b) {
-                          return const SettingsPage();
-                        },
-                        transitionsBuilder: (context, anim, b, child) =>
-                            FadeTransition(opacity: anim, child: child),
-                        transitionDuration: const Duration(milliseconds: 20),
-                      ),
+                    Get.to(
+                      () => const SettingsPage(),
+                      transition: Transition.noTransition,
                     );
                   },
                   icon: Icon(
@@ -143,63 +109,27 @@ class _NavigationPanelState extends State<NavigationPanel> {
                         (e) => NavigationButton(
                           onPressed: () {
                             if (e.index == 0) {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a, b) {
-                                    return const HomePage();
-                                  },
-                                  transitionsBuilder:
-                                      (context, anim, b, child) =>
-                                          FadeTransition(
-                                              opacity: anim, child: child),
-                                  transitionDuration:
-                                      const Duration(milliseconds: 20),
-                                ),
+                              Get.to(
+                                () => const HomePage(),
+                                transition: Transition.noTransition,
                               );
                             }
                             if (e.index == 1) {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a, b) {
-                                    return const ProductsPage();
-                                  },
-                                  transitionsBuilder:
-                                      (context, anim, b, child) =>
-                                          FadeTransition(
-                                              opacity: anim, child: child),
-                                  transitionDuration:
-                                      const Duration(milliseconds: 20),
-                                ),
+                              Get.to(
+                                () => const ProductsPage(),
+                                transition: Transition.noTransition,
                               );
                             }
                             if (e.index == 2) {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a, b) {
-                                    return const AnalyticsPage();
-                                  },
-                                  transitionsBuilder:
-                                      (context, anim, b, child) =>
-                                          FadeTransition(
-                                              opacity: anim, child: child),
-                                  transitionDuration:
-                                      const Duration(milliseconds: 20),
-                                ),
+                              Get.to(
+                                () => const AnalyticsPage(),
+                                transition: Transition.noTransition,
                               );
                             }
                             if (e.index == 3) {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a, b) {
-                                    return const EmployeesPage();
-                                  },
-                                  transitionsBuilder:
-                                      (context, anim, b, child) =>
-                                          FadeTransition(
-                                              opacity: anim, child: child),
-                                  transitionDuration:
-                                      const Duration(milliseconds: 20),
-                                ),
+                              Get.to(
+                                () => const EmployeesPage(),
+                                transition: Transition.noTransition,
                               );
                             }
                           },
@@ -211,15 +141,9 @@ class _NavigationPanelState extends State<NavigationPanel> {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      PageRouteBuilder(
-                        pageBuilder: (context, a, b) {
-                          return const SettingsPage();
-                        },
-                        transitionsBuilder: (context, anim, b, child) =>
-                            FadeTransition(opacity: anim, child: child),
-                        transitionDuration: const Duration(milliseconds: 20),
-                      ),
+                    Get.to(
+                      () => const SettingsPage(),
+                      transition: Transition.noTransition,
                     );
                   },
                   icon: Icon(

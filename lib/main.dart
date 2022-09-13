@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:migo/utils/theme_config.dart';
 import 'package:migo/view/auth/login.dart';
@@ -14,7 +15,7 @@ class MiGo extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'MiGo',
       debugShowCheckedModeBanner: false,
       theme: mainTheme,
