@@ -23,25 +23,47 @@ class _TopAppBarState extends State<TopAppBar> {
       value: chosenDropdownOption,
       icon: const Icon(Iconsax.arrow_circle_down),
       borderRadius: BorderRadius.circular(20),
-      items: const [
+      items: [
         DropdownMenuItem(
           value: "Notifications",
-          child: Text(
-            "Notifications",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
+          child: Row(
+            children: const [
+              Icon(
+                Iconsax.notification,
+                size: 20,
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "Notifications",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         DropdownMenuItem(
           value: "Logout",
-          child: Text(
-            "Logout",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
+          child: Row(
+            children: const [
+              Icon(
+                Iconsax.logout,
+                size: 20,
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "Logout",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
