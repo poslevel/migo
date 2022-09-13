@@ -18,15 +18,15 @@ class NavigationButton extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: isActive ? const Color(0xff90BAF9) : const Color(0xff0C0D16),
         shape: BoxShape.circle,
       ),
       child: IconButton(
         onPressed: onPressed,
+        hoverColor: Colors.black,
         icon: Icon(
           icon,
           size: 24,
-          color: isActive ? const Color(0xff0C0D16) : Colors.grey,
+          color: isActive ? Colors.white : const Color(0xff6C6BA9),
         ),
       ),
     );

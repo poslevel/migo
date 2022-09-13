@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:migo/models/navigation_items.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/nav_buttons.dart';
@@ -17,12 +18,15 @@ class _NavigationPanelState extends State<NavigationPanel> {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(minWidth: 80),
-      decoration: BoxDecoration(
-        color: const Color(0xff1F212E),
-        borderRadius: BorderRadius.circular(20),
+      decoration: const BoxDecoration(
+        color: Color(0xff1F212E),
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
       ),
       margin: Responsive.isDesktop(context)
-          ? const EdgeInsets.all(16)
+          ? const EdgeInsets.all(0)
           : const EdgeInsets.all(10),
       child: widget.axis == Axis.vertical
           ? Column(
@@ -45,7 +49,18 @@ class _NavigationPanelState extends State<NavigationPanel> {
                       )
                       .toList(),
                 ),
-                Container()
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      activeTab = 5;
+                    });
+                  },
+                  icon: Icon(
+                    Iconsax.setting,
+                    color:
+                        activeTab == 5 ? Colors.white : const Color(0xff6C6BA9),
+                  ),
+                )
               ],
             )
           : Row(

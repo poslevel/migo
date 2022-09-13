@@ -3,9 +3,9 @@ import 'package:iconsax/iconsax.dart';
 
 enum NavigationItems {
   home,
-  users,
-  panel,
+  products,
   pieChart,
+  users,
 }
 
 extension NavigationItemsExtensions on NavigationItems {
@@ -13,12 +13,12 @@ extension NavigationItemsExtensions on NavigationItems {
     switch (this) {
       case NavigationItems.home:
         return Iconsax.home;
-      case NavigationItems.panel:
-        return Iconsax.chart;
+      case NavigationItems.products:
+        return Iconsax.box;
       case NavigationItems.pieChart:
         return Iconsax.chart_square;
       case NavigationItems.users:
-        return Iconsax.user;
+        return Iconsax.people;
       default:
         return Iconsax.add;
     }
