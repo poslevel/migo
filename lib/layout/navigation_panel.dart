@@ -18,16 +18,16 @@ class _NavigationPanelState extends State<NavigationPanel> {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(minWidth: 80),
-      decoration: const BoxDecoration(
-        color: Color(0xff1F212E),
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),
+      decoration: BoxDecoration(
+        color: const Color(0xff1F212E),
+        borderRadius: !Responsive.isMobile(context)
+            ? const BorderRadius.only(
+                topRight: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              )
+            : BorderRadius.circular(0),
       ),
-      margin: Responsive.isDesktop(context)
-          ? const EdgeInsets.all(0)
-          : const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(0),
       child: widget.axis == Axis.vertical
           ? Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -81,7 +81,18 @@ class _NavigationPanelState extends State<NavigationPanel> {
                       )
                       .toList(),
                 ),
-                Container()
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      activeTab = 5;
+                    });
+                  },
+                  icon: Icon(
+                    Iconsax.setting,
+                    color:
+                        activeTab == 5 ? Colors.white : const Color(0xff6C6BA9),
+                  ),
+                )
               ],
             ),
     );

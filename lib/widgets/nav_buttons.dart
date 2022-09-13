@@ -17,7 +17,7 @@ class NavigationButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.circle,
       ),
       child: IconButton(
