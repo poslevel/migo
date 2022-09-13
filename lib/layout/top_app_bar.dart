@@ -88,19 +88,16 @@ class _TopAppBarState extends State<TopAppBar> {
           children: [
             Visibility(
               visible: Responsive.isDesktop(context),
-              child: Padding(
-                padding: const EdgeInsets.only(right: 32.0),
-                child: Text(
-                  widget.pageName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 36,
-                  ),
+              child: Text(
+                widget.pageName,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 36,
                 ),
               ),
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width / 2,
+              width: MediaQuery.of(context).size.width / 3,
               child: const TextField(
                 decoration: InputDecoration(
                   fillColor: Colors.transparent,
