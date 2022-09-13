@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:migo/layout/layout.dart';
-import 'package:migo/view/responsive.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
