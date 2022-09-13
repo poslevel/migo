@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:migo/layout/layout.dart';
+import 'package:migo/widgets/piechart.dart';
 
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({super.key});
@@ -11,24 +12,11 @@ class AnalyticsPage extends StatefulWidget {
 class _AnalyticsPageState extends State<AnalyticsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppLayout(
-        activeTab: 2,
-        pageName: "Analytics",
-        content: Row(
-          children: [
-            InkWell(
-              onTap: () {},
-              child: Card(
-                child: Column(
-                  children: const [
-                    Text("Analytics page"),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+    return AppLayout(
+      activeTab: 2,
+      pageName: "Analytics",
+      content: Row(
+        children: [SizedBox(height: 270, child: PieChartSample2())],
       ),
     );
   }

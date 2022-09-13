@@ -6,12 +6,10 @@ class SalesHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppLayout(
-        activeTab: 1,
-        content: Container(),
-        pageName: "Sales History",
-      ),
+    return AppLayout(
+      activeTab: 1,
+      content: Container(),
+      pageName: "Sales History",
     );
   }
 }

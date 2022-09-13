@@ -6,12 +6,10 @@ class ProductReplacement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppLayout(
-        activeTab: 1,
-        content: Container(),
-        pageName: "Product Replacement",
-      ),
+    return AppLayout(
+      activeTab: 1,
+      content: Container(),
+      pageName: "Product Replacement",
     );
   }
 }

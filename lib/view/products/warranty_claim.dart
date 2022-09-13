@@ -6,12 +6,10 @@ class WarrantyClaim extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppLayout(
-        activeTab: 1,
-        content: Container(),
-        pageName: "Warranty Claim",
-      ),
+    return AppLayout(
+      activeTab: 1,
+      content: Container(),
+      pageName: "Warranty Claim",
     );
   }
 }
