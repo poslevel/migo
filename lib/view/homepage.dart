@@ -11,12 +11,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppLayout(
-        activeTab: 0,
-        pageName: "Home",
-        content: Container(),
-      ),
+    return AppLayout(
+      activeTab: 0,
+      pageName: "Home",
+      content: Container(),
     );
   }
 }

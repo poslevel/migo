@@ -18,20 +18,18 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppLayout(
-        activeTab: 1,
-        pageName: "Products",
-        content: SingleChildScrollView(
-          primary: false,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              CTARow(),
-              CTARow(),
-              CTARow(),
-            ],
-          ),
+    return AppLayout(
+      activeTab: 1,
+      pageName: "Products",
+      content: SingleChildScrollView(
+        primary: false,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            CTARow(),
+            CTARow(),
+            CTARow(),
+          ],
         ),
       ),
     );
