@@ -7,7 +7,7 @@ class Billing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      activeTab: 1,
+      activeTab: 0,
       content: Row(
         children: [],
       ),

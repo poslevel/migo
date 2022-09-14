@@ -10,6 +10,7 @@ class PrimaryButton extends StatelessWidget {
     this.iconRight,
     this.bgColor = const Color(0xffff6900),
     this.textColor = const Color(0xffffffff),
+    this.iconBgColor = Colors.transparent,
     this.border = BorderSide.none,
     this.horzPad = 8,
     this.vertPad = 14,
@@ -21,6 +22,7 @@ class PrimaryButton extends StatelessWidget {
   final Icon? iconRight;
   final Color? bgColor;
   final Color? textColor;
+  final Color? iconBgColor;
   final BorderSide border;
   final double vertPad;
   final double horzPad;
@@ -49,7 +51,10 @@ class PrimaryButton extends StatelessWidget {
             child: imageLeft,
           ),
           Container(
-            padding: iconLeft == null ? null : const EdgeInsets.only(right: 12),
+            padding: iconLeft == null ? null : const EdgeInsets.all(8),
+            margin: iconLeft == null ? null : const EdgeInsets.only(right: 12),
+            decoration: BoxDecoration(
+                color: iconBgColor, borderRadius: BorderRadius.circular(8)),
             child: iconLeft,
           ),
           Text(

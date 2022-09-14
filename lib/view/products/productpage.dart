@@ -117,7 +117,9 @@ class _ProductsPageState extends State<ProductsPage> {
                           child: const Text(
                             "All Products in store (28)",
                             style: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.w800),
+                              fontSize: 28,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
                         ),
                         const SizedBox(

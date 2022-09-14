@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:migo/view/products/billing.dart';
+import 'package:migo/view/billing/billing.dart';
 import 'package:migo/view/products/product_replacement.dart';
 import 'package:migo/view/products/sales_history.dart';
 import 'package:migo/view/products/warranty_claim.dart';
