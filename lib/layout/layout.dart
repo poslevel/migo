@@ -49,18 +49,13 @@ class AppLayout extends StatelessWidget {
               axis: Axis.vertical,
               activeTab: activeTab,
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
+            Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TopAppBar(
-                      pageName: pageName,
-                    ),
-                    Expanded(child: content),
-                  ],
+                TopAppBar(
+                  pageName: pageName,
                 ),
+                Flexible(child: content),
               ],
             ),
           ],

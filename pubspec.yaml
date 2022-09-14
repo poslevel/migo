@@ -51,6 +51,7 @@ dependencies:
   sqflite: ^2.0.3+1
   # UI related
   toggle_switch: ^2.0.1
+  url_launcher: ^6.1.5
 
 
 
