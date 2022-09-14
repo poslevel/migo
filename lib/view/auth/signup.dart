@@ -64,7 +64,7 @@ class _SignupState extends State<Signup> {
         ),
         Expanded(
           child: Image.asset(
-            'assets/lorempicsum.jpg',
+            'assets/side_image.png',
             height: size.height * 1,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -252,6 +252,7 @@ class _SignupState extends State<Signup> {
 
                   /// Login Button
                   PrimaryButton(
+                    vertPad: 20,
                     buttonTitle: "Create Admin account",
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.

@@ -53,17 +53,17 @@ class _LoginViewState extends State<LoginView> {
     return Row(
       children: [
         Expanded(
-          child: Image.asset(
-            'assets/lorempicsum.jpg',
-            height: size.height * 1,
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
-        ),
-        Expanded(
           child: _buildMainBody(
             size,
             simpleUIController,
+          ),
+        ),
+        Expanded(
+          child: Image.asset(
+            'assets/side_image.png',
+            height: size.height * 1,
+            width: double.infinity,
+            fit: BoxFit.cover,
           ),
         ),
       ],
@@ -183,6 +183,7 @@ class _LoginViewState extends State<LoginView> {
 
                   /// Login Button
                   PrimaryButton(
+                    vertPad: 20,
                     buttonTitle: "Login",
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.
