@@ -86,30 +86,27 @@ class _TopAppBarState extends State<TopAppBar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Visibility(
-              visible: Responsive.isDesktop(context),
-              child: Text(
-                widget.pageName,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 36,
-                ),
+            Text(
+              widget.pageName,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: Responsive.isMobile(context) ? 24 : 36,
               ),
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 3,
-              child: const TextField(
-                decoration: InputDecoration(
-                  fillColor: Colors.transparent,
-                  hintText: "Search",
-                  icon: Icon(Iconsax.search_normal),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    borderSide: BorderSide(color: Colors.transparent),
-                  ),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width / 3,
+            //   child: const TextField(
+            //     decoration: InputDecoration(
+            //       fillColor: Colors.transparent,
+            //       hintText: "Search",
+            //       icon: Icon(Iconsax.search_normal),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            //         borderSide: BorderSide(color: Colors.transparent),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             DropdownButtonHideUnderline(
               child: profileDropdown,
             ),

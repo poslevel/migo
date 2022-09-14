@@ -13,7 +13,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      activeTab: 2,
+      activeTab: 1,
       pageName: "Analytics",
       content: Row(
         children: const [SizedBox(height: 270, child: PieChartSample2())],

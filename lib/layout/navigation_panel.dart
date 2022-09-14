@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/models/navigation_items.dart';
 import 'package:migo/view/analytics/analyticspage.dart';
-import 'package:migo/view/employees/employee_dashboard.dart';
-import 'package:migo/view/homepage.dart';
+// import 'package:migo/view/employees/employee_dashboard.dart';
+// import 'package:migo/view/homepage.dart';
 import 'package:migo/view/products/productpage.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/view/settings/settingspage.dart';
@@ -41,8 +41,12 @@ class _NavigationPanelState extends State<NavigationPanel> {
               children: [
                 GestureDetector(
                     onTap: () {
+                      // Get.to(
+                      //   () => const HomePage(),
+                      //   transition: Transition.noTransition,
+                      // );
                       Get.to(
-                        () => const HomePage(),
+                        () => const ProductsPage(),
                         transition: Transition.noTransition,
                       );
                     },
@@ -53,30 +57,30 @@ class _NavigationPanelState extends State<NavigationPanel> {
                       .map(
                         (e) => NavigationButton(
                           onPressed: () {
+                            // if (e.index == 0) {
+                            //   Get.to(
+                            //     () => const HomePage(),
+                            //     transition: Transition.noTransition,
+                            //   );
+                            // }
                             if (e.index == 0) {
-                              Get.to(
-                                () => const HomePage(),
-                                transition: Transition.noTransition,
-                              );
-                            }
-                            if (e.index == 1) {
                               Get.to(
                                 () => const ProductsPage(),
                                 transition: Transition.noTransition,
                               );
                             }
-                            if (e.index == 2) {
+                            if (e.index == 1) {
                               Get.to(
                                 () => const AnalyticsPage(),
                                 transition: Transition.noTransition,
                               );
                             }
-                            if (e.index == 3) {
-                              Get.to(
-                                () => const EmployeesPage(),
-                                transition: Transition.noTransition,
-                              );
-                            }
+                            // if (e.index == 3) {
+                            //   Get.to(
+                            //     () => const EmployeesPage(),
+                            //     transition: Transition.noTransition,
+                            //   );
+                            // }
                           },
                           icon: e.icon,
                           isActive: e.index == widget.activeTab,
@@ -101,58 +105,38 @@ class _NavigationPanelState extends State<NavigationPanel> {
               ],
             )
           : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  children: NavigationItems.values
-                      .map(
-                        (e) => NavigationButton(
-                          onPressed: () {
-                            if (e.index == 0) {
-                              Get.to(
-                                () => const HomePage(),
-                                transition: Transition.noTransition,
-                              );
-                            }
-                            if (e.index == 1) {
-                              Get.to(
-                                () => const ProductsPage(),
-                                transition: Transition.noTransition,
-                              );
-                            }
-                            if (e.index == 2) {
-                              Get.to(
-                                () => const AnalyticsPage(),
-                                transition: Transition.noTransition,
-                              );
-                            }
-                            if (e.index == 3) {
-                              Get.to(
-                                () => const EmployeesPage(),
-                                transition: Transition.noTransition,
-                              );
-                            }
-                          },
-                          icon: e.icon,
-                          isActive: e.index == widget.activeTab,
-                        ),
-                      )
-                      .toList(),
+                NavigationButton(
+                  isActive: widget.activeTab == 0,
+                  icon: NavigationItems.products.icon,
+                  onPressed: () {
+                    Get.to(
+                      () => const ProductsPage(),
+                      transition: Transition.noTransition,
+                    );
+                  },
                 ),
-                IconButton(
+                NavigationButton(
+                  isActive: widget.activeTab == 1,
+                  icon: NavigationItems.analytics.icon,
+                  onPressed: () {
+                    Get.to(
+                      () => const AnalyticsPage(),
+                      transition: Transition.noTransition,
+                    );
+                  },
+                ),
+                NavigationButton(
+                  isActive: widget.activeTab == 5,
                   onPressed: () {
                     Get.to(
                       () => const SettingsPage(),
                       transition: Transition.noTransition,
                     );
                   },
-                  icon: Icon(
-                    Iconsax.setting,
-                    color: widget.activeTab == 5
-                        ? Colors.white
-                        : const Color(0xff6C6BA9),
-                  ),
-                )
+                  icon: Iconsax.setting,
+                ),
               ],
             ),
     );
