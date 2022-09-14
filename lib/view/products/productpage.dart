@@ -111,18 +111,28 @@ class _ProductsPageState extends State<ProductsPage> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "All Products in store (28)",
-                          style: TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.w800),
+                      children: [
+                        Visibility(
+                          visible: Responsive.isDesktop(context),
+                          child: const Text(
+                            "All Products in store (28)",
+                            style: TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.w800),
+                          ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 200,
                           child: TextField(
                             decoration: InputDecoration(
+                              fillColor: Colors.transparent,
                               prefixIcon: Icon(Iconsax.search_normal),
                               hintText: 'Search...',
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8)),
