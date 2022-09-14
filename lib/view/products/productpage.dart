@@ -23,11 +23,14 @@ class _ProductsPageState extends State<ProductsPage> {
       pageName: "Products",
       content: SingleChildScrollView(
         primary: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            CTARow(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              CTARow(),
+            ],
+          ),
         ),
       ),
     );
@@ -42,12 +45,16 @@ class CTARow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Responsive.isDesktop(context) ? 270 : null,
-      child: Flex(
+      // height: Responsive.isDesktop(context) ? 270 : null,
+      width: !Responsive.isMobile(context)
+          ? MediaQuery.of(context).size.width - 90
+          : null,
+      child: Wrap(
+        spacing: 4,
         direction:
-            Responsive.isDesktop(context) ? Axis.horizontal : Axis.vertical,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
+            !Responsive.isMobile(context) ? Axis.horizontal : Axis.vertical,
+        // mainAxisSize: MainAxisSize.max,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const ProductCard(
               toPage: Billing(),
@@ -110,7 +117,7 @@ class CTARow extends StatelessWidget {
               ),
               SizedBox(
                 height: 135,
-                width: 316,
+                width: 315,
                 child: InkWell(
                   onTap: () {
                     Get.to(() => const WarrantyClaim(),
@@ -118,7 +125,7 @@ class CTARow extends StatelessWidget {
                   },
                   borderRadius: BorderRadius.circular(20),
                   child: Card(
-                    color: Color(0xffB9B7FF),
+                    color: const Color(0xffB9B7FF),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 24.0, vertical: 24),
@@ -185,7 +192,7 @@ class ProductCard extends StatelessWidget {
       child: Card(
         color: cardColor,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

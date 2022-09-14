@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
       activeTab: 0,
       pageName: "Home",
       content: Row(
-        children: [SizedBox(height: 270, child: PieChartSample2())],
+        children: const [SizedBox(height: 270, child: PieChartSample2())],
       ),
     );
   }

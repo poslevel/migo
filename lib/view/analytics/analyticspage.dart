@@ -16,7 +16,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
       activeTab: 2,
       pageName: "Analytics",
       content: Row(
-        children: [SizedBox(height: 270, child: PieChartSample2())],
+        children: const [SizedBox(height: 270, child: PieChartSample2())],
       ),
     );
   }
