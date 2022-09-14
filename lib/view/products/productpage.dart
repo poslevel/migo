@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:migo/layout/layout.dart';
 import 'package:migo/view/homepage.dart';
 import 'package:migo/view/products/billing.dart';
@@ -22,16 +23,130 @@ class _ProductsPageState extends State<ProductsPage> {
       activeTab: 1,
       pageName: "Products",
       content: SingleChildScrollView(
+        padding: const EdgeInsets.only(left: 8.0),
         primary: false,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              CTARow(),
-            ],
-          ),
+        child: Column(
+          children: [
+            const CTARow(),
+            SizedBox(
+              width: !Responsive.isMobile(context)
+                  ? MediaQuery.of(context).size.width - 90
+                  : null,
+              child: Wrap(
+                children: [
+                  ProductCard(),
+                  ProductCard(),
+                  ProductCard(),
+                  ProductCard(),
+                ],
+              ),
+            )
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  const ProductCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: Responsive.isDesktop(context) ? 400 : 300,
+      child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Image.asset("assets/mi_watch_img.png"),
+                    ],
+                  ),
+                  const Text(
+                    "Mi Watch Revolve Active",
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 28),
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        "Price: ",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 22),
+                      ),
+                      const Text(
+                        "₹9,999",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800, fontSize: 28),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Variants: ",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 22),
+                      ),
+                      Row(
+                        children: [
+                          VariantCircle(),
+                          VariantCircle(),
+                          VariantCircle(),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(24),
+            decoration: BoxDecoration(
+                color: Color(0xff0C0D16),
+                borderRadius: BorderRadius.circular(16)),
+            child: IconButton(
+                padding: EdgeInsets.all(16),
+                onPressed: () {},
+                icon: Icon(Iconsax.export_3)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class VariantCircle extends StatelessWidget {
+  const VariantCircle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 36,
+      width: 36,
+      margin: EdgeInsets.only(right: 4),
+      decoration: BoxDecoration(
+        color: Colors.lightBlueAccent,
+        shape: BoxShape.circle,
+        border: Border.all(color: Color(0xffFF6900), width: 2.0),
       ),
     );
   }
@@ -56,17 +171,17 @@ class CTARow extends StatelessWidget {
         // mainAxisSize: MainAxisSize.max,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const ProductCard(
+          const ProductCTACard(
               toPage: Billing(),
               caption: "Create Bill",
               image: "assets/create_bill_ill.png",
               cardColor: Color(0xffDAEEB8)),
-          const ProductCard(
+          const ProductCTACard(
               toPage: SalesHistory(),
               caption: "View Sales History",
               image: "assets/view_sales_history.png",
               cardColor: Color(0xffFFD58E)),
-          const ProductCard(
+          const ProductCTACard(
               caption: "Order a Product",
               image: "assets/order_a_product.png",
               cardColor: Color(0xffBEE4FF)),
@@ -169,12 +284,12 @@ class CTARow extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
+class ProductCTACard extends StatelessWidget {
   final Widget toPage;
   final String caption;
   final String image;
   final Color? cardColor;
-  const ProductCard({
+  const ProductCTACard({
     Key? key,
     this.toPage = const HomePage(),
     required this.caption,
