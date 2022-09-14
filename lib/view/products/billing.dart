@@ -8,7 +8,9 @@ class Billing extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppLayout(
       activeTab: 1,
-      content: Container(),
+      content: Row(
+        children: [],
+      ),
       pageName: "Billing",
     );
   }

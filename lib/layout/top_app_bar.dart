@@ -77,7 +77,9 @@ class _TopAppBarState extends State<TopAppBar> {
             // print(value);
           },
         );
-        Get.to(() => const LoginView());
+        if (value == "Logout") {
+          Get.to(() => const LoginView());
+        }
       },
     );
 

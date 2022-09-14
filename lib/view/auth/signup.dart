@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/simple_ui_controller.dart';
 import 'package:migo/view/auth/login.dart';
-import 'package:migo/view/homepage.dart';
+import 'package:migo/view/products/productpage.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/buttons.dart';
 
@@ -257,7 +257,7 @@ class _SignupState extends State<Signup> {
                       // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
                         // ... Navigate To your Home Page
-                        Get.to(() => const HomePage());
+                        Get.to(() => const ProductsPage());
                       }
                     },
                   ),
