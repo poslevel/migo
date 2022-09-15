@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     Key? key,
-    required this.buttonTitle,
+    this.buttonTitle,
     required this.onPressed,
     this.imageLeft,
     this.iconLeft,
@@ -15,7 +15,7 @@ class PrimaryButton extends StatelessWidget {
     this.horzPad = 8,
     this.vertPad = 14,
   }) : super(key: key);
-  final String buttonTitle;
+  final String? buttonTitle;
   final void Function()? onPressed;
   final Image? imageLeft;
   final Icon? iconLeft;
@@ -57,10 +57,11 @@ class PrimaryButton extends StatelessWidget {
                 color: iconBgColor, borderRadius: BorderRadius.circular(8)),
             child: iconLeft,
           ),
-          Text(
-            buttonTitle,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-          ),
+          if(buttonTitle != null)
+            Text(
+              buttonTitle!,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
           Container(
             padding:
                 iconRight == null ? null : const EdgeInsets.only(right: 12),

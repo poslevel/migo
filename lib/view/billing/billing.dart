@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:migo/controller/product_controller.dart';
 import 'package:migo/layout/layout.dart';
 import 'package:migo/view/responsive.dart';
+import 'package:migo/widgets/buttons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Billing extends StatefulWidget {
@@ -12,21 +15,45 @@ class Billing extends StatefulWidget {
 }
 
 class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
-  static const List<Tab> myTabs = <Tab>[
+  static List<Tab> myTabs = <Tab>[
     Tab(
         child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Text("Add Products"),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: const [
+          Icon(
+            Iconsax.bag,
+            size: 20,
+          ),
+          Text("Add Products"),
+        ],
+      ),
     )),
     Tab(
         child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Text("Customer info"),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: const [
+          Icon(
+            Iconsax.user_edit,
+            size: 20,
+          ),
+          Text("Customer info"),
+        ],
+      ),
     )),
     Tab(
         child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Text("Payment"),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: const [
+          Icon(
+            Iconsax.dollar_square,
+            size: 20,
+          ),
+          Text("Payment"),
+        ],
+      ),
     )),
   ];
 
@@ -57,20 +84,64 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
           appBar: TabBar(
             controller: _tabController,
             unselectedLabelColor: Colors.white,
-            labelPadding: EdgeInsets.symmetric(horizontal: 100),
+            isScrollable: true,
             tabs: myTabs,
             indicatorSize: TabBarIndicatorSize.label,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: Color(0xffB9B7FF),
+              color: const Color(0xffB9B7FF),
             ),
           ),
           body: TabBarView(
             controller: _tabController,
-            children: const [
-              _AddProductsPage(),
-              _AddProductsPage(),
-              _AddProductsPage(),
+            children: [
+              const _AddProductsPage(),
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(24),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          icon: Icon(Iconsax.user_octagon),
+                          label: Text("Customer Name"),
+                          hintText: "Jhon Doe"),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(24),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          icon: Icon(Iconsax.sms),
+                          label: Text("E-mail"),
+                          hintText: "jhon.doe@example.com"),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(24),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          icon: Icon(Iconsax.call),
+                          label: Text("Phone Number"),
+                          hintText: "9553052451"),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(24),
+                    child: TextField(
+                      maxLines: 3,
+                      decoration: InputDecoration(
+                          icon: Icon(Iconsax.location),
+                          label: Text("Address"),
+                          hintText: "Where does your customer live"),
+                    ),
+                  ),
+                  PrimaryButton(
+                    onPressed: () {},
+                    buttonTitle: "Continue",
+                  )
+                ],
+              ),
+              const _AddProductsPage(),
             ],
           ),
         ),
@@ -186,6 +257,10 @@ class _ProductsGrid extends StatelessWidget {
               price: 9000, name: "Hayat", url: "https://hayat.design"),
           const _ProductCard(
               price: 9000, name: "Hayat", url: "https://hayat.design"),
+          const _ProductCard(
+              price: 9000, name: "Hayat", url: "https://hayat.design"),
+          const _ProductCard(
+              price: 9000, name: "Hayat", url: "https://hayat.design"),
         ],
       ),
     );
@@ -205,6 +280,7 @@ class _ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductController productController = Get.put(ProductController());
     return SizedBox(
       width: Responsive.isDesktop(context)
           ? (MediaQuery.of(context).size.width - 500) / 3
@@ -216,7 +292,7 @@ class _ProductCard extends StatelessWidget {
         children: [
           Card(
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -231,7 +307,7 @@ class _ProductCard extends StatelessWidget {
                     name,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                        fontWeight: FontWeight.w800, fontSize: 28),
+                        fontWeight: FontWeight.w800, fontSize: 20),
                   ),
                   Row(
                     children: [
@@ -239,13 +315,13 @@ class _ProductCard extends StatelessWidget {
                         "Price: ",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 22),
+                            fontWeight: FontWeight.w500, fontSize: 16),
                       ),
                       Text(
                         "₹" + price.toString(),
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 28),
+                            fontWeight: FontWeight.w800, fontSize: 20),
                       ),
                     ],
                   ),
@@ -269,6 +345,43 @@ class _ProductCard extends StatelessWidget {
                         )
                       ],
                     ),
+                  ),
+                  Row(
+                    children: [
+                      if (productController.quantity.value == 0)
+                        Expanded(
+                          child: PrimaryButton(
+                            buttonTitle: "Add to bill",
+                            onPressed: () {},
+                            iconLeft: const Icon(Iconsax.add_circle),
+                            bgColor: const Color(0xffDAEEB8),
+                            textColor: const Color(0xff1F212E),
+                            iconBgColor: const Color(0xffBEE29B),
+                          ),
+                        ),
+                      if (productController.quantity.value != 0)
+                        Expanded(
+                          child: Row(
+                            children: [
+                              PrimaryButton(
+                                buttonTitle: "Add one more",
+                                onPressed: () {},
+                                iconLeft: const Icon(Iconsax.add_circle),
+                                bgColor: const Color(0xffDAEEB8),
+                                textColor: const Color(0xff1F212E),
+                                iconBgColor: const Color(0xffBEE29B),
+                              ),
+                              PrimaryButton(
+                                onPressed: () {},
+                                iconLeft: const Icon(Iconsax.trash),
+                                bgColor: const Color(0xffDAEEB8),
+                                textColor: const Color(0xff1F212E),
+                                iconBgColor: const Color(0xffBEE29B),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
                   ),
                 ],
               ),
