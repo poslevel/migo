@@ -12,7 +12,6 @@ class SalesHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScrollController _controller = new ScrollController();
     return AppLayout(
       activeTab: 0,
       content: Column(
@@ -34,7 +33,6 @@ class SalesHistory extends StatelessWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: 10,
-                    controller: _controller,
                     itemBuilder: (context, index) => BillCard(
                       price: index,
                       status: "Paid",
@@ -43,12 +41,12 @@ class SalesHistory extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (Responsive.isDesktop(context))
+                if (Responsive.isDesktop(context) && false)
                   const Expanded(
                     flex: 2,
                     child: SalesHistoryEmptyState(),
                   ),
-                if (Responsive.isDesktop(context) && false)
+                if (Responsive.isDesktop(context))
                   const Expanded(
                     flex: 2,
                     child: SingleBill(),
@@ -73,7 +71,7 @@ class SalesHistoryEmptyState extends StatelessWidget {
     return Column(
       children: [
         Image.asset("assets/select_bill_empty_state.png"),
-        Text(
+        const Text(
           "Select a bill to view it",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
         ),
@@ -99,9 +97,7 @@ class BillCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       hoverColor: const Color(0xff1F212E),
-      onTap: () {
-        
-      },
+      onTap: () {},
       child: Container(
         decoration: const BoxDecoration(
           border: Border.symmetric(
@@ -248,7 +244,7 @@ class ActionRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 16,
         ),
         const FilterBtn(),

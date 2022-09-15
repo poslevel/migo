@@ -9,7 +9,7 @@ class Billing extends StatelessWidget {
     return AppLayout(
       activeTab: 0,
       content: Row(
-        children: [],
+        children: const [],
       ),
       pageName: "Billing",
     );
