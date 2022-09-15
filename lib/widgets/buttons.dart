@@ -52,12 +52,16 @@ class PrimaryButton extends StatelessWidget {
           ),
           Container(
             padding: iconLeft == null ? null : const EdgeInsets.all(8),
-            margin: iconLeft == null ? null : const EdgeInsets.only(right: 12),
+            margin: iconLeft == null
+                ? null
+                : buttonTitle != null
+                    ? const EdgeInsets.only(right: 12)
+                    : null,
             decoration: BoxDecoration(
                 color: iconBgColor, borderRadius: BorderRadius.circular(8)),
             child: iconLeft,
           ),
-          if(buttonTitle != null)
+          if (buttonTitle != null)
             Text(
               buttonTitle!,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),

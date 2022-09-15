@@ -6,6 +6,7 @@ import 'package:migo/controller/product_controller.dart';
 import 'package:migo/layout/layout.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/buttons.dart';
+import 'package:migo/widgets/product_link_opener.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Billing extends StatefulWidget {
@@ -289,31 +290,6 @@ class CustomerInfoPage extends StatelessWidget {
   }
 }
 
-class _Tab extends StatelessWidget {
-  const _Tab({
-    Key? key,
-    required this.selectedTab,
-    required this.value,
-  }) : super(key: key);
-
-  final String selectedTab;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      value,
-      style: TextStyle(
-        fontSize: 24,
-        fontWeight: selectedTab == value ? FontWeight.w700 : FontWeight.w500,
-        color: selectedTab == value
-            ? const Color(0xffFFFFFF)
-            : const Color(0xffB9B7FF),
-      ),
-    );
-  }
-}
-
 class _ProductsGrid extends StatelessWidget {
   const _ProductsGrid({
     Key? key,
@@ -425,7 +401,7 @@ class _ProductCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      if (productController.quantity.value == 0)
+                      if (productController.quantity.value != 0)
                         Expanded(
                           child: PrimaryButton(
                             buttonTitle: "Add to bill",
@@ -436,24 +412,26 @@ class _ProductCard extends StatelessWidget {
                             iconBgColor: const Color(0xffBEE29B),
                           ),
                         ),
-                      if (productController.quantity.value != 0)
+                      if (productController.quantity.value == 0)
                         Expanded(
                           child: Row(
                             children: [
-                              PrimaryButton(
-                                buttonTitle: "Add one more",
-                                onPressed: () {},
-                                iconLeft: const Icon(Iconsax.add_circle),
-                                bgColor: const Color(0xffDAEEB8),
-                                textColor: const Color(0xff1F212E),
-                                iconBgColor: const Color(0xffBEE29B),
+                              Expanded(
+                                child: PrimaryButton(
+                                  buttonTitle: "Add one",
+                                  onPressed: () {},
+                                  iconLeft: const Icon(Iconsax.add_circle),
+                                  bgColor: const Color(0xffDAEEB8),
+                                  textColor: const Color(0xff1F212E),
+                                  iconBgColor: const Color(0xffBEE29B),
+                                ),
                               ),
                               PrimaryButton(
                                 onPressed: () {},
                                 iconLeft: const Icon(Iconsax.trash),
-                                bgColor: const Color(0xffDAEEB8),
+                                bgColor: const Color(0xffFFBBC1),
                                 textColor: const Color(0xff1F212E),
-                                iconBgColor: const Color(0xffBEE29B),
+                                iconBgColor: const Color(0xffF29DA3),
                               ),
                             ],
                           ),
@@ -464,28 +442,9 @@ class _ProductCard extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-                color: const Color(0xff0C0D16),
-                borderRadius: BorderRadius.circular(16)),
-            child: IconButton(
-              padding: const EdgeInsets.all(16),
-              onPressed: () {
-                _launchUrl(url);
-              },
-              icon: const Icon(Iconsax.export_3),
-            ),
-          ),
+          ProductDescriptionLinkOpener(url: url),
         ],
       ),
     );
-  }
-}
-
-Future<void> _launchUrl(url) async {
-  final Uri _url = Uri.parse(url);
-  if (!await launchUrl(_url)) {
-    throw 'Could not launch $_url';
   }
 }
