@@ -60,23 +60,26 @@ class ProductCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Variants: ",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 22),
-                      ),
-                      Row(
-                        children: const [
-                          VariantCircle(),
-                          VariantCircle(),
-                          VariantCircle(),
-                        ],
-                      )
-                    ],
+                  Visibility(
+                    visible: false,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Variants: ",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 22),
+                        ),
+                        Row(
+                          children: const [
+                            VariantCircle(),
+                            VariantCircle(),
+                            VariantCircle(),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                   Row(
                     children: [
