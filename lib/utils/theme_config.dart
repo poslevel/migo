@@ -32,6 +32,10 @@ ThemeData mainTheme = ThemeData(
       borderRadius: BorderRadius.all(Radius.circular(8.0)),
       borderSide: BorderSide(color: Color(0xffFF6900)),
     ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      borderSide: BorderSide(color: Color(0xffFF6900)),
+    ),
   ),
   bottomAppBarTheme: const BottomAppBarTheme(
     color: Color(0xFF0E0E0E),
