@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:migo/layout/layout.dart';
+import 'package:migo/widgets/billing_page_divider.dart';
 import 'package:migo/widgets/piechart.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -16,30 +17,37 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
     return AppLayout(
       activeTab: 1,
       pageName: "Analytics",
-      content: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const SizedBox(
-                  height: 270,
-                  child: PieChartSample2(),
-                ),
-                ToggleSwitch(
-                  initialLabelIndex: 0,
-                  totalSwitches: 3,
-                  inactiveBgColor: Color(0xff1F212E),
-                  activeFgColor: Color(0xff1F212E),
-                  labels: ['Days', 'Weeks', 'Months'],
-                  onToggle: (index) {
-                    print('switched to: $index');
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const CircleAvatar(
+                radius: 32,
+                backgroundImage: AssetImage("assets/avatar.png"),
+              ),
+              const SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    "Hello, " + " Hayat Tamboli" + "👋",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+                  ),
+                  Text(
+                    "These are your reports, have a great day",
+                    style: TextStyle(color: Color(0xffB9B7FF)),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const BillingPageDivider(),
+          const SizedBox(height: 16),
+          const Text("Status",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+          Row(),
+        ],
       ),
     );
   }
