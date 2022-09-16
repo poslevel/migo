@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:migo/utils/theme_config.dart';
 import 'package:migo/view/auth/login.dart';
+import 'package:migo/view/splash.dart';
 
 main() async {
   await GetStorage.init();
@@ -19,7 +20,7 @@ class MiGo extends StatelessWidget {
       title: 'MiGo',
       debugShowCheckedModeBanner: false,
       theme: mainTheme,
-      home: const LoginView(),
+      home: SplashView(),
     );
   }
 }
