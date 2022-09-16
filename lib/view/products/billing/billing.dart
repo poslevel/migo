@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/layout/layout.dart';
-import 'package:migo/view/billing/add_products_page.dart';
-import 'package:migo/view/billing/customer_info_page.dart';
+import 'package:migo/view/products/billing/add_products_page.dart';
+import 'package:migo/view/products/billing/customer_info_page.dart';
 import 'package:migo/view/responsive.dart';
 
 class Billing extends StatefulWidget {

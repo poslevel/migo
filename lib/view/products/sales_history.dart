@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/layout/layout.dart';
-import 'package:migo/view/billing/billing.dart';
-import 'package:migo/view/billing/single_bill.dart';
+import 'package:migo/view/products/billing/billing.dart';
+import 'package:migo/view/products/billing/single_bill.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/buttons.dart';
 

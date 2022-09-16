@@ -27,7 +27,7 @@ class AddProductsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                flex: Responsive.isTablet(context)? 3: 5,
+                flex: Responsive.isTablet(context) ? 3 : 5,
                 child: const _ProductsGrid(),
               ),
               if (!Responsive.isMobile(context))
@@ -65,7 +65,7 @@ class ProductsToBeBilledList extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: 4,
+                itemCount: 5,
                 itemBuilder: (_, i) => const ProductToBeBilledListTile(),
               ),
             ),
@@ -199,31 +199,157 @@ class ProductToBeBilledListTile extends StatelessWidget {
   }
 }
 
-class _ProductsGrid extends StatelessWidget {
+class _ProductsGrid extends StatefulWidget {
   const _ProductsGrid({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<_ProductsGrid> createState() => _ProductsGridState();
+}
+
+class _ProductsGridState extends State<_ProductsGrid> {
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: GridView.builder(
-        shrinkWrap: true,
-        itemCount: 9,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: Responsive.isDesktop(context)
-              ? 3
-              : Responsive.isMobile(context)
-                  ? 1
-                  : 2,
-          childAspectRatio: 4 / 5,
+    String? chosenDropdownOption;
+    var filterDropdown = DropdownButton(
+      hint: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        child: Text("Select Filter"),
+      ),
+      elevation: 8,
+      value: chosenDropdownOption,
+      icon: const Icon(Iconsax.arrow_circle_down),
+      borderRadius: BorderRadius.circular(8),
+      items: const [
+        DropdownMenuItem(
+          value: "All",
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "All products",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
         ),
-        itemBuilder: (_, index) => _ProductCard(
-            price: index,
-            name: " Mi ka phone",
-            url: "https://hayat.design",
-            quantitySelected: 0),
+        DropdownMenuItem(
+          value: "Watches",
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "Watches",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        DropdownMenuItem(
+          value: "Earphones",
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "Earphones",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        DropdownMenuItem(
+          value: "Mobiles",
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "Mobiles",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+      ],
+      onChanged: (value) {
+        setState(
+          () {
+            chosenDropdownOption = value;
+            // print(value);
+          },
+        );
+      },
+    );
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0, bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Visibility(
+                      visible: Responsive.isDesktop(context),
+                      child: const Text(
+                        "All Products in store (28)",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 200,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          fillColor: Colors.transparent,
+                          prefixIcon: Icon(Iconsax.search_normal),
+                          hintText: 'Search...',
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                            borderSide: BorderSide(color: Colors.transparent),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                DropdownButtonHideUnderline(
+                  child: filterDropdown,
+                ),
+              ],
+            ),
+          ),
+          GridView.builder(
+            shrinkWrap: true,
+            itemCount: 9,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: Responsive.isDesktop(context)
+                  ? 3
+                  : Responsive.isMobile(context)
+                      ? 1
+                      : 2,
+              childAspectRatio: 4 / 5,
+            ),
+            itemBuilder: (_, index) => _ProductCard(
+                price: index,
+                name: " Mi ka phone",
+                url: "https://hayat.design",
+                quantitySelected: 0),
+          ),
+        ],
       ),
     );
   }
