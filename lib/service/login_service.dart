@@ -15,7 +15,6 @@ class LoginService extends GetConnect {
     var dio = Dio();
     Response response =
         await dio.post(loginUrl, data: json.encode(model.toJson()));
-    print(response.data.toString());
     if (response.statusCode == HttpStatus.ok) {
       return LoginResponseModel.fromJson(response.data);
     } else {

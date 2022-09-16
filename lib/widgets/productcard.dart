@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:migo/models/product/product.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/product_link_opener.dart';
 
 class ProductCard extends StatelessWidget {
-  final int price;
-  final String name;
-  final int quantity;
-  final String url;
-  const ProductCard({
-    Key? key,
-    required this.price,
-    required this.name,
-    required this.url,
-    this.quantity = 0,
-  }) : super(key: key);
+  final Product product;
+  const ProductCard(this.product, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +33,7 @@ class ProductCard extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    name,
+                    product.name.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                         fontWeight: FontWeight.w800, fontSize: 28),
@@ -55,7 +47,7 @@ class ProductCard extends StatelessWidget {
                             fontWeight: FontWeight.w500, fontSize: 22),
                       ),
                       Text(
-                        "₹" + price.toString(),
+                        "₹ ${product.stockAmount}",
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 28),
@@ -86,7 +78,7 @@ class ProductCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Amount in Stock: " + quantity.toString(),
+                        "Amount in Stock: ₹ ${product.stockAmount}",
                         style: const TextStyle(
                           color: Color(0xffB9B7FF),
                           fontSize: 18,
@@ -98,7 +90,7 @@ class ProductCard extends StatelessWidget {
               ),
             ),
           ),
-          ProductDescriptionLinkOpener(url: url),
+          ProductDescriptionLinkOpener(url: product.description.toString()),
         ],
       ),
     );
