@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:migo/view/responsive.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:migo/widgets/product_link_opener.dart';
 
 class ProductCard extends StatelessWidget {
   final int price;
@@ -60,23 +59,26 @@ class ProductCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Variants: ",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 22),
-                      ),
-                      Row(
-                        children: const [
-                          VariantCircle(),
-                          VariantCircle(),
-                          VariantCircle(),
-                        ],
-                      )
-                    ],
+                  Visibility(
+                    visible: false,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Variants: ",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 22),
+                        ),
+                        Row(
+                          children: const [
+                            VariantCircle(),
+                            VariantCircle(),
+                            VariantCircle(),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                   Row(
                     children: [
@@ -93,31 +95,13 @@ class ProductCard extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-                color: const Color(0xff0C0D16),
-                borderRadius: BorderRadius.circular(16)),
-            child: IconButton(
-              padding: const EdgeInsets.all(16),
-              onPressed: () {
-                _launchUrl(url);
-              },
-              icon: const Icon(Iconsax.export_3),
-            ),
-          ),
+          ProductDescriptionLinkOpener(url: url),
         ],
       ),
     );
   }
 }
 
-Future<void> _launchUrl(url) async {
-  final Uri _url = Uri.parse(url);
-  if (!await launchUrl(_url)) {
-    throw 'Could not launch $_url';
-  }
-}
 
 class VariantCircle extends StatelessWidget {
   const VariantCircle({
