@@ -143,17 +143,138 @@ class _AddProductsPage extends StatelessWidget {
               ? MediaQuery.of(context).size.height - 150
               : MediaQuery.of(context).size.height - 220,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Expanded(
                 flex: 5,
                 child: _ProductsGrid(),
               ),
               if (!Responsive.isMobile(context))
-                Expanded(flex: 2, child: Container()),
+                Expanded(
+                  flex: 2,
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Products to be billed",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w800),
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: 4,
+                              itemBuilder: (_, i) =>
+                                  const ProductToBeBilledCard(),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
             ],
           ),
         )
       ],
+    );
+  }
+}
+
+class ProductToBeBilledCard extends StatelessWidget {
+  const ProductToBeBilledCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    "Mi Watch Revolve Active",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    "(₹9,999)",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 100,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        label: Text("Quanitity"),
+                        fillColor: Color(0xff0C0D16),
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text("Price"),
+                      Text(
+                        "₹9,999",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Image.asset(
+                "assets/mi_watch_img.png",
+                scale: 2.5,
+              ),
+              PrimaryButton(
+                onPressed: () {},
+                // buttonTitle: "Remove product",
+                bgColor: const Color(0xffFFBBC1),
+                iconLeft: const Icon(Iconsax.trash),
+                iconBgColor: const Color(0xffF29DA3),
+                textColor: const Color(0xff1F212E),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
