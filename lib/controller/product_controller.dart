@@ -30,12 +30,8 @@ class ProductController extends GetxController {
   void fetchAllProducts() async {
     try {
       isLoading(true);
-      print("done fetching all products");
       var products = await _productService.fetchAllProducts();
-      print(products.toString());
-      print("done fetching all products 1");
       if (products != null) {
-        print("done fetching all products 2");
         productList.value = products;
       }
     } finally {

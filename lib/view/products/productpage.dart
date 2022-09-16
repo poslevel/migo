@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:migo/controller/product_controller.dart';
 import 'package:migo/layout/layout.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/product_page_cta_row.dart';
@@ -13,6 +15,14 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
+  final ProductController productController = Get.put(ProductController());
+
+  @override
+  void initState() {
+    super.initState();
+    productController.fetchAllProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     String? chosenDropdownOption;
@@ -151,28 +161,31 @@ class _ProductsPageState extends State<ProductsPage> {
               ),
             ),
             SizedBox(
-              width: !Responsive.isMobile(context)
-                  ? MediaQuery.of(context).size.width - 90
-                  : null,
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: Responsive.isDesktop(context)
-                      ? 3
-                      : Responsive.isMobile(context)
-                          ? 1
-                          : 2,
-                  childAspectRatio: Responsive.isMobile(context) ? 1 : 4 / 3,
-                ),
-                itemCount: 9,
-                itemBuilder: (_, i) => ProductCard(
-                  price: i,
-                  name: "Baap",
-                  url: "https://hayat.design",
-                ),
-              ),
-            ),
+                width: !Responsive.isMobile(context)
+                    ? MediaQuery.of(context).size.width - 90
+                    : null,
+                child: Obx(() {
+                  if (productController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: Responsive.isDesktop(context)
+                            ? 3
+                            : Responsive.isMobile(context)
+                                ? 1
+                                : 2,
+                        childAspectRatio:
+                            Responsive.isMobile(context) ? 1 : 4 / 3,
+                      ),
+                      itemCount: productController.productList.length,
+                      itemBuilder: (_, index) =>
+                          ProductCard(productController.productList[index]),
+                    );
+                  }
+                })),
             // SizedBox(
             // width: !Responsive.isMobile(context)
             //     ? MediaQuery.of(context).size.width - 90
