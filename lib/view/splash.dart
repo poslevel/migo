@@ -6,6 +6,8 @@ import 'package:migo/view/setup.dart';
 class SplashView extends StatelessWidget {
   final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
 
+  SplashView({super.key});
+
   Future<void> initializeSettings() async {
     _authmanager.checkLoginStatus();
 
@@ -42,11 +44,21 @@ class SplashView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: CircularProgressIndicator(),
+          Image.asset(
+            "assets/logo.png",
+            scale: 0.8,
           ),
-          Text('Loading...'),
+          const SizedBox(
+            width: 250,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: LinearProgressIndicator(),
+            ),
+          ),
+          const Text(
+            '🍳Cooking the next screen',
+            style: TextStyle(fontSize: 18),
+          ),
         ],
       ),
     ));
