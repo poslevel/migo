@@ -5,9 +5,9 @@ import 'package:migo/controller/customer_details_controller.dart';
 import 'package:migo/controller/product_controller.dart';
 import 'package:migo/layout/layout.dart';
 import 'package:migo/view/responsive.dart';
+import 'package:migo/widgets/billing_page_divider.dart';
 import 'package:migo/widgets/buttons.dart';
 import 'package:migo/widgets/product_link_opener.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Billing extends StatefulWidget {
   const Billing({super.key});
@@ -106,7 +106,7 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
             controller: _tabController,
             children: [
               const _AddProductsPage(),
-              CustomerInfoPage(
+              _CustomerInfoPage(
                 nameController: nameController,
                 emailController: emailController,
                 phonenumberController: phonenumberController,
@@ -158,24 +158,8 @@ class _AddProductsPage extends StatelessWidget {
   }
 }
 
-class BillingPageDivider extends StatelessWidget {
-  const BillingPageDivider({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: !Responsive.isMobile(context)
-          ? MediaQuery.of(context).size.width - 120
-          : MediaQuery.of(context).size.width,
-      child: const Divider(color: Colors.white),
-    );
-  }
-}
-
-class CustomerInfoPage extends StatelessWidget {
-  const CustomerInfoPage({
+class _CustomerInfoPage extends StatelessWidget {
+  const _CustomerInfoPage({
     Key? key,
     required this.nameController,
     required this.emailController,
@@ -298,153 +282,141 @@ class _ProductsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Wrap(
-        children: [
-          const _ProductCard(
-              price: 9000, name: "Hayat", url: "https://hayat.design"),
-          const _ProductCard(
-              price: 9000, name: "Hayat", url: "https://hayat.design"),
-          const _ProductCard(
-              price: 9000, name: "Hayat", url: "https://hayat.design"),
-          const _ProductCard(
-              price: 9000, name: "Hayat", url: "https://hayat.design"),
-          const _ProductCard(
-              price: 9000, name: "Hayat", url: "https://hayat.design"),
-          const _ProductCard(
-              price: 9000, name: "Hayat", url: "https://hayat.design"),
-          const _ProductCard(
-              price: 9000, name: "Hayat", url: "https://hayat.design"),
-        ],
+      child: GridView.builder(
+        shrinkWrap: true,
+        itemCount: 9,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: Responsive.isDesktop(context)
+              ? 3
+              : Responsive.isMobile(context)
+                  ? 1
+                  : 2,
+          childAspectRatio: 4 / 5,
+        ),
+        itemBuilder: (_, index) => _ProductCard(
+            price: index,
+            name: " Mi ka phone",
+            url: "https://hayat.design",
+            quantitySelected: 0),
       ),
     );
   }
 }
 
-class _ProductCard extends StatelessWidget {
+class _ProductCard extends StatefulWidget {
   final int price;
   final String name;
   final String url;
+  final int quantitySelected;
   const _ProductCard({
     Key? key,
     required this.price,
     required this.name,
     required this.url,
+    required this.quantitySelected,
   }) : super(key: key);
 
   @override
+  State<_ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<_ProductCard> {
+  @override
   Widget build(BuildContext context) {
     ProductController productController = Get.put(ProductController());
-    return SizedBox(
-      width: Responsive.isDesktop(context)
-          ? (MediaQuery.of(context).size.width - 500) / 3
-          : Responsive.isTablet(context)
-              ? (MediaQuery.of(context).size.width - 500)
-              : MediaQuery.of(context).size.width - 8,
-      child: Stack(
-        alignment: Alignment.topRight,
-        children: [
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Image.asset("assets/mi_watch_img.png"),
-                    ],
-                  ),
-                  Text(
-                    name,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w800, fontSize: 20),
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        "Price: ",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 16),
-                      ),
-                      Text(
-                        "₹" + price.toString(),
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 20),
-                      ),
-                    ],
-                  ),
-                  Visibility(
-                    visible: false,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Variants: ",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 22),
-                        ),
-                        Row(
-                          children: const [
-                            // VariantCircle(),
-                            // VariantCircle(),
-                            // VariantCircle(),
-                          ],
-                        )
-                      ],
+    // width: Responsive.isDesktop(context)
+    //     ? (MediaQuery.of(context).size.width - 500) / 3
+    //     : Responsive.isTablet(context)
+    //         ? (MediaQuery.of(context).size.width - 500)
+    //         : MediaQuery.of(context).size.width - 8,
+    return Stack(
+      alignment: Alignment.topRight,
+      children: [
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Image.asset(
+                      "assets/mi_watch_img.png",
+                      scale: 1.5,
                     ),
-                  ),
-                  Row(
-                    children: [
-                      if (productController.quantity.value != 0)
-                        Expanded(
-                          child: PrimaryButton(
-                            buttonTitle: "Add to bill",
-                            onPressed: () {},
-                            iconLeft: const Icon(Iconsax.add_circle),
-                            bgColor: const Color(0xffDAEEB8),
-                            textColor: const Color(0xff1F212E),
-                            iconBgColor: const Color(0xffBEE29B),
-                          ),
+                  ],
+                ),
+                Text(
+                  widget.name,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w800, fontSize: 20),
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "Price: ",
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                    ),
+                    Text(
+                      "₹" + widget.price.toString(),
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w800, fontSize: 20),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    if (widget.quantitySelected == 0)
+                      Expanded(
+                        child: PrimaryButton(
+                          buttonTitle: "Add to bill",
+                          onPressed: () {},
+                          iconLeft: const Icon(Iconsax.add_circle),
+                          bgColor: const Color(0xffDAEEB8),
+                          textColor: const Color(0xff1F212E),
+                          iconBgColor: const Color(0xffBEE29B),
                         ),
-                      if (productController.quantity.value == 0)
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: PrimaryButton(
-                                  buttonTitle: "Add one",
-                                  onPressed: () {},
-                                  iconLeft: const Icon(Iconsax.add_circle),
-                                  bgColor: const Color(0xffDAEEB8),
-                                  textColor: const Color(0xff1F212E),
-                                  iconBgColor: const Color(0xffBEE29B),
-                                ),
-                              ),
-                              PrimaryButton(
+                      ),
+                    if (widget.quantitySelected != 0)
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: PrimaryButton(
+                                buttonTitle: "Add one",
                                 onPressed: () {},
-                                iconLeft: const Icon(Iconsax.trash),
-                                bgColor: const Color(0xffFFBBC1),
+                                iconLeft: const Icon(Iconsax.add_circle),
+                                bgColor: const Color(0xffDAEEB8),
                                 textColor: const Color(0xff1F212E),
-                                iconBgColor: const Color(0xffF29DA3),
+                                iconBgColor: const Color(0xffBEE29B),
                               ),
-                            ],
-                          ),
+                            ),
+                            PrimaryButton(
+                              onPressed: () {},
+                              iconLeft: const Icon(Iconsax.trash),
+                              bgColor: const Color(0xffFFBBC1),
+                              textColor: const Color(0xff1F212E),
+                              iconBgColor: const Color(0xffF29DA3),
+                            ),
+                          ],
                         ),
-                    ],
-                  ),
-                ],
-              ),
+                      ),
+                  ],
+                ),
+              ],
             ),
           ),
-          ProductDescriptionLinkOpener(url: url),
-        ],
-      ),
+        ),
+        ProductDescriptionLinkOpener(url: widget.url),
+      ],
     );
   }
 }
