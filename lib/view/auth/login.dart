@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/simple_ui_controller.dart';
+import 'package:migo/view/auth/login_view_model.dart';
 import 'package:migo/view/auth/signup.dart';
 import 'package:migo/view/products/productpage.dart';
 import 'package:migo/view/responsive.dart';
@@ -17,7 +18,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  final LoginViewModel _viewModel = Get.put(LoginViewModel());
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -136,7 +137,7 @@ class _LoginViewState extends State<LoginView> {
                         return 'Please enter username';
                       } else if (value.length < 4) {
                         return 'at least enter 4 characters';
-                      } else if (value.length > 13) {
+                      } else if (value.length > 40) {
                         return 'maximum character is 13';
                       }
                       return null;
@@ -185,11 +186,12 @@ class _LoginViewState extends State<LoginView> {
                   PrimaryButton(
                     vertPad: 20,
                     buttonTitle: "Login",
-                    onPressed: () {
+                    onPressed: () async {
                       // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
                         // ... Navigate To your Home Page
-                        Get.to(() => const ProductsPage());
+                        await _viewModel.loginUser(
+                            usernameController.text, passwordController.text);
                       }
                     },
                   ),
