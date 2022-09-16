@@ -34,7 +34,10 @@ class ProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset("assets/mi_watch_img.png"),
+                      Image.asset(
+                        "assets/mi_watch_img.png",
+                        scale: Responsive.isMobile(context) ? 1 : 1.5,
+                      ),
                     ],
                   ),
                   Text(
@@ -101,7 +104,6 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
-
 
 class VariantCircle extends StatelessWidget {
   const VariantCircle({

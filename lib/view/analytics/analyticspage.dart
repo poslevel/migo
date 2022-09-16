@@ -43,10 +43,15 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
             ],
           ),
           const BillingPageDivider(),
-          const SizedBox(height: 16),
+          const SizedBox(height: 32),
           const Text("Status",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-          Row(),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              SizedBox(width: 400, child: PieChartSample2()),
+            ],
+          ),
         ],
       ),
     );

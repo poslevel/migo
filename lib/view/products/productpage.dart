@@ -154,35 +154,58 @@ class _ProductsPageState extends State<ProductsPage> {
               width: !Responsive.isMobile(context)
                   ? MediaQuery.of(context).size.width - 90
                   : null,
-              child: Wrap(
-                children: const [
-                  ProductCard(
-                    price: 800,
-                    name: "Mi Watch Revolve Active",
-                    url:
-                        "https://www.mi.com/in/product/mi-watch-revolve-active/",
-                  ),
-                  ProductCard(
-                    price: 800,
-                    name: "Mi Watch Revolve Active",
-                    url:
-                        "https://www.mi.com/in/product/mi-watch-revolve-active/",
-                  ),
-                  ProductCard(
-                    price: 800,
-                    name: "Mi Watch Revolve Active",
-                    url:
-                        "https://www.mi.com/in/product/mi-watch-revolve-active/",
-                  ),
-                  ProductCard(
-                    price: 800,
-                    name: "Mi Watch Revolve Active",
-                    url:
-                        "https://www.mi.com/in/product/mi-watch-revolve-active/",
-                  ),
-                ],
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: Responsive.isDesktop(context)
+                      ? 3
+                      : Responsive.isMobile(context)
+                          ? 1
+                          : 2,
+                  childAspectRatio: Responsive.isMobile(context) ? 1 : 4 / 3,
+                ),
+                itemCount: 9,
+                itemBuilder: (_, i) => ProductCard(
+                  price: i,
+                  name: "Baap",
+                  url: "https://hayat.design",
+                ),
               ),
-            )
+            ),
+            // SizedBox(
+            // width: !Responsive.isMobile(context)
+            //     ? MediaQuery.of(context).size.width - 90
+            //     : null,
+            //   child: Wrap(
+            //     children: const [
+            //       ProductCard(
+            //         price: 800,
+            //         name: "Mi Watch Revolve Active",
+            //         url:
+            //             "https://www.mi.com/in/product/mi-watch-revolve-active/",
+            //       ),
+            //       ProductCard(
+            //         price: 800,
+            //         name: "Mi Watch Revolve Active",
+            //         url:
+            //             "https://www.mi.com/in/product/mi-watch-revolve-active/",
+            //       ),
+            //       ProductCard(
+            //         price: 800,
+            //         name: "Mi Watch Revolve Active",
+            //         url:
+            //             "https://www.mi.com/in/product/mi-watch-revolve-active/",
+            //       ),
+            //       ProductCard(
+            //         price: 800,
+            //         name: "Mi Watch Revolve Active",
+            //         url:
+            //             "https://www.mi.com/in/product/mi-watch-revolve-active/",
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),

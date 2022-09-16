@@ -17,7 +17,7 @@ class PieChart2State extends State {
     return AspectRatio(
       aspectRatio: 1.3,
       child: Card(
-        color: Colors.white,
+        color: const Color(0xff1F212E),
         child: Row(
           children: <Widget>[
             const SizedBox(
