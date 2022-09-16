@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PrimaryButton extends StatelessWidget {
+class PrimaryButton extends StatefulWidget {
   const PrimaryButton({
     Key? key,
     this.buttonTitle,
@@ -28,17 +28,24 @@ class PrimaryButton extends StatelessWidget {
   final double horzPad;
 
   @override
+  State<PrimaryButton> createState() => _PrimaryButtonState();
+}
+
+class _PrimaryButtonState extends State<PrimaryButton> {
+  bool loading = false;
+  @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: widget.onPressed,
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all<Color?>(textColor),
-        backgroundColor: MaterialStateProperty.all<Color?>(bgColor),
+        foregroundColor: MaterialStateProperty.all<Color?>(widget.textColor),
+        backgroundColor: MaterialStateProperty.all<Color?>(widget.bgColor),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
-            EdgeInsets.symmetric(vertical: vertPad, horizontal: horzPad)),
+            EdgeInsets.symmetric(
+                vertical: widget.vertPad, horizontal: widget.horzPad)),
         shape: MaterialStateProperty.resolveWith<OutlinedBorder>((_) {
           return RoundedRectangleBorder(
-              side: border, borderRadius: BorderRadius.circular(8));
+              side: widget.border, borderRadius: BorderRadius.circular(8));
         }),
         elevation: MaterialStateProperty.all<double>(0),
       ),
@@ -46,30 +53,33 @@ class PrimaryButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding:
-                imageLeft == null ? null : const EdgeInsets.only(right: 12),
-            child: imageLeft,
+            padding: widget.imageLeft == null
+                ? null
+                : const EdgeInsets.only(right: 12),
+            child: widget.imageLeft,
           ),
           Container(
-            padding: iconLeft == null ? null : const EdgeInsets.all(8),
-            margin: iconLeft == null
+            padding: widget.iconLeft == null ? null : const EdgeInsets.all(8),
+            margin: widget.iconLeft == null
                 ? null
-                : buttonTitle != null
+                : widget.buttonTitle != null
                     ? const EdgeInsets.only(right: 12)
                     : null,
             decoration: BoxDecoration(
-                color: iconBgColor, borderRadius: BorderRadius.circular(8)),
-            child: iconLeft,
+                color: widget.iconBgColor,
+                borderRadius: BorderRadius.circular(8)),
+            child: widget.iconLeft,
           ),
-          if (buttonTitle != null)
+          if (widget.buttonTitle != null)
             Text(
-              buttonTitle!,
+              widget.buttonTitle!,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
           Container(
-            padding:
-                iconRight == null ? null : const EdgeInsets.only(right: 12),
-            child: iconRight,
+            padding: widget.iconRight == null
+                ? null
+                : const EdgeInsets.only(right: 12),
+            child: widget.iconRight,
           ),
         ],
       ),

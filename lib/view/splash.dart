@@ -39,28 +39,29 @@ class SplashView extends StatelessWidget {
 
   Scaffold waitingView() {
     return Scaffold(
-        body: Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            "assets/logo.png",
-            scale: 0.8,
-          ),
-          const SizedBox(
-            width: 250,
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: LinearProgressIndicator(),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/logo.png",
+              scale: 0.8,
             ),
-          ),
-          const Text(
-            '🍳Cooking the next screen',
-            style: TextStyle(fontSize: 18),
-          ),
-        ],
+            const SizedBox(
+              width: 250,
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: LinearProgressIndicator(),
+              ),
+            ),
+            const Text(
+              '🍳Cooking the next screen',
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:migo/view/homepage.dart';
+import 'package:migo/view/products/productpage.dart';
 
 class ProductCTACard extends StatelessWidget {
   final Widget toPage;
@@ -9,7 +9,7 @@ class ProductCTACard extends StatelessWidget {
   final Color? cardColor;
   const ProductCTACard({
     Key? key,
-    this.toPage = const HomePage(),
+    this.toPage = const ProductsPage(),
     required this.caption,
     required this.image,
     required this.cardColor,
