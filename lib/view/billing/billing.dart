@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/customer_details_controller.dart';
 import 'package:migo/controller/product_controller.dart';
 import 'package:migo/layout/layout.dart';
+import 'package:migo/view/billing/add_products_page.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/billing_page_divider.dart';
 import 'package:migo/widgets/buttons.dart';
@@ -86,6 +87,7 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return AppLayout(
       activeTab: 0,
+      pageName: "Billing",
       content: SizedBox(
         width: !Responsive.isMobile(context)
             ? MediaQuery.of(context).size.width - 120
@@ -105,7 +107,9 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
           body: TabBarView(
             controller: _tabController,
             children: [
-              const _AddProductsPage(),
+              AddProductsPage(
+                tabController: _tabController,
+              ),
               _CustomerInfoPage(
                 nameController: nameController,
                 emailController: emailController,
@@ -118,162 +122,6 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
             ],
           ),
         ),
-      ),
-      pageName: "Billing",
-    );
-  }
-}
-
-class _AddProductsPage extends StatelessWidget {
-  const _AddProductsPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const BillingPageDivider(),
-        SizedBox(
-          width: !Responsive.isMobile(context)
-              ? MediaQuery.of(context).size.width - 110
-              : null,
-          height: !Responsive.isMobile(context)
-              ? MediaQuery.of(context).size.height - 150
-              : MediaQuery.of(context).size.height - 220,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Expanded(
-                flex: 5,
-                child: _ProductsGrid(),
-              ),
-              if (!Responsive.isMobile(context))
-                Expanded(
-                  flex: 2,
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Products to be billed",
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.w800),
-                          ),
-                          Expanded(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: 4,
-                              itemBuilder: (_, i) =>
-                                  const ProductToBeBilledCard(),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class ProductToBeBilledCard extends StatelessWidget {
-  const ProductToBeBilledCard({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Mi Watch Revolve Active",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    "(₹9,999)",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 100,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        label: Text("Quanitity"),
-                        fillColor: Color(0xff0C0D16),
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text("Price"),
-                      Text(
-                        "₹9,999",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Image.asset(
-                "assets/mi_watch_img.png",
-                scale: 2.5,
-              ),
-              PrimaryButton(
-                onPressed: () {},
-                // buttonTitle: "Remove product",
-                bgColor: const Color(0xffFFBBC1),
-                iconLeft: const Icon(Iconsax.trash),
-                iconBgColor: const Color(0xffF29DA3),
-                textColor: const Color(0xff1F212E),
-              )
-            ],
-          ),
-        ],
       ),
     );
   }
@@ -305,239 +153,103 @@ class _CustomerInfoPage extends StatelessWidget {
       key: formkey,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  icon: Icon(Iconsax.user_octagon),
-                  label: Text("Customer Name"),
-                  hintText: "Jhon Doe"),
-              controller: nameController,
-              validator: ((value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter Name';
-                }
-                return null;
-              }),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                icon: Icon(Iconsax.sms),
-                label: Text("E-mail"),
-                hintText: "jhon.doe@example.com",
+          const BillingPageDivider(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                          icon: Icon(Iconsax.user_octagon),
+                          label: Text("Customer Name"),
+                          hintText: "Jhon Doe"),
+                      controller: nameController,
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter Name';
+                        }
+                        return null;
+                      }),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        icon: Icon(Iconsax.sms),
+                        label: Text("E-mail"),
+                        hintText: "jhon.doe@example.com",
+                      ),
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter Email';
+                        }
+                        if (!value.isEmail) {
+                          return 'Please enter valid Email';
+                        }
+                        return null;
+                      }),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                          icon: Icon(Iconsax.call),
+                          label: Text("Phone Number"),
+                          hintText: "9553052451"),
+                      controller: phonenumberController,
+                      keyboardType: TextInputType.phone,
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter Phone number';
+                        }
+                        if (!value.isPhoneNumber) {
+                          return 'Please enter a valid Phone number';
+                        }
+                        return null;
+                      }),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: TextFormField(
+                      maxLines: 3,
+                      decoration: const InputDecoration(
+                          icon: Icon(Iconsax.location),
+                          label: Text("Address"),
+                          hintText: "Where does your customer live"),
+                      controller: addressController,
+                    ),
+                  ),
+                  PrimaryButton(
+                    onPressed: () {
+                      // Validate returns true if the form is valid, or false otherwise.
+                      if (formkey.currentState!.validate()) {
+                        // ... Navigate To next page
+                        _customerDetailsController.name.value =
+                            nameController.text;
+                        _customerDetailsController.email.value =
+                            emailController.text;
+                        _customerDetailsController.phone.value =
+                            phonenumberController.text;
+                        _customerDetailsController.address.value =
+                            addressController.text;
+                        tabController.animateTo(2);
+                      }
+                    },
+                    buttonTitle: "Continue",
+                  )
+                ],
               ),
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              validator: ((value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter Email';
-                }
-                if (!value.isEmail) {
-                  return 'Please enter valid Email';
-                }
-                return null;
-              }),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  icon: Icon(Iconsax.call),
-                  label: Text("Phone Number"),
-                  hintText: "9553052451"),
-              controller: phonenumberController,
-              keyboardType: TextInputType.phone,
-              validator: ((value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter Phone number';
-                }
-                if (!value.isPhoneNumber) {
-                  return 'Please enter a valid Phone number';
-                }
-                return null;
-              }),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: TextFormField(
-              maxLines: 3,
-              decoration: const InputDecoration(
-                  icon: Icon(Iconsax.location),
-                  label: Text("Address"),
-                  hintText: "Where does your customer live"),
-              controller: addressController,
-            ),
-          ),
-          PrimaryButton(
-            onPressed: () {
-              // Validate returns true if the form is valid, or false otherwise.
-              if (formkey.currentState!.validate()) {
-                // ... Navigate To next page
-                _customerDetailsController.name.value = nameController.text;
-                _customerDetailsController.email.value = emailController.text;
-                _customerDetailsController.phone.value =
-                    phonenumberController.text;
-                _customerDetailsController.address.value =
-                    addressController.text;
-                tabController.animateTo(2);
-              }
-            },
-            buttonTitle: "Continue",
-          )
         ],
       ),
-    );
-  }
-}
-
-class _ProductsGrid extends StatelessWidget {
-  const _ProductsGrid({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: GridView.builder(
-        shrinkWrap: true,
-        itemCount: 9,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: Responsive.isDesktop(context)
-              ? 3
-              : Responsive.isMobile(context)
-                  ? 1
-                  : 2,
-          childAspectRatio: 4 / 5,
-        ),
-        itemBuilder: (_, index) => _ProductCard(
-            price: index,
-            name: " Mi ka phone",
-            url: "https://hayat.design",
-            quantitySelected: 0),
-      ),
-    );
-  }
-}
-
-class _ProductCard extends StatefulWidget {
-  final int price;
-  final String name;
-  final String url;
-  final int quantitySelected;
-  const _ProductCard({
-    Key? key,
-    required this.price,
-    required this.name,
-    required this.url,
-    required this.quantitySelected,
-  }) : super(key: key);
-
-  @override
-  State<_ProductCard> createState() => _ProductCardState();
-}
-
-class _ProductCardState extends State<_ProductCard> {
-  @override
-  Widget build(BuildContext context) {
-    ProductController productController = Get.put(ProductController());
-    // width: Responsive.isDesktop(context)
-    //     ? (MediaQuery.of(context).size.width - 500) / 3
-    //     : Responsive.isTablet(context)
-    //         ? (MediaQuery.of(context).size.width - 500)
-    //         : MediaQuery.of(context).size.width - 8,
-    return Stack(
-      alignment: Alignment.topRight,
-      children: [
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Image.asset(
-                      "assets/mi_watch_img.png",
-                      scale: 1.5,
-                    ),
-                  ],
-                ),
-                Text(
-                  widget.name,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w800, fontSize: 20),
-                ),
-                Row(
-                  children: [
-                    const Text(
-                      "Price: ",
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-                    ),
-                    Text(
-                      "₹" + widget.price.toString(),
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w800, fontSize: 20),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    if (widget.quantitySelected == 0)
-                      Expanded(
-                        child: PrimaryButton(
-                          buttonTitle: "Add to bill",
-                          onPressed: () {},
-                          iconLeft: const Icon(Iconsax.add_circle),
-                          bgColor: const Color(0xffDAEEB8),
-                          textColor: const Color(0xff1F212E),
-                          iconBgColor: const Color(0xffBEE29B),
-                        ),
-                      ),
-                    if (widget.quantitySelected != 0)
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: PrimaryButton(
-                                buttonTitle: "Add one",
-                                onPressed: () {},
-                                iconLeft: const Icon(Iconsax.add_circle),
-                                bgColor: const Color(0xffDAEEB8),
-                                textColor: const Color(0xff1F212E),
-                                iconBgColor: const Color(0xffBEE29B),
-                              ),
-                            ),
-                            PrimaryButton(
-                              onPressed: () {},
-                              iconLeft: const Icon(Iconsax.trash),
-                              bgColor: const Color(0xffFFBBC1),
-                              textColor: const Color(0xff1F212E),
-                              iconBgColor: const Color(0xffF29DA3),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        ProductDescriptionLinkOpener(url: widget.url),
-      ],
     );
   }
 }
