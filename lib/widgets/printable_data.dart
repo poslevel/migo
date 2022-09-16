@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -15,7 +17,7 @@ buildPrintableData(image) => pw.Padding(
                   height: 24,
                 ),
               ),
-                  pw.SizedBox(width: 5.5),
+              pw.SizedBox(width: 5.5),
               pw.Text(
                 "Hayat Tamboli",
                 style: pw.TextStyle(
@@ -40,7 +42,6 @@ buildPrintableData(image) => pw.Padding(
                   )
                 ],
               ),
-              
               pw.SizedBox(height: 10.00),
               pw.Text(
                 "Thanks for choosing our service!",

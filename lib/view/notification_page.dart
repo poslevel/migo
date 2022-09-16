@@ -29,9 +29,9 @@ class NotificationsPage extends StatelessWidget {
           ),
           child: ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: 40,
-            itemBuilder: (context, index) => NotificationCard(),
+            itemBuilder: (context, index) => const NotificationCard(),
           ),
         ),
       ),
@@ -60,7 +60,7 @@ class NotificationCard extends StatelessWidget {
                 Text("This is a notification"),
               ],
             ),
-            Icon(Iconsax.tick_square)
+            const Icon(Iconsax.tick_square)
           ],
         ),
       ),

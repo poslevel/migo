@@ -141,27 +141,27 @@ class RevenueStatus extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: const Color(0xffBEE29B),
                     borderRadius: BorderRadius.circular(16)),
-                child: Icon(
+                child: const Icon(
                   Iconsax.dollar_square,
                   size: 32,
                   color: Color(0xff1F212E),
                 ),
               ),
-              Text(
+              const Text(
                 "Revenue",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Text(
+              const Text(
                 "\$45000",
                 style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: RevenueLineChart(),
               )
             ],
@@ -195,27 +195,27 @@ class CustomersStatus extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: const Color(0xff90BAF9),
                     borderRadius: BorderRadius.circular(16)),
-                child: Icon(
+                child: const Icon(
                   Iconsax.people,
                   size: 32,
                   color: Color(0xff1F212E),
                 ),
               ),
-              Text(
+              const Text(
                 "Customers",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Text(
+              const Text(
                 "40",
                 style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: CustomersLineChart(),
               )
             ],
@@ -249,27 +249,27 @@ class ProductSoldStatus extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: const Color(0xffF29DA3),
                     borderRadius: BorderRadius.circular(16)),
-                child: Icon(
+                child: const Icon(
                   Iconsax.box_1,
                   size: 32,
                   color: Color(0xff1F212E),
                 ),
               ),
-              Text(
+              const Text(
                 "Products Sold",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Text(
+              const Text(
                 "70",
                 style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: ProductsSoldLineChart(),
               )
             ],

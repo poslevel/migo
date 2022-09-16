@@ -7,7 +7,6 @@ import 'package:migo/view/products/warranty_claim.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/product_page_cta_cards.dart';
 
-
 class CTARow extends StatelessWidget {
   const CTARow({
     Key? key,

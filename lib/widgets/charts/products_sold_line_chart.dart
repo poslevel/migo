@@ -22,8 +22,8 @@ class _ProductsSoldLineChartState extends State<ProductsSoldLineChart> {
     return AspectRatio(
       aspectRatio: Responsive.isDesktop(context) ? 6 / 2 : 3 / 2,
       child: Padding(
-        padding: const EdgeInsets.only(
-            right: 18.0, left: 12.0, top: 24, bottom: 12),
+        padding:
+            const EdgeInsets.only(right: 18.0, left: 12.0, top: 24, bottom: 12),
         child: LineChart(mainData()),
       ),
     );

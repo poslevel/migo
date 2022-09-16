@@ -25,7 +25,7 @@ class PieChart2State extends State {
           padding: const EdgeInsets.all(24.0),
           child: Column(
             children: [
-              Text(
+              const Text(
                 "Sales by categories",
                 style: TextStyle(
                   fontSize: 24,

@@ -118,7 +118,7 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
                 formkey: _formKey,
                 tabController: _tabController,
               ),
-              PaymentsPage(),
+              const PaymentsPage(),
             ],
           ),
         ),
@@ -183,7 +183,7 @@ class _PaymentsPageState extends State<PaymentsPage> {
     /*Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId!,
         toastLength: Toast.LENGTH_SHORT);*/
-    Get.to(ProductsPage());
+    Get.to(() => const ProductsPage());
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
