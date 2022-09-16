@@ -51,7 +51,9 @@ dependencies:
   sqflite: ^2.0.3+1
   # UI related
   toggle_switch: ^2.0.1
+  # to launch url
   url_launcher: ^6.1.5
+  # powerful Http client for Dart
   dio: ^4.0.6
 
 

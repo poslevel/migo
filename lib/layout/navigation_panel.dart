@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/models/navigation_items.dart';
 import 'package:migo/view/analytics/analyticspage.dart';
-// import 'package:migo/view/employees/employee_dashboard.dart';
-// import 'package:migo/view/homepage.dart';
 import 'package:migo/view/products/productpage.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/view/settings/settingspage.dart';
@@ -84,11 +82,13 @@ class _NavigationPanelState extends State<NavigationPanel> {
                           },
                           icon: e.icon,
                           isActive: e.index == widget.activeTab,
+                          tooltipMessage: e.name,
                         ),
                       )
                       .toList(),
                 ),
                 IconButton(
+                  tooltip: "Settings",
                   onPressed: () {
                     Get.to(
                       () => const SettingsPage(),
@@ -110,6 +110,7 @@ class _NavigationPanelState extends State<NavigationPanel> {
                 NavigationButton(
                   isActive: widget.activeTab == 0,
                   icon: NavigationItems.products.icon,
+                  tooltipMessage: "Products",
                   onPressed: () {
                     Get.to(
                       () => const ProductsPage(),
@@ -118,6 +119,7 @@ class _NavigationPanelState extends State<NavigationPanel> {
                   },
                 ),
                 NavigationButton(
+                  tooltipMessage: "Analytics",
                   isActive: widget.activeTab == 1,
                   icon: NavigationItems.analytics.icon,
                   onPressed: () {
@@ -128,6 +130,7 @@ class _NavigationPanelState extends State<NavigationPanel> {
                   },
                 ),
                 NavigationButton(
+                  tooltipMessage: "Settings",
                   isActive: widget.activeTab == 5,
                   onPressed: () {
                     Get.to(

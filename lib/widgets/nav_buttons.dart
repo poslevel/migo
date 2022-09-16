@@ -5,12 +5,14 @@ class NavigationButton extends StatelessWidget {
     Key? key,
     required this.onPressed,
     required this.icon,
+    required this.tooltipMessage,
     this.isActive = false,
   }) : super(key: key);
 
   final VoidCallback onPressed;
   final IconData icon;
   final bool isActive;
+  final String tooltipMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class NavigationButton extends StatelessWidget {
       child: IconButton(
         onPressed: onPressed,
         hoverColor: Colors.black,
+        tooltip: tooltipMessage,
         icon: Icon(
           icon,
           size: 24,
