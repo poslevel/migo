@@ -22,7 +22,6 @@ class LoginViewModel extends GetxController {
     if (response != null) {
       /// Set isLogin to true
       _authManager.login(response.token);
-      print(response.token);
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(
