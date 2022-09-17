@@ -1,16 +1,33 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:migo/controller/product_controller.dart';
+import 'package:migo/models/product/product.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/billing_page_divider.dart';
 import 'package:migo/widgets/buttons.dart';
 import 'package:migo/widgets/product_link_opener.dart';
+import 'package:migo/widgets/productcard.dart';
 
-class AddProductsPage extends StatelessWidget {
+class AddProductsPage extends StatefulWidget {
   final TabController tabController;
   const AddProductsPage({Key? key, required this.tabController})
       : super(key: key);
+
+  @override
+  State<AddProductsPage> createState() => _AddProductsPageState();
+}
+
+class _AddProductsPageState extends State<AddProductsPage> {
+  final ProductController productController = Get.put(ProductController());
+
+  @override
+  void initState() {
+    super.initState();
+    productController.fetchAllProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +47,19 @@ class AddProductsPage extends StatelessWidget {
             children: [
               Expanded(
                 flex: Responsive.isTablet(context) ? 3 : 5,
-                child: const _ProductsGrid(),
+                child: Obx(() {
+                  if (productController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return _ProductsGrid(productController: productController);
+                  }
+                }),
               ),
               if (!Responsive.isMobile(context))
                 Expanded(
                   flex: 2,
-                  child: ProductsToBeBilledList(tabController: tabController),
+                  child: ProductsToBeBilledList(
+                      tabController: widget.tabController),
                 ),
             ],
           ),
@@ -202,9 +226,9 @@ class ProductToBeBilledListTile extends StatelessWidget {
 }
 
 class _ProductsGrid extends StatefulWidget {
-  const _ProductsGrid({
-    Key? key,
-  }) : super(key: key);
+  final ProductController productController;
+  const _ProductsGrid({Key? key, required this.productController})
+      : super(key: key);
 
   @override
   State<_ProductsGrid> createState() => _ProductsGridState();
@@ -289,53 +313,10 @@ class _ProductsGridState extends State<_ProductsGrid> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0, bottom: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Visibility(
-                      visible: Responsive.isDesktop(context),
-                      child: const Text(
-                        "All Products in store (28)",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 200,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          fillColor: Colors.transparent,
-                          prefixIcon: Icon(Iconsax.search_normal),
-                          hintText: 'Search...',
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
-                            borderSide: BorderSide(color: Colors.transparent),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                DropdownButtonHideUnderline(
-                  child: filterDropdown,
-                ),
-              ],
-            ),
-          ),
+          SearchAndFilterRow(filterDropdown: filterDropdown),
           GridView.builder(
             shrinkWrap: true,
-            itemCount: 9,
+            itemCount: widget.productController.productList.length,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: Responsive.isDesktop(context)
@@ -345,11 +326,8 @@ class _ProductsGridState extends State<_ProductsGrid> {
                       : 2,
               childAspectRatio: 4 / 5,
             ),
-            itemBuilder: (_, index) => _ProductCard(
-                price: index,
-                name: " Mi ka phone",
-                url: "https://hayat.design",
-                quantitySelected: 0),
+            itemBuilder: (_, index) =>
+                _ProductCard(widget.productController.productList[index]),
           ),
         ],
       ),
@@ -357,24 +335,66 @@ class _ProductsGridState extends State<_ProductsGrid> {
   }
 }
 
-class _ProductCard extends StatefulWidget {
-  final int price;
-  final String name;
-  final String url;
-  final int quantitySelected;
-  const _ProductCard({
+class SearchAndFilterRow extends StatelessWidget {
+  const SearchAndFilterRow({
     Key? key,
-    required this.price,
-    required this.name,
-    required this.url,
-    required this.quantitySelected,
+    required this.filterDropdown,
   }) : super(key: key);
 
+  final DropdownButton<String> filterDropdown;
+
   @override
-  State<_ProductCard> createState() => _ProductCardState();
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0, bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Visibility(
+                visible: Responsive.isDesktop(context),
+                child: const Text(
+                  "All Products in store (28)",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 200,
+                child: TextField(
+                  decoration: InputDecoration(
+                    fillColor: Colors.transparent,
+                    prefixIcon: Icon(Iconsax.search_normal),
+                    hintText: 'Search...',
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          DropdownButtonHideUnderline(
+            child: filterDropdown,
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-class _ProductCardState extends State<_ProductCard> {
+class _ProductCard extends StatelessWidget {
+  final Product product;
+  const _ProductCard(this.product, {super.key});
+
   @override
   Widget build(BuildContext context) {
     // width: Responsive.isDesktop(context)
@@ -403,7 +423,7 @@ class _ProductCardState extends State<_ProductCard> {
                   ],
                 ),
                 Text(
-                  widget.name,
+                  product.name.toString(),
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       fontWeight: FontWeight.w800, fontSize: 20),
@@ -417,7 +437,7 @@ class _ProductCardState extends State<_ProductCard> {
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),
                     Text(
-                      "₹" + widget.price.toString(),
+                      "₹" + product.sellingPrice.toString(),
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontWeight: FontWeight.w800, fontSize: 20),
@@ -426,7 +446,7 @@ class _ProductCardState extends State<_ProductCard> {
                 ),
                 Row(
                   children: [
-                    if (widget.quantitySelected == 0)
+                    if (true)
                       Expanded(
                         child: PrimaryButton(
                           buttonTitle: "Add to bill",
@@ -437,7 +457,7 @@ class _ProductCardState extends State<_ProductCard> {
                           iconBgColor: const Color(0xffBEE29B),
                         ),
                       ),
-                    if (widget.quantitySelected != 0)
+                    if (false)
                       Expanded(
                         child: Row(
                           children: [
@@ -467,7 +487,7 @@ class _ProductCardState extends State<_ProductCard> {
             ),
           ),
         ),
-        ProductDescriptionLinkOpener(url: widget.url),
+        ProductDescriptionLinkOpener(url: product.description.toString()),
       ],
     );
   }
