@@ -99,10 +99,16 @@ class ProductsToBeBilledList extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
             ),
             Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: 5,
-                itemBuilder: (_, i) => const ProductToBeBilledListTile(),
+              child: Obx(
+                () => ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: invoiceController.productList.length,
+                  itemBuilder: (_, i) => ProductToBeBilledListTile(
+                    product: invoiceController.productList[i],
+                    index: i,
+                    invoiceController: invoiceController,
+                  ),
+                ),
               ),
             ),
             const Divider(
@@ -113,11 +119,11 @@ class ProductsToBeBilledList extends StatelessWidget {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text("Total"),
+                  children: [
+                    const Text("Total"),
                     Text(
-                      "₹9,999",
-                      style: TextStyle(
+                      "₹" + invoiceController.totalAmt.toString(),
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                       ),
@@ -141,7 +147,13 @@ class ProductsToBeBilledList extends StatelessWidget {
 }
 
 class ProductToBeBilledListTile extends StatelessWidget {
+  final Product product;
+  final int index;
+  final InvoiceController invoiceController;
   const ProductToBeBilledListTile({
+    required this.product,
+    required this.index,
+    required this.invoiceController,
     Key? key,
   }) : super(key: key);
 
@@ -152,66 +164,73 @@ class ProductToBeBilledListTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Mi Watch Revolve Active",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    "(₹9,999)",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 100,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        label: Text("Quanitity"),
-                        fillColor: Color(0xff0C0D16),
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text("Price"),
-                      Text(
-                        "₹9,999",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      child: Text(
+                        product.name.toString(),
+                        maxLines: 2,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-            ],
+                    ),
+                    Text(
+                      "(₹ ${product.sellingPrice.toString()})",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 100,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          label: Text("Quanitity"),
+                          fillColor: Color(0xff0C0D16),
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("Price"),
+                        Text(
+                          "₹${product.sellingPrice.toString()}",
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
           ),
           Column(
             children: [
@@ -220,7 +239,10 @@ class ProductToBeBilledListTile extends StatelessWidget {
                 scale: 2.5,
               ),
               PrimaryButton(
-                onPressed: () {},
+                onPressed: () {
+                  // TODO: add functionality here
+                  invoiceController.productList.removeAt(index);
+                },
                 // buttonTitle: "Remove product",
                 bgColor: const Color(0xffFFBBC1),
                 iconLeft: const Icon(Iconsax.trash),
@@ -468,6 +490,15 @@ class _ProductCard extends StatelessWidget {
                           buttonTitle: "Add to bill",
                           onPressed: () {
                             // TODO: add functionality here
+                            invoiceController.productList.add(Product(
+                              id: product.id,
+                              name: product.name,
+                              description: product.description,
+                              category: product.category,
+                              price: product.price,
+                              sellingPrice: product.sellingPrice,
+                              stockAmount: product.stockAmount,
+                            ));
                           },
                           iconLeft: const Icon(Iconsax.add_circle),
                           bgColor: const Color(0xffDAEEB8),
