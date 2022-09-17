@@ -18,7 +18,7 @@ class PieChart2State extends State {
     return SizedBox(
       width: !Responsive.isMobile(context)
           ? (MediaQuery.of(context).size.width - 100) / 2
-          : MediaQuery.of(context).size.width-16,
+          : MediaQuery.of(context).size.width - 16,
       height: 400,
       child: Card(
         child: Padding(
