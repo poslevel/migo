@@ -94,9 +94,19 @@ class ProductsToBeBilledList extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Products to be billed",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Products to be billed",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                ),
+                TextButton(
+                    onPressed: () {
+                      invoiceController.productList.clear();
+                    },
+                    child: Text("clear all"))
+              ],
             ),
             Expanded(
               child: Obx(
