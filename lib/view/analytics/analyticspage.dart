@@ -116,11 +116,11 @@ class AnalyticsStatus extends StatelessWidget {
           : MediaQuery.of(context).size.width,
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
-        children: const [
+        children: [
           RevenueStatus(),
           CustomersStatus(),
           ProductSoldStatus(),
-          ProductsSoldByCategoryChart(),
+          if (Responsive.isDesktop(context)) ProductsSoldByCategoryChart(),
         ],
       ),
     );
