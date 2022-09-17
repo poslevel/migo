@@ -39,7 +39,7 @@ class _MiGoState extends State<MiGo> {
       const ShortcutItem(
         type: 'create_bill',
         localizedTitle: 'Create a bill',
-        icon: 'icon_reciept_long.png',
+        icon: 'icon_reciept_long',
       ),
     ]).then((void _) {
       setState(() {
