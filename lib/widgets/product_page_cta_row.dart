@@ -27,11 +27,11 @@ class CTARow extends StatelessWidget {
         direction:
             !Responsive.isMobile(context) ? Axis.horizontal : Axis.vertical,
         children: [
-          const ProductCTACard(
-              toPage: Billing(),
+          ProductCTACard(
+              toPage: Billing(isMobile: Responsive.isMobile(context)),
               caption: "Create Bill",
               image: "assets/create_bill_ill.png",
-              cardColor: Color(0xffDAEEB8)),
+              cardColor: const Color(0xffDAEEB8)),
           const ProductCTACard(
               toPage: SalesHistory(),
               caption: "View Sales History",
@@ -121,12 +121,10 @@ class CTARow extends StatelessWidget {
                               "Check Product Authentication",
                               maxLines: 1,
                               style: TextStyle(
-                                color: Color(0xffffffff),
-                                fontWeight: FontWeight.w700,
-                                fontSize: 14,
-                                overflow: TextOverflow.ellipsis
-                                
-                              ),
+                                  color: Color(0xffffffff),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                  overflow: TextOverflow.ellipsis),
                             ),
                           ),
                         ],

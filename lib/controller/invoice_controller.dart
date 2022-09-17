@@ -12,7 +12,7 @@ class InvoiceController extends GetxController {
   String? customerPhone;
   String? customerEmail;
   String? customerAddress;
-  int totalAmt = 0;
+  int totalAmt =0;
   var productList = <Product>[].obs;
 
   void setCustomer(
@@ -28,9 +28,6 @@ class InvoiceController extends GetxController {
 
   void setItems(List<Product> val) async {
     productList.addAll(val);
-    for (var item in productList) {
-      totalAmt += int.parse(item.sellingPrice ?? "0");
-    }
     await Future.delayed(const Duration(milliseconds: 20), () {
       update();
     });

@@ -308,11 +308,11 @@ class _ProductsGridState extends State<_ProductsGrid> {
           ),
         ),
         DropdownMenuItem(
-          value: "Watches",
+          value: "Audio",
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              "Watches",
+              "Audio",
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -321,11 +321,11 @@ class _ProductsGridState extends State<_ProductsGrid> {
           ),
         ),
         DropdownMenuItem(
-          value: "Earphones",
+          value: "Laptops",
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              "Earphones",
+              "Laptops",
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -334,11 +334,37 @@ class _ProductsGridState extends State<_ProductsGrid> {
           ),
         ),
         DropdownMenuItem(
-          value: "Mobiles",
+          value: "Fitness bands",
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              "Mobiles",
+              "Fitness bands",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        DropdownMenuItem(
+          value: "TV",
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "TV",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        DropdownMenuItem(
+          value: "Phones",
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "Phones",
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -499,16 +525,19 @@ class _ProductCard extends StatelessWidget {
                         child: PrimaryButton(
                           buttonTitle: "Add to bill",
                           onPressed: () {
-                            // TODO: add functionality here
-                            invoiceController.productList.add(Product(
-                              id: product.id,
-                              name: product.name,
-                              description: product.description,
-                              category: product.category,
-                              price: product.price,
-                              sellingPrice: product.sellingPrice,
-                              stockAmount: product.stockAmount,
-                            ));
+                            invoiceController.productList.add(
+                              Product(
+                                id: product.id,
+                                name: product.name,
+                                description: product.description,
+                                category: product.category,
+                                price: product.price,
+                                sellingPrice: product.sellingPrice,
+                                stockAmount: product.stockAmount,
+                              ),
+                            );
+                            invoiceController.totalAmt +=
+                                int.parse(product.sellingPrice.toString());
                           },
                           iconLeft: const Icon(Iconsax.add_circle),
                           bgColor: const Color(0xffDAEEB8),

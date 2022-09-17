@@ -28,7 +28,7 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Image.asset(
                         "assets/mi_watch_img.png",
-                        scale: Responsive.isMobile(context) ? 1 : 1.5,
+                        scale: Responsive.isMobile(context) ? 1 : 1.2,
                       ),
                     ],
                   ),
@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
                     product.name.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                        fontWeight: FontWeight.w800, fontSize: 28),
+                        fontWeight: FontWeight.w700, fontSize: 22),
                   ),
                   Row(
                     children: [
@@ -50,7 +50,7 @@ class ProductCard extends StatelessWidget {
                         "₹ ${product.sellingPrice?.replaceAllMapped(reg, mathFunc)}",
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 28),
+                            fontWeight: FontWeight.w700, fontSize: 24),
                       ),
                     ],
                   ),

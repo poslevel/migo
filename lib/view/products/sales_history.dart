@@ -272,7 +272,7 @@ class ActionRow extends StatelessWidget {
               !Responsive.isMobile(context) ? "Create a new bill" : null,
           iconLeft: const Icon(Iconsax.add_circle),
           onPressed: () {
-            Get.to(() => const Billing(), transition: Transition.noTransition);
+            Get.to(() => Billing(isMobile: Responsive.isMobile(context)), transition: Transition.noTransition);
           },
           bgColor: const Color(0xffDAEEB8),
           textColor: const Color(0xff1F212E),

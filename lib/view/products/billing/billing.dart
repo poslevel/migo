@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,7 +14,8 @@ import 'package:migo/widgets/buttons.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class Billing extends StatefulWidget {
-  const Billing({super.key});
+  final bool isMobile;
+  const Billing({super.key, required this.isMobile});
 
   @override
   State<Billing> createState() => _BillingState();
@@ -20,7 +23,7 @@ class Billing extends StatefulWidget {
 
 class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
   final InvoiceController invoiceController = Get.put(InvoiceController());
-  static List<Tab> myTabs = <Tab>[
+  static List<Tab> desktopTabs = <Tab>[
     Tab(
         child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -31,6 +34,60 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
             size: 20,
           ),
           Text("Add Products"),
+        ],
+      ),
+    )),
+    Tab(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: const [
+          Icon(
+            Iconsax.user_edit,
+            size: 20,
+          ),
+          Text("Customer info"),
+        ],
+      ),
+    )),
+    Tab(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: const [
+          Icon(
+            Iconsax.dollar_square,
+            size: 20,
+          ),
+          Text("Payment"),
+        ],
+      ),
+    )),
+  ];
+  static List<Tab> mobileTabs = <Tab>[
+    Tab(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: const [
+          Icon(
+            Iconsax.bag,
+            size: 20,
+          ),
+          Text("Add Products"),
+        ],
+      ),
+    )),
+    Tab(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: const [
+          Icon(
+            Iconsax.bag_happy,
+            size: 20,
+          ),
+          Text("Cart"),
         ],
       ),
     )),
@@ -72,7 +129,9 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: myTabs.length);
+    _tabController = TabController(
+        vsync: this,
+        length: widget.isMobile ? mobileTabs.length : desktopTabs.length);
   }
 
   @override
@@ -99,7 +158,7 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
             controller: _tabController,
             unselectedLabelColor: Colors.white,
             isScrollable: true,
-            tabs: myTabs,
+            tabs: widget.isMobile ? mobileTabs : desktopTabs,
             indicatorSize: TabBarIndicatorSize.label,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -113,6 +172,13 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
                 tabController: _tabController,
                 invoiceController: invoiceController,
               ),
+              if (widget.isMobile)
+                Container(
+                  child: ProductsToBeBilledList(
+                    invoiceController: invoiceController,
+                    tabController: _tabController,
+                  ),
+                ),
               CustomerInfoPage(
                 nameController: nameController,
                 emailController: emailController,
