@@ -28,7 +28,7 @@ class SalesHistory extends StatelessWidget {
                 : null,
             height: !Responsive.isMobile(context)
                 ? MediaQuery.of(context).size.height - 150
-                : MediaQuery.of(context).size.height - 220,
+                : MediaQuery.of(context).size.height - 240,
             child: Row(
               children: [
                 Expanded(
@@ -268,7 +268,8 @@ class ActionRow extends StatelessWidget {
           ),
         ),
         PrimaryButton(
-          buttonTitle: "Create a new bill",
+          buttonTitle:
+              !Responsive.isMobile(context) ? "Create a new bill" : null,
           iconLeft: const Icon(Iconsax.add_circle),
           onPressed: () {
             Get.to(() => const Billing(), transition: Transition.noTransition);
