@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:migo/view/products/productpage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductCTACard extends StatelessWidget {
   final Widget toPage;
   final String caption;
   final String image;
+  final bool isGoToAdmin;
   final Color? cardColor;
   const ProductCTACard({
     Key? key,
@@ -13,13 +15,18 @@ class ProductCTACard extends StatelessWidget {
     required this.caption,
     required this.image,
     required this.cardColor,
+    this.isGoToAdmin = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => toPage, transition: Transition.noTransition);
+        if (!isGoToAdmin) {
+          Get.to(() => toPage, transition: Transition.noTransition);
+        } else {
+          _launchUrl("https://backpos.herokuapp.com/admin/");
+        }
       },
       borderRadius: BorderRadius.circular(20),
       child: Card(
@@ -43,5 +50,12 @@ class ProductCTACard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<void> _launchUrl(url) async {
+  final Uri _url = Uri.parse(url);
+  if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
+    throw 'Could not launch $_url';
   }
 }

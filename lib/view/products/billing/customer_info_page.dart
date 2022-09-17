@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/customer_details_controller.dart';
+import 'package:migo/controller/invoice_controller.dart';
 import 'package:migo/widgets/billing_page_divider.dart';
 import 'package:migo/widgets/buttons.dart';
 
@@ -14,6 +15,7 @@ class CustomerInfoPage extends StatelessWidget {
     required this.addressController,
     required this.formkey,
     required this.tabController,
+    required this.invoiceController,
   }) : super(key: key);
 
   final TextEditingController nameController;
@@ -22,11 +24,10 @@ class CustomerInfoPage extends StatelessWidget {
   final TextEditingController addressController;
   final GlobalKey<FormState> formkey;
   final TabController tabController;
+  final InvoiceController invoiceController;
 
   @override
   Widget build(BuildContext context) {
-    final CustomerDetailsController _customerDetailsController =
-        Get.put(CustomerDetailsController());
     return Form(
       key: formkey,
       child: Column(
@@ -109,13 +110,11 @@ class CustomerInfoPage extends StatelessWidget {
                       // Validate returns true if the form is valid, or false otherwise.
                       if (formkey.currentState!.validate()) {
                         // ... Navigate To next page
-                        _customerDetailsController.name.value =
-                            nameController.text;
-                        _customerDetailsController.email.value =
-                            emailController.text;
-                        _customerDetailsController.phone.value =
+                        invoiceController.customerName = nameController.text;
+                        invoiceController.customerEmail = emailController.text;
+                        invoiceController.customerPhone =
                             phonenumberController.text;
-                        _customerDetailsController.address.value =
+                        invoiceController.customerAddress =
                             addressController.text;
                         tabController.animateTo(2);
                       }

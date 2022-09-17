@@ -12,7 +12,7 @@ class InvoiceController extends GetxController {
   String? customerPhone;
   String? customerEmail;
   String? customerAddress;
-  int totalAmt =0;
+  var totalAmt = 0.obs;
   var productList = <Product>[].obs;
 
   void setCustomer(

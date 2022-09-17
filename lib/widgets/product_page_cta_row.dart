@@ -6,6 +6,7 @@ import 'package:migo/view/products/sales_history.dart';
 import 'package:migo/view/products/warranty_claim.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/product_page_cta_cards.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CTARow extends StatelessWidget {
   const CTARow({
@@ -38,9 +39,11 @@ class CTARow extends StatelessWidget {
               image: "assets/view_sales_history.png",
               cardColor: Color(0xffFFD58E)),
           const ProductCTACard(
-              caption: "Order a Product",
-              image: "assets/order_a_product.png",
-              cardColor: Color(0xffBEE4FF)),
+            caption: "Order a Product",
+            image: "assets/order_a_product.png",
+            cardColor: Color(0xffBEE4FF),
+            isGoToAdmin: true,
+          ),
           Column(
             children: [
               InkWell(
@@ -91,8 +94,9 @@ class CTARow extends StatelessWidget {
                 width: 315,
                 child: InkWell(
                   onTap: () {
-                    Get.to(() => const WarrantyClaim(),
-                        transition: Transition.noTransition);
+                    // Get.to(() => const WarrantyClaim(),
+                    //     transition: Transition.noTransition);
+                    _launchUrl("https://www.mi.com/in/service/warranty/");
                   },
                   borderRadius: BorderRadius.circular(20),
                   child: Card(
@@ -138,5 +142,12 @@ class CTARow extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+Future<void> _launchUrl(url) async {
+  final Uri _url = Uri.parse(url);
+  if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
+    throw 'Could not launch $_url';
   }
 }

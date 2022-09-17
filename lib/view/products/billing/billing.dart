@@ -173,11 +173,9 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
                 invoiceController: invoiceController,
               ),
               if (widget.isMobile)
-                Container(
-                  child: ProductsToBeBilledList(
-                    invoiceController: invoiceController,
-                    tabController: _tabController,
-                  ),
+                ProductsToBeBilledList(
+                  invoiceController: invoiceController,
+                  tabController: _tabController,
                 ),
               CustomerInfoPage(
                 nameController: nameController,
@@ -186,6 +184,7 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
                 addressController: addressController,
                 formkey: _formKey,
                 tabController: _tabController,
+                invoiceController: invoiceController,
               ),
               const PaymentsPage(),
             ],

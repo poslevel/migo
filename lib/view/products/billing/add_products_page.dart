@@ -131,11 +131,13 @@ class ProductsToBeBilledList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("Total"),
-                    Text(
-                      "₹" + invoiceController.totalAmt.toString(),
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
+                    Obx(
+                      () => Text(
+                        "₹" + invoiceController.totalAmt.toString(),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ],
@@ -536,7 +538,7 @@ class _ProductCard extends StatelessWidget {
                                 stockAmount: product.stockAmount,
                               ),
                             );
-                            invoiceController.totalAmt +=
+                            invoiceController.totalAmt.value +=
                                 int.parse(product.sellingPrice.toString());
                           },
                           iconLeft: const Icon(Iconsax.add_circle),
