@@ -10,6 +10,7 @@ import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/billing_page_divider.dart';
 import 'package:migo/widgets/buttons.dart';
 import 'package:migo/widgets/product_link_opener.dart';
+import 'package:quantity_input/quantity_input.dart';
 
 class AddProductsPage extends StatefulWidget {
   final TabController tabController;
@@ -103,7 +104,7 @@ class ProductsToBeBilledList extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                      invoiceController.productList.clear();
+                      invoiceController.clearInvoice();
                     },
                     child: const Text("clear all"))
               ],
@@ -197,7 +198,7 @@ class ProductToBeBilledListTile extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "(₹ ${product.sellingPrice.toString()})",
+                      "(₹ ${product.sellingPrice.toString().substring(0, product.sellingPrice.toString().length - 3)})",
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -210,32 +211,38 @@ class ProductToBeBilledListTile extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const SizedBox(
-                      width: 100,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          label: Text("Quanitity"),
-                          fillColor: Color(0xff0C0D16),
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                        ),
-                      ),
+                    // const SizedBox(
+                    //   width: 100,
+                    //   child: TextField(
+                    //     decoration: InputDecoration(
+                    //       label: Text("Quanitity"),
+                    //       fillColor: Color(0xff0C0D16),
+                    //       floatingLabelBehavior: FloatingLabelBehavior.always,
+                    //     ),
+                    //   ),
+                    // ),
+                    QuantityInput(
+                      value: 1,
+                      onChanged: (val) {},
+                      buttonColor: const Color(0xffBEE4FF),
+                      iconColor: const Color(0xff1F212E),
                     ),
                     const SizedBox(
                       width: 8,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("Price"),
-                        Text(
-                          "₹${product.sellingPrice.toString()}",
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     const Text("Price"),
+                    //     Text(
+                    //       "₹${product.sellingPrice.toString()}",
+                    //       style: const TextStyle(
+                    //         fontSize: 20,
+                    //         fontWeight: FontWeight.w700,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
                 const SizedBox(
@@ -252,7 +259,17 @@ class ProductToBeBilledListTile extends StatelessWidget {
               ),
               PrimaryButton(
                 onPressed: () {
+                  var price_to_be_deducted = int.parse(invoiceController
+                      .productList[index].sellingPrice
+                      .toString()
+                      .substring(
+                          0,
+                          invoiceController.productList[index].sellingPrice
+                                  .toString()
+                                  .length -
+                              3));
                   invoiceController.productList.removeAt(index);
+                  invoiceController.removeFromTotal(price_to_be_deducted);
                 },
                 // buttonTitle: "Remove product",
                 bgColor: const Color(0xffFFBBC1),
@@ -500,8 +517,9 @@ class _ProductCard extends StatelessWidget {
                 Text(
                   product.name.toString(),
                   overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                   style: const TextStyle(
-                      fontWeight: FontWeight.w800, fontSize: 20),
+                      fontWeight: FontWeight.w700, fontSize: 18),
                 ),
                 Row(
                   children: [
@@ -512,7 +530,9 @@ class _ProductCard extends StatelessWidget {
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),
                     Text(
-                      "₹" + product.sellingPrice.toString(),
+                      "₹" +
+                          product.sellingPrice.toString().substring(
+                              0, product.sellingPrice.toString().length - 3),
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontWeight: FontWeight.w800, fontSize: 20),
@@ -537,8 +557,10 @@ class _ProductCard extends StatelessWidget {
                                 stockAmount: product.stockAmount,
                               ),
                             );
-                            invoiceController.totalAmt.value +=
-                                int.parse(product.sellingPrice.toString());
+                            var sellpr = product.sellingPrice.toString();
+                            invoiceController.addToTotal(
+                              int.parse(sellpr.substring(0, sellpr.length - 3)),
+                            );
                           },
                           iconLeft: const Icon(Iconsax.add_circle),
                           bgColor: const Color(0xffDAEEB8),
