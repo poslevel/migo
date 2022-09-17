@@ -21,10 +21,11 @@ class CTARow extends StatelessWidget {
           : null,
       child: Wrap(
         spacing: 4,
+        alignment: WrapAlignment.center,
+        runAlignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
         direction:
             !Responsive.isMobile(context) ? Axis.horizontal : Axis.vertical,
-        // mainAxisSize: MainAxisSize.max,
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const ProductCTACard(
               toPage: Billing(),
@@ -114,14 +115,17 @@ class CTARow extends StatelessWidget {
                                 color: const Color(0xff6C6BA9),
                                 borderRadius: BorderRadius.circular(8)),
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 24, vertical: 8),
+                                horizontal: 24, vertical: 7),
                             margin: const EdgeInsets.only(top: 8),
                             child: const Text(
                               "Check Product Authentication",
+                              maxLines: 1,
                               style: TextStyle(
                                 color: Color(0xffffffff),
                                 fontWeight: FontWeight.w700,
                                 fontSize: 14,
+                                overflow: TextOverflow.ellipsis
+                                
                               ),
                             ),
                           ),

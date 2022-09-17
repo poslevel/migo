@@ -18,12 +18,13 @@ class PieChart2State extends State {
     return SizedBox(
       width: !Responsive.isMobile(context)
           ? (MediaQuery.of(context).size.width - 100) / 2
-          : null,
+          : MediaQuery.of(context).size.width-16,
       height: 400,
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                 "Sales by categories",

@@ -29,52 +29,60 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
       activeTab: 1,
       pageName: "Analytics",
       content: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flex(
-              direction: Responsive.isMobile(context)
-                  ? Axis.vertical
-                  : Axis.horizontal,
-              children: [
-                Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 32,
-                      backgroundImage: AssetImage("assets/avatar.png"),
+        child: Padding(
+          padding: EdgeInsets.all(!Responsive.isMobile(context) ? 0 : 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flex(
+                direction: Responsive.isMobile(context)
+                    ? Axis.vertical
+                    : Axis.horizontal,
+                children: [
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 32,
+                        backgroundImage: AssetImage("assets/avatar.png"),
+                      ),
+                      const SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Hello, " + " Hayat Tamboli" + "👋",
+                            style: TextStyle(
+                                fontSize:
+                                    !Responsive.isMobile(context) ? 24 : 18,
+                                fontWeight: FontWeight.w800),
+                          ),
+                          const Text(
+                            "These are your reports, have a great day",
+                            style: TextStyle(color: Color(0xffB9B7FF)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: PrimaryButton(
+                      onPressed: () => printDoc(),
+                      buttonTitle: "Print Report",
+                      textColor: const Color(0xff1F212E),
+                      bgColor: const Color(0xffBEE4FF),
                     ),
-                    const SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Hello, " + " Hayat Tamboli" + "👋",
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w800),
-                        ),
-                        Text(
-                          "These are your reports, have a great day",
-                          style: TextStyle(color: Color(0xffB9B7FF)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                PrimaryButton(
-                  onPressed: () => printDoc(),
-                  buttonTitle: "Print Report",
-                  textColor: const Color(0xff1F212E),
-                  bgColor: const Color(0xffBEE4FF),
-                )
-              ],
-            ),
-            const BillingPageDivider(),
-            const SizedBox(height: 32),
-            const Text("Status",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 8),
-            const AnalyticsStatus(),
-          ],
+                  )
+                ],
+              ),
+              const BillingPageDivider(),
+              const SizedBox(height: 32),
+              const Text("Status",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+              const SizedBox(height: 8),
+              const AnalyticsStatus(),
+            ],
+          ),
         ),
       ),
     );
@@ -105,8 +113,9 @@ class AnalyticsStatus extends StatelessWidget {
     return SizedBox(
       width: !Responsive.isMobile(context)
           ? MediaQuery.of(context).size.width - 90
-          : null,
+          : MediaQuery.of(context).size.width,
       child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: const [
           RevenueStatus(),
           CustomersStatus(),
@@ -128,7 +137,7 @@ class RevenueStatus extends StatelessWidget {
     return SizedBox(
       width: !Responsive.isMobile(context)
           ? (MediaQuery.of(context).size.width - 100) / 2
-          : null,
+          : MediaQuery.of(context).size.width - 16,
       height: 400,
       child: Card(
         child: Padding(
@@ -182,7 +191,7 @@ class CustomersStatus extends StatelessWidget {
     return SizedBox(
       width: !Responsive.isMobile(context)
           ? (MediaQuery.of(context).size.width - 100) / 2
-          : null,
+          : MediaQuery.of(context).size.width - 16,
       height: 400,
       child: Card(
         child: Padding(
@@ -236,7 +245,7 @@ class ProductSoldStatus extends StatelessWidget {
     return SizedBox(
       width: !Responsive.isMobile(context)
           ? (MediaQuery.of(context).size.width - 100) / 2
-          : null,
+          : MediaQuery.of(context).size.width - 16,
       height: 400,
       child: Card(
         child: Padding(

@@ -34,31 +34,27 @@ class AppLayout extends StatelessWidget {
           activeTab: activeTab,
         ),
       ),
-      body: Responsive(
-        mobile: Column(
-          children: [
-            Expanded(
-              child: content,
-            ),
-          ],
-        ),
-        desktop: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            NavigationPanel(
-              axis: Axis.vertical,
-              activeTab: activeTab,
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TopAppBar(
-                  pageName: pageName,
-                ),
-                Flexible(child: content),
-              ],
-            ),
-          ],
+      body: SafeArea(
+        child: Responsive(
+          mobile: content,
+          desktop: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              NavigationPanel(
+                axis: Axis.vertical,
+                activeTab: activeTab,
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TopAppBar(
+                    pageName: pageName,
+                  ),
+                  Flexible(child: content),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
