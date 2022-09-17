@@ -3,18 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:migo/controller/invoice_controller.dart';
 import 'package:migo/controller/product_controller.dart';
 import 'package:migo/models/product/product.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/billing_page_divider.dart';
 import 'package:migo/widgets/buttons.dart';
 import 'package:migo/widgets/product_link_opener.dart';
-import 'package:migo/widgets/productcard.dart';
 
 class AddProductsPage extends StatefulWidget {
   final TabController tabController;
-  const AddProductsPage({Key? key, required this.tabController})
-      : super(key: key);
+  final InvoiceController invoiceController;
+  const AddProductsPage({
+    Key? key,
+    required this.tabController,
+    required this.invoiceController,
+  }) : super(key: key);
 
   @override
   State<AddProductsPage> createState() => _AddProductsPageState();
@@ -51,7 +55,9 @@ class _AddProductsPageState extends State<AddProductsPage> {
                   if (productController.isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
-                    return _ProductsGrid(productController: productController);
+                    return _ProductsGrid(
+                        productController: productController,
+                        invoiceController: widget.invoiceController);
                   }
                 }),
               ),
@@ -59,7 +65,9 @@ class _AddProductsPageState extends State<AddProductsPage> {
                 Expanded(
                   flex: 2,
                   child: ProductsToBeBilledList(
-                      tabController: widget.tabController),
+                    tabController: widget.tabController,
+                    invoiceController: widget.invoiceController,
+                  ),
                 ),
             ],
           ),
@@ -71,9 +79,11 @@ class _AddProductsPageState extends State<AddProductsPage> {
 
 class ProductsToBeBilledList extends StatelessWidget {
   final TabController tabController;
+  final InvoiceController invoiceController;
   const ProductsToBeBilledList({
     Key? key,
     required this.tabController,
+    required this.invoiceController,
   }) : super(key: key);
 
   @override
@@ -227,7 +237,11 @@ class ProductToBeBilledListTile extends StatelessWidget {
 
 class _ProductsGrid extends StatefulWidget {
   final ProductController productController;
-  const _ProductsGrid({Key? key, required this.productController})
+  final InvoiceController invoiceController;
+  const _ProductsGrid(
+      {Key? key,
+      required this.productController,
+      required this.invoiceController})
       : super(key: key);
 
   @override
@@ -326,8 +340,9 @@ class _ProductsGridState extends State<_ProductsGrid> {
                       : 2,
               childAspectRatio: 4 / 5,
             ),
-            itemBuilder: (_, index) =>
-                _ProductCard(widget.productController.productList[index]),
+            itemBuilder: (_, index) => _ProductCard(
+                widget.productController.productList[index],
+                widget.invoiceController),
           ),
         ],
       ),
@@ -393,7 +408,8 @@ class SearchAndFilterRow extends StatelessWidget {
 
 class _ProductCard extends StatelessWidget {
   final Product product;
-  const _ProductCard(this.product, {super.key});
+  final InvoiceController invoiceController;
+  const _ProductCard(this.product, this.invoiceController, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -450,7 +466,9 @@ class _ProductCard extends StatelessWidget {
                       Expanded(
                         child: PrimaryButton(
                           buttonTitle: "Add to bill",
-                          onPressed: () {},
+                          onPressed: () {
+                            // TODO: add functionality here
+                          },
                           iconLeft: const Icon(Iconsax.add_circle),
                           bgColor: const Color(0xffDAEEB8),
                           textColor: const Color(0xff1F212E),

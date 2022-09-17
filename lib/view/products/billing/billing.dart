@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:migo/controller/invoice_controller.dart';
 import 'package:migo/layout/layout.dart';
 import 'package:migo/view/products/billing/add_products_page.dart';
 import 'package:migo/view/products/billing/customer_info_page.dart';
@@ -18,6 +19,7 @@ class Billing extends StatefulWidget {
 }
 
 class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
+  final InvoiceController invoiceController = Get.put(InvoiceController());
   static List<Tab> myTabs = <Tab>[
     Tab(
         child: Padding(
@@ -109,6 +111,7 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
             children: [
               AddProductsPage(
                 tabController: _tabController,
+                invoiceController: invoiceController,
               ),
               CustomerInfoPage(
                 nameController: nameController,
