@@ -199,7 +199,7 @@ class BillCardRow1 extends StatelessWidget {
       children: [
         BillLabel(color: const Color(0xffBEE29B), status: status),
         Text(
-          "₹" + price.toString(),
+          "₹$price",
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w700,

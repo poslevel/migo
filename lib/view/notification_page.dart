@@ -61,7 +61,7 @@ class NotificationCard extends StatelessWidget {
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           "This is a notification",
                           style: TextStyle(fontWeight: FontWeight.bold),

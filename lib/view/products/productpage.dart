@@ -151,7 +151,7 @@ class _ProductsPageState extends State<ProductsPage> {
                           visible: Responsive.isDesktop(context),
                           child: Text(
                             "All Products in store (${productController.productList.length})",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w800,
                             ),

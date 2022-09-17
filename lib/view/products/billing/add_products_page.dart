@@ -105,7 +105,7 @@ class ProductsToBeBilledList extends StatelessWidget {
                     onPressed: () {
                       invoiceController.productList.clear();
                     },
-                    child: Text("clear all"))
+                    child: const Text("clear all"))
               ],
             ),
             Expanded(
@@ -252,7 +252,6 @@ class ProductToBeBilledListTile extends StatelessWidget {
               ),
               PrimaryButton(
                 onPressed: () {
-                  // TODO: add functionality here
                   invoiceController.productList.removeAt(index);
                 },
                 // buttonTitle: "Remove product",
@@ -469,7 +468,7 @@ class SearchAndFilterRow extends StatelessWidget {
 class _ProductCard extends StatelessWidget {
   final Product product;
   final InvoiceController invoiceController;
-  const _ProductCard(this.product, this.invoiceController, {super.key});
+  const _ProductCard(this.product, this.invoiceController);
 
   @override
   Widget build(BuildContext context) {
@@ -547,30 +546,30 @@ class _ProductCard extends StatelessWidget {
                           iconBgColor: const Color(0xffBEE29B),
                         ),
                       ),
-                    if (false)
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: PrimaryButton(
-                                buttonTitle: "Add one",
-                                onPressed: () {},
-                                iconLeft: const Icon(Iconsax.add_circle),
-                                bgColor: const Color(0xffDAEEB8),
-                                textColor: const Color(0xff1F212E),
-                                iconBgColor: const Color(0xffBEE29B),
-                              ),
-                            ),
-                            PrimaryButton(
-                              onPressed: () {},
-                              iconLeft: const Icon(Iconsax.trash),
-                              bgColor: const Color(0xffFFBBC1),
-                              textColor: const Color(0xff1F212E),
-                              iconBgColor: const Color(0xffF29DA3),
-                            ),
-                          ],
-                        ),
-                      ),
+                    // if (false)
+                    //   Expanded(
+                    //     child: Row(
+                    //       children: [
+                    //         Expanded(
+                    //           child: PrimaryButton(
+                    //             buttonTitle: "Add one",
+                    //             onPressed: () {},
+                    //             iconLeft: const Icon(Iconsax.add_circle),
+                    //             bgColor: const Color(0xffDAEEB8),
+                    //             textColor: const Color(0xff1F212E),
+                    //             iconBgColor: const Color(0xffBEE29B),
+                    //           ),
+                    //         ),
+                    //         PrimaryButton(
+                    //           onPressed: () {},
+                    //           iconLeft: const Icon(Iconsax.trash),
+                    //           bgColor: const Color(0xffFFBBC1),
+                    //           textColor: const Color(0xff1F212E),
+                    //           iconBgColor: const Color(0xffF29DA3),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
                   ],
                 ),
               ],

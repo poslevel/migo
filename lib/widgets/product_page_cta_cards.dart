@@ -54,6 +54,7 @@ class ProductCTACard extends StatelessWidget {
 }
 
 Future<void> _launchUrl(url) async {
+  // ignore: no_leading_underscores_for_local_identifiers
   final Uri _url = Uri.parse(url);
   if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
     throw 'Could not launch $_url';

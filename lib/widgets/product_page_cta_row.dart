@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:migo/view/products/billing/billing.dart';
 import 'package:migo/view/products/product_replacement.dart';
 import 'package:migo/view/products/sales_history.dart';
-import 'package:migo/view/products/warranty_claim.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/product_page_cta_cards.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -146,6 +145,7 @@ class CTARow extends StatelessWidget {
 }
 
 Future<void> _launchUrl(url) async {
+  // ignore: no_leading_underscores_for_local_identifiers
   final Uri _url = Uri.parse(url);
   if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
     throw 'Could not launch $_url';
