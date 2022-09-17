@@ -159,7 +159,7 @@ class ProductsToBeBilledList extends StatelessWidget {
   }
 }
 
-class ProductToBeBilledListTile extends StatelessWidget {
+class ProductToBeBilledListTile extends StatefulWidget {
   final Product product;
   final int index;
   final InvoiceController invoiceController;
@@ -169,6 +169,21 @@ class ProductToBeBilledListTile extends StatelessWidget {
     required this.invoiceController,
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<ProductToBeBilledListTile> createState() =>
+      _ProductToBeBilledListTileState();
+}
+
+class _ProductToBeBilledListTileState extends State<ProductToBeBilledListTile> {
+  late int quantity;
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      quantity = 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +202,7 @@ class ProductToBeBilledListTile extends StatelessWidget {
                   children: [
                     SizedBox(
                       child: Text(
-                        product.name.toString(),
+                        widget.product.name.toString(),
                         maxLines: 2,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
@@ -198,7 +213,7 @@ class ProductToBeBilledListTile extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "(₹ ${product.sellingPrice.toString().substring(0, product.sellingPrice.toString().length - 3)})",
+                      "(₹ ${widget.product.sellingPrice.toString().substring(0, widget.product.sellingPrice.toString().length - 3)})",
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -222,10 +237,33 @@ class ProductToBeBilledListTile extends StatelessWidget {
                     //   ),
                     // ),
                     QuantityInput(
-                      value: 1,
-                      onChanged: (val) {},
+                      value: quantity,
+                      onChanged: (val) {
+                        int change = int.parse(val) - quantity;
+                        setState(() {
+                          quantity = int.parse(val);
+                        });
+                        var priceOfTheItem = int.parse(widget.invoiceController
+                            .productList[widget.index].sellingPrice
+                            .toString()
+                            .substring(
+                                0,
+                                widget.invoiceController
+                                        .productList[widget.index].sellingPrice
+                                        .toString()
+                                        .length -
+                                    3));
+                        int priceToBeChanged = priceOfTheItem * change;
+                        if (change < 0) {
+                          widget.invoiceController
+                              .removeFromTotal(priceToBeChanged * -1);
+                        } else {
+                          widget.invoiceController.addToTotal(priceToBeChanged);
+                        }
+                      },
                       buttonColor: const Color(0xffBEE4FF),
                       iconColor: const Color(0xff1F212E),
+                      maxValue: 10,
                     ),
                     const SizedBox(
                       width: 8,
@@ -259,17 +297,19 @@ class ProductToBeBilledListTile extends StatelessWidget {
               ),
               PrimaryButton(
                 onPressed: () {
-                  var price_to_be_deducted = int.parse(invoiceController
-                      .productList[index].sellingPrice
+                  var price_to_be_deducted = int.parse(widget
+                      .invoiceController.productList[widget.index].sellingPrice
                       .toString()
                       .substring(
                           0,
-                          invoiceController.productList[index].sellingPrice
+                          widget.invoiceController.productList[widget.index]
+                                  .sellingPrice
                                   .toString()
                                   .length -
                               3));
-                  invoiceController.productList.removeAt(index);
-                  invoiceController.removeFromTotal(price_to_be_deducted);
+                  widget.invoiceController.productList.removeAt(widget.index);
+                  widget.invoiceController
+                      .removeFromTotal(price_to_be_deducted);
                 },
                 // buttonTitle: "Remove product",
                 bgColor: const Color(0xffFFBBC1),

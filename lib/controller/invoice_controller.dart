@@ -26,6 +26,13 @@ class InvoiceController extends GetxController {
     });
   }
 
+  void setTotal(int val) async {
+    totalAmt.value = val;
+    await Future.delayed(const Duration(milliseconds: 20), () {
+      update();
+    });
+  }
+
   void addToTotal(int val) async {
     totalAmt.value += val;
     await Future.delayed(const Duration(milliseconds: 20), () {
