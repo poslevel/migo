@@ -32,7 +32,7 @@ class ProductDescriptionLinkOpener extends StatelessWidget {
 
 Future<void> _launchUrl(url) async {
   final Uri _url = Uri.parse(url);
-  if (!await launchUrl(_url)) {
+  if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
     throw 'Could not launch $_url';
   }
 }

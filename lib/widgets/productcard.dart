@@ -47,7 +47,7 @@ class ProductCard extends StatelessWidget {
                             fontWeight: FontWeight.w500, fontSize: 22),
                       ),
                       Text(
-                        "₹ ${product.stockAmount}",
+                        "₹ ${product.sellingPrice?.replaceAllMapped(reg, mathFunc)}",
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 28),
@@ -78,7 +78,7 @@ class ProductCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Amount in Stock: ₹ ${product.stockAmount}",
+                        "Amount in Stock: ${product.stockAmount}",
                         style: const TextStyle(
                           color: Color(0xffB9B7FF),
                           fontSize: 18,
@@ -116,3 +116,6 @@ class VariantCircle extends StatelessWidget {
     );
   }
 }
+
+RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+String Function(Match) mathFunc = (Match match) => '${match[1]},';

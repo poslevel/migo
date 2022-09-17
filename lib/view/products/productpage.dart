@@ -161,10 +161,11 @@ class _ProductsPageState extends State<ProductsPage> {
               ),
             ),
             SizedBox(
-                width: !Responsive.isMobile(context)
-                    ? MediaQuery.of(context).size.width - 90
-                    : null,
-                child: Obx(() {
+              width: !Responsive.isMobile(context)
+                  ? MediaQuery.of(context).size.width - 90
+                  : null,
+              child: Obx(
+                () {
                   if (productController.isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
@@ -185,40 +186,9 @@ class _ProductsPageState extends State<ProductsPage> {
                           ProductCard(productController.productList[index]),
                     );
                   }
-                })),
-            // SizedBox(
-            // width: !Responsive.isMobile(context)
-            //     ? MediaQuery.of(context).size.width - 90
-            //     : null,
-            //   child: Wrap(
-            //     children: const [
-            //       ProductCard(
-            //         price: 800,
-            //         name: "Mi Watch Revolve Active",
-            //         url:
-            //             "https://www.mi.com/in/product/mi-watch-revolve-active/",
-            //       ),
-            //       ProductCard(
-            //         price: 800,
-            //         name: "Mi Watch Revolve Active",
-            //         url:
-            //             "https://www.mi.com/in/product/mi-watch-revolve-active/",
-            //       ),
-            //       ProductCard(
-            //         price: 800,
-            //         name: "Mi Watch Revolve Active",
-            //         url:
-            //             "https://www.mi.com/in/product/mi-watch-revolve-active/",
-            //       ),
-            //       ProductCard(
-            //         price: 800,
-            //         name: "Mi Watch Revolve Active",
-            //         url:
-            //             "https://www.mi.com/in/product/mi-watch-revolve-active/",
-            //       ),
-            //     ],
-            //   ),
-            // )
+                },
+              ),
+            ),
           ],
         ),
       ),
