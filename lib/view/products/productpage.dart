@@ -205,7 +205,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                 ? 1
                                 : 2,
                         childAspectRatio:
-                            Responsive.isMobile(context) ? 1 : 4 / 3,
+                            Responsive.isMobile(context) ? 1 : 6/5,
                       ),
                       itemCount: productController.productList.length,
                       itemBuilder: (_, index) =>

@@ -291,9 +291,17 @@ class _ProductToBeBilledListTileState extends State<ProductToBeBilledListTile> {
           ),
           Column(
             children: [
-              Image.asset(
-                "assets/mi_watch_img.png",
-                scale: 2.5,
+              // Image.asset(
+              //   "assets/mi_watch_img.png",
+              //   scale: 2.5,
+              // ),
+              FadeInImage(
+                image: NetworkImage("https://i.imgur.com/JZtfCYf.png"),
+                placeholder: AssetImage("assets/placeholder_product.png"),
+                fit: BoxFit.fitWidth,
+                placeholderFit: BoxFit.fitWidth,
+                width: 80,
+                height: 80,
               ),
               PrimaryButton(
                 onPressed: () {
@@ -443,7 +451,10 @@ class _ProductsGridState extends State<_ProductsGrid> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SearchAndFilterRow(filterDropdown: filterDropdown),
+          SearchAndFilterRow(
+            filterDropdown: filterDropdown,
+            productController: widget.productController,
+          ),
           GridView.builder(
             shrinkWrap: true,
             itemCount: widget.productController.productList.length,
@@ -467,8 +478,10 @@ class _ProductsGridState extends State<_ProductsGrid> {
 }
 
 class SearchAndFilterRow extends StatelessWidget {
+  final ProductController productController;
   const SearchAndFilterRow({
     Key? key,
+    required this.productController,
     required this.filterDropdown,
   }) : super(key: key);
 
@@ -486,8 +499,8 @@ class SearchAndFilterRow extends StatelessWidget {
             children: [
               Visibility(
                 visible: Responsive.isDesktop(context),
-                child: const Text(
-                  "All Products in store (28)",
+                child: Text(
+                  "All Products in store (${productController.productList.length})",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w800,
@@ -548,9 +561,13 @@ class _ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Image.asset(
-                      "assets/mi_watch_img.png",
-                      scale: 1.5,
+                    FadeInImage(
+                      image: NetworkImage("https://i.imgur.com/JZtfCYf.png"),
+                      placeholder: AssetImage("assets/placeholder_product.png"),
+                      fit: BoxFit.fitWidth,
+                      placeholderFit: BoxFit.fitWidth,
+                      width: 200,
+                      height: 200,
                     ),
                   ],
                 ),

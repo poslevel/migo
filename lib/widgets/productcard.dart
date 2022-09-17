@@ -26,9 +26,18 @@ class ProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset(
-                        "assets/mi_watch_img.png",
-                        scale: Responsive.isMobile(context) ? 1 : 1.2,
+                      // Image.network(
+                      //   "https://i.imgur.com/JZtfCYf.png",
+                      //   scale: Responsive.isMobile(context) ? 1 : 1.2,
+                      // ),
+                      FadeInImage(
+                        image: NetworkImage("https://i.imgur.com/JZtfCYf.png"),
+                        placeholder:
+                            AssetImage("assets/placeholder_product.png"),
+                        fit: BoxFit.fitWidth,
+                        placeholderFit: BoxFit.fitWidth,
+                        width: 200,
+                        height: 200,
                       ),
                     ],
                   ),
