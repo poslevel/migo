@@ -59,16 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
         pageName: "Settings",
         content: Row(
           children: [
-            InkWell(
-              onTap: () {},
-              child: Card(
-                child: Column(
-                  children: const [
-                    Text("Settings page"),
-                  ],
-                ),
-              ),
-            ),
+            
           ],
         ),
       ),
