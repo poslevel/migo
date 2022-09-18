@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:migo/utils/theme_config.dart';
 import 'package:migo/view/products/billing/billing.dart';
-import 'package:migo/view/responsive.dart';
 import 'package:migo/view/splash.dart';
 import 'package:quick_actions/quick_actions.dart';
 
@@ -50,7 +49,7 @@ class _MiGoState extends State<MiGo> {
     });
     quickActions.initialize((type) {
       if (type == 'create_bill') {
-        Get.to(() => Billing(isMobile: true));
+        Get.to(() => const Billing(isMobile: true));
       }
     });
   }

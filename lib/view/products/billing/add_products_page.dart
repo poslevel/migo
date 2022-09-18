@@ -305,7 +305,7 @@ class _ProductToBeBilledListTileState extends State<ProductToBeBilledListTile> {
               ),
               PrimaryButton(
                 onPressed: () {
-                  var price_to_be_deducted = int.parse(widget
+                  var priceToBeDeducted = int.parse(widget
                       .invoiceController.productList[widget.index].sellingPrice
                       .toString()
                       .substring(
@@ -317,7 +317,7 @@ class _ProductToBeBilledListTileState extends State<ProductToBeBilledListTile> {
                               3));
                   widget.invoiceController.productList.removeAt(widget.index);
                   widget.invoiceController
-                      .removeFromTotal(price_to_be_deducted);
+                      .removeFromTotal(priceToBeDeducted);
                 },
                 // buttonTitle: "Remove product",
                 bgColor: const Color(0xffFFBBC1),
@@ -501,7 +501,7 @@ class SearchAndFilterRow extends StatelessWidget {
                 visible: Responsive.isDesktop(context),
                 child: Text(
                   "All Products in store (${productController.productList.length})",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w800,
                   ),

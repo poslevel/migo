@@ -117,10 +117,10 @@ class AnalyticsStatus extends StatelessWidget {
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          RevenueStatus(),
-          CustomersStatus(),
-          ProductSoldStatus(),
-          if (Responsive.isDesktop(context)) ProductsSoldByCategoryChart(),
+          const RevenueStatus(),
+          const CustomersStatus(),
+          const ProductSoldStatus(),
+          if (Responsive.isDesktop(context)) const ProductsSoldByCategoryChart(),
         ],
       ),
     );
