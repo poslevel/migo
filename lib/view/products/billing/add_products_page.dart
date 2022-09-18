@@ -145,7 +145,7 @@ class ProductsToBeBilledList extends StatelessWidget {
                 ),
                 PrimaryButton(
                   onPressed: () {
-                    tabController.animateTo(1);
+                    tabController.animateTo(Responsive.isMobile(context)?2:1);
                   },
                   buttonTitle: "Continue",
                   horzPad: 20,
