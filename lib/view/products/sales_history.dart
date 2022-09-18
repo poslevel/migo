@@ -3,14 +3,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:migo/controller/invoice_controller.dart';
 import 'package:migo/layout/layout.dart';
+import 'package:migo/models/invoice/invoice.dart';
 import 'package:migo/view/products/billing/billing.dart';
 import 'package:migo/view/products/billing/single_bill.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/buttons.dart';
 
-class SalesHistory extends StatelessWidget {
+class SalesHistory extends StatefulWidget {
   const SalesHistory({super.key});
+
+  @override
+  State<SalesHistory> createState() => _SalesHistoryState();
+}
+
+class _SalesHistoryState extends State<SalesHistory> {
+  final InvoiceController invoiceController = Get.put(InvoiceController());
+
+  @override
+  void initState() {
+    super.initState();
+    invoiceController.fetchAllInvoice();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +47,19 @@ class SalesHistory extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 10,
-                    itemBuilder: (context, index) => BillCard(
-                      price: index,
-                      status: "Paid",
-                      typeOfPayment: "Debit Card",
-                      customerName: "Hayat",
-                    ),
-                  ),
+                  child: Obx(() {
+                    if (invoiceController.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: invoiceController.salesList.length,
+                        itemBuilder: (context, index) => BillCard(
+                          invoice: invoiceController.salesList[index],
+                        ),
+                      );
+                    }
+                  }),
                 ),
                 if (Responsive.isDesktop(context) && false)
                   const Expanded(
@@ -83,18 +101,9 @@ class SalesHistoryEmptyState extends StatelessWidget {
 }
 
 class BillCard extends StatelessWidget {
-  final int price;
-  final String status;
-  final String typeOfPayment;
-  final String customerName;
-  const BillCard({
-    Key? key,
-    this.status = "Paid",
-    required this.price,
-    required this.typeOfPayment,
-    required this.customerName,
-  }) : super(key: key);
+  final Invoice invoice;
 
+  const BillCard({super.key, required this.invoice});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -113,15 +122,15 @@ class BillCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BillCardRow1(
-              price: price,
-              status: status,
+              price: invoice.netAmount?.toInt() ?? 0,
+              status: "paid",
             ),
             const SizedBox(height: 8),
             const BillCardRow2(),
             const SizedBox(height: 8),
             BillCardRow3(
-              typeOfPayment: typeOfPayment,
-              customerName: customerName,
+              typeOfPayment: invoice.invoiceType?.toString() ?? "",
+              customerName: invoice.clientName?.toString() ?? "",
             ),
           ],
         ),
