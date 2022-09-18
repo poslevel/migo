@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/invoice_controller.dart';
+import 'package:migo/view/products/billing/payment_success.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/buttons.dart';
 import 'package:migo/widgets/productsToBeBilledListTile.dart';
@@ -114,7 +115,9 @@ class _PaymentsPageState extends State<PaymentsPage> {
                 child: PrimaryButton(
                   bgColor: Color(0xffBEE29B),
                   textColor: Color(0xff0C0D16),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => PaymentSuccessPage());
+                  },
                   buttonTitle: "Cash payment",
                   iconLeft: Icon(Iconsax.moneys),
                   horzPad: 24,
