@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Functions {
   static String formatDate(DateTime date) {
@@ -38,6 +39,13 @@ class Functions {
           snackPosition: SnackPosition.BOTTOM);
     } catch (e) {
       Get.snackbar("ERROR", e.toString(), snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
+  static Future<void> launchURL(url) async {
+    final Uri _url = Uri.parse(url);
+    if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $_url';
     }
   }
 }

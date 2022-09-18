@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:migo/utils/functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductDescriptionLinkOpener extends StatelessWidget {
@@ -22,17 +23,10 @@ class ProductDescriptionLinkOpener extends StatelessWidget {
       child: IconButton(
         padding: const EdgeInsets.all(16),
         onPressed: () {
-          _launchUrl(url);
+          Functions.launchURL(url);
         },
         icon: const Icon(Iconsax.export_3),
       ),
     );
-  }
-}
-
-Future<void> _launchUrl(url) async {
-  final Uri _url = Uri.parse(url);
-  if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
-    throw 'Could not launch $_url';
   }
 }

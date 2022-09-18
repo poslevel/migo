@@ -64,6 +64,7 @@ dependencies:
   flutter_launcher_icons: ^0.10.0
   quick_actions: ^1.0.0
   share_plus: ^4.1.0
+  easy_table: ^2.0.1
 
 flutter_icons:
   android: "launcher_icon"
