@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:migo/models/authManager.dart';
 import 'package:migo/view/auth/login.dart';
 import 'package:migo/view/notification_page.dart';
 import 'package:migo/view/responsive.dart';
@@ -14,6 +15,7 @@ class TopAppBar extends StatefulWidget {
 }
 
 class _TopAppBarState extends State<TopAppBar> {
+  AuthenticationManager _authManager = Get.find();
   @override
   Widget build(BuildContext context) {
     String? chosenDropdownOption;
@@ -79,6 +81,7 @@ class _TopAppBarState extends State<TopAppBar> {
           },
         );
         if (value == "Logout") {
+          _authManager.logOut();
           Get.to(() => const LoginView());
         }
         if (value == "Notifications") {
