@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:migo/controller/invoice_controller.dart';
 import 'package:migo/view/products/sales%20history/sales_history.dart';
 import 'package:migo/widgets/buttons.dart';
 
-class SingleBill extends StatelessWidget {
-  const SingleBill({super.key});
+class SingleBill extends StatefulWidget {
+  final int index;
+  final InvoiceController invoiceController;
+  const SingleBill(
+      {super.key, required this.index, required this.invoiceController});
 
   @override
+  State<SingleBill> createState() => _SingleBillState();
+}
+
+class _SingleBillState extends State<SingleBill> {
+  @override
   Widget build(BuildContext context) {
+    var seletedBill = widget.invoiceController.salesList[widget.index];
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 48),
@@ -45,42 +55,30 @@ class SingleBill extends StatelessWidget {
                   ),
                   clipBehavior: Clip.hardEdge,
                   child: Column(
-                    children: const [
+                    children: [
                       BillDetailRow(
-                        property: "Amount",
-                        value: "₹1998",
+                        property: "Bill ID",
+                        value: seletedBill.invoiceNumber.toString(),
                       ),
                       BillDetailRow(
                         property: "Amount",
-                        value: "₹1998",
+                        value: seletedBill.netAmount.toString(),
                       ),
                       BillDetailRow(
-                        property: "Amount",
-                        value: "₹1998",
+                        property: "Type",
+                        value: seletedBill.invoiceType.toString(),
                       ),
                       BillDetailRow(
-                        property: "Amount",
-                        value: "₹1998",
+                        property: "Customer Name",
+                        value: seletedBill.clientName.toString(),
                       ),
                       BillDetailRow(
-                        property: "Amount",
-                        value: "₹1998",
+                        property: "POS operator",
+                        value: "Hayat",
                       ),
                       BillDetailRow(
-                        property: "Amount",
-                        value: "₹1998",
-                      ),
-                      BillDetailRow(
-                        property: "Amount",
-                        value: "₹1998",
-                      ),
-                      BillDetailRow(
-                        property: "Amount",
-                        value: "₹1998",
-                      ),
-                      BillDetailRow(
-                        property: "Amount",
-                        value: "₹1998",
+                        property: "Bill sent Via",
+                        value: "E-mail",
                       ),
                     ],
                   ),
@@ -102,12 +100,13 @@ class SingleBill extends StatelessWidget {
                   ),
                   clipBehavior: Clip.hardEdge,
                   child: ListView.builder(
-                    itemCount: 2,
+                    itemCount: seletedBill.items!.length,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) => const BillDetailRow(
-                      property: "Mi ka mast phone",
-                      value: "₹1998",
+                      // TODO: errors sambhal
+                      property: seletedBill.items[index].title,
+                      value: seletedBill.items[index].unitPrice,
                     ),
                   ),
                 ),

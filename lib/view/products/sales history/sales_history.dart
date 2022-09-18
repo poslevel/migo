@@ -57,21 +57,29 @@ class _SalesHistoryState extends State<SalesHistory> {
                         itemCount: invoiceController.salesList.length,
                         itemBuilder: (context, index) => BillCard(
                           invoice: invoiceController.salesList[index],
+                          index: index,
+                          invoiceController: invoiceController,
                         ),
                       );
                     }
                   }),
                 ),
-                if (Responsive.isDesktop(context) && false)
+                if (Responsive.isDesktop(context) &&
+                    (invoiceController.selectedInvoice == 0))
                   const Expanded(
                     flex: 2,
                     child: SalesHistoryEmptyState(),
                   ),
-                if (Responsive.isDesktop(context))
-                  const Expanded(
-                    flex: 2,
-                    child: SingleBill(),
-                  ),
+                if (Responsive.isDesktop(context) &&
+                    (invoiceController.selectedInvoice != 0))
+                  Expanded(
+                      flex: 2,
+                      child: Obx(
+                        () => SingleBill(
+                          index: invoiceController.selectedInvoice.value,
+                          invoiceController: invoiceController,
+                        ),
+                      )),
               ],
             ),
           )
@@ -103,13 +111,22 @@ class SalesHistoryEmptyState extends StatelessWidget {
 
 class BillCard extends StatelessWidget {
   final Invoice invoice;
+  final int index;
+  final InvoiceController invoiceController;
 
-  const BillCard({super.key, required this.invoice});
+  const BillCard(
+      {super.key,
+      required this.invoice,
+      this.index = 0,
+      required this.invoiceController});
   @override
   Widget build(BuildContext context) {
     return InkWell(
       hoverColor: const Color(0xff1F212E),
-      onTap: () {},
+      onTap: () {
+        invoiceController.setSelectedInvoice(index);
+        debugPrint(invoiceController.selectedInvoice.value.toString());
+      },
       child: Container(
         decoration: const BoxDecoration(
           border: Border.symmetric(

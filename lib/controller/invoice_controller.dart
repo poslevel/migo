@@ -19,11 +19,21 @@ class InvoiceController extends GetxController {
   var totalAmt = 0.obs;
   var productList = <Product>[].obs;
   var salesList = <Invoice>[].obs;
+  // for sales history purpose
+  var selectedInvoice = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
     _invoiceService = Get.put(InvoiceService());
+  }
+
+  // for sales history purpose
+  void setSelectedInvoice(int val) async {
+    selectedInvoice.value = val;
+    await Future.delayed(const Duration(milliseconds: 20), () {
+      update();
+    });
   }
 
   void setCustomer(
