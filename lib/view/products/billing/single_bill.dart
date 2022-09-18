@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:migo/view/products/sales_history.dart';
+import 'package:migo/view/products/sales%20history/sales_history.dart';
 import 'package:migo/widgets/buttons.dart';
 
 class SingleBill extends StatelessWidget {

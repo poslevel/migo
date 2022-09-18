@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:migo/utils/functions.dart';
 import 'package:migo/view/products/billing/billing.dart';
 import 'package:migo/view/products/product_replacement.dart';
-import 'package:migo/view/products/sales_history.dart';
+import 'package:migo/view/products/sales%20history/sales_history.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/product_page_cta_cards.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -47,8 +48,10 @@ class CTARow extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Get.to(() => const ProductReplacement(),
-                      transition: Transition.noTransition);
+                  // Get.to(() => const ProductReplacement(),
+                  //     transition: Transition.noTransition);
+                  Functions.launchURL(
+                      "https://www.mi.com/in/service/replacefaq/");
                 },
                 borderRadius: BorderRadius.circular(20),
                 child: Card(
