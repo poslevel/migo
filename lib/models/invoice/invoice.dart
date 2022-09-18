@@ -36,6 +36,7 @@ class Invoice {
   String? invoiceType;
   int? netAmount;
   List<Items>? items;
+  Map<String, dynamic>? itemsDetails;
 
   Invoice(
       {this.invoiceNumber,
@@ -84,8 +85,8 @@ class Invoice {
     data['client_country'] = clientCountry;
     data['invoice_type'] = invoiceType;
     data['net_amount'] = netAmount;
-    if (items != null) {
-      data['items'] = items!.map((v) => v.toJson()).toList();
+    if (itemsDetails != null) {
+      data['items'] = itemsDetails;
     }
     return data;
   }
