@@ -20,7 +20,6 @@
 - [Idea / Solution](#idea)
 - [Dependencies / Limitations](#limitations)
 - [Future Scope](#future_scope)
-- [Setting up a realistic local environment](#getting_started)
 - [Usage](#usage)
 - [Technology Stack](#tech_stack)
 - [Authors](#authors)
@@ -79,9 +78,6 @@ We will be creating a POS software which will be a web app, a desktop app that r
     - ```Swagger``` : [https://backpos.herokuapp.com/_platform/docs/v1/swagger/](https://backpos.herokuapp.com/_platform/docs/v1/swagger/)
     - ``` Postman``` : [https://documenter.getpostman.com/view/20830684/2s7Ymz8N6s](https://documenter.getpostman.com/view/20830684/2s7Ymz8N6s)
 
-<a name="getting_started"></a>
-
-## 👷‍♂️ Setting up a realistic local environment
 
 <a name="usage"></a>
 
