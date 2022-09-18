@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/invoice_controller.dart';
+import 'package:migo/models/invoice/invoice.dart';
 import 'package:migo/view/products/sales%20history/sales_history.dart';
 import 'package:migo/widgets/buttons.dart';
 
@@ -17,7 +18,7 @@ class SingleBill extends StatefulWidget {
 class _SingleBillState extends State<SingleBill> {
   @override
   Widget build(BuildContext context) {
-    var seletedBill = widget.invoiceController.salesList[widget.index];
+    Invoice seletedBill = widget.invoiceController.salesList[widget.index];
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 48),
@@ -72,11 +73,11 @@ class _SingleBillState extends State<SingleBill> {
                         property: "Customer Name",
                         value: seletedBill.clientName.toString(),
                       ),
-                      BillDetailRow(
+                      const BillDetailRow(
                         property: "POS operator",
                         value: "Hayat",
                       ),
-                      BillDetailRow(
+                      const BillDetailRow(
                         property: "Bill sent Via",
                         value: "E-mail",
                       ),
@@ -99,16 +100,13 @@ class _SingleBillState extends State<SingleBill> {
                     border: Border.all(color: const Color(0xff1F212E)),
                   ),
                   clipBehavior: Clip.hardEdge,
-                  // child: ListView.builder(
-                  //   itemCount: seletedBill.items!.length,
-                  //   shrinkWrap: true,
-                  //   physics: const NeverScrollableScrollPhysics(),
-                  //   itemBuilder: (context, index) => const BillDetailRow(
-                  //     // TODO: errors sambhal
-                  //     property: seletedBill.items[index].title,
-                  //     value: seletedBill.items[index].unitPrice,
-                  //   ),
-                  // ),
+                  child: ListView.builder(
+                    itemCount: seletedBill.items!.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, i) =>
+                        ItemDetailRow(item: seletedBill.items![i]),
+                  ),
                 ),
               ],
             ),
@@ -170,6 +168,38 @@ class BillDetailRow extends StatelessWidget {
           ),
           Text(
             value,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ItemDetailRow extends StatelessWidget {
+  final Items item;
+
+  const ItemDetailRow({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: const Color(0xff1F212E)),
+      ),
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            item.title.toString(),
+            style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Color(0xffB9B7FF)),
+          ),
+          Text(
+            item.netAmount.toString(),
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
         ],
