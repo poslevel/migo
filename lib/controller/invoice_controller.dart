@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
-import 'package:migo/models/invoice.dart';
+import 'package:migo/models/invoice/invoice.dart';
+
 import 'package:migo/models/product/product.dart';
-import 'package:migo/utils/functions.dart';
+import 'package:migo/service/invoice_service.dart';
 // import 'package:migo/service/product_service.dart';
 
 class InvoiceController extends GetxController {
   // late final ProductServices _productService;
+  late final InvoiceService _invoiceService;
   int id = 0;
   var isLoading = true.obs;
   String? customerName;
@@ -14,6 +16,13 @@ class InvoiceController extends GetxController {
   String? customerAddress;
   var totalAmt = 0.obs;
   var productList = <Product>[].obs;
+  var salesList = <Invoice>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _invoiceService = Get.put(InvoiceService());
+  }
 
   void setCustomer(
       String name, String phone, String email, String? address) async {
@@ -24,6 +33,18 @@ class InvoiceController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 20), () {
       update();
     });
+  }
+
+  void fetchAllInvoice() async {
+    try {
+      isLoading(true);
+      var invoices = await _invoiceService.getAllInvoice();
+      if (invoices != null) {
+        salesList.value = invoices;
+      }
+    } finally {
+      isLoading(false);
+    }
   }
 
   void setTotal(int val) async {
@@ -61,17 +82,4 @@ class InvoiceController extends GetxController {
       update();
     });
   }
-
-  Invoice generatePreviewInvoice() => Invoice(
-        id: id,
-        date: Functions.formatDate(DateTime.now()),
-        customerName: customerName,
-        customerEmail: customerEmail,
-        customerAddress: customerAddress,
-        customerPhone: customerPhone,
-        store: "Hayat Store",
-        posOperator: "Hayat Tamboli",
-        products: productList,
-        totalAmount: totalAmt.toString(),
-      );
 }
