@@ -64,22 +64,23 @@ class _SalesHistoryState extends State<SalesHistory> {
                     }
                   }),
                 ),
-                if (Responsive.isDesktop(context) &&
-                    (invoiceController.selectedInvoice == 0))
-                  const Expanded(
-                    flex: 2,
-                    child: SalesHistoryEmptyState(),
-                  ),
-                if (Responsive.isDesktop(context) &&
-                    (invoiceController.selectedInvoice != 0))
-                  Expanded(
-                      flex: 2,
-                      child: Obx(
-                        () => SingleBill(
-                          index: invoiceController.selectedInvoice.value,
-                          invoiceController: invoiceController,
-                        ),
-                      )),
+                if (Responsive.isDesktop(context))
+                  Obx(() {
+                    if (invoiceController.selectedInvoice.value == -1)
+                      return Expanded(
+                        flex: 2,
+                        child: SalesHistoryEmptyState(),
+                      );
+                    else
+                      return Expanded(
+                          flex: 2,
+                          child: Obx(
+                            () => SingleBill(
+                              index: invoiceController.selectedInvoice.value,
+                              invoiceController: invoiceController,
+                            ),
+                          ));
+                  }),
               ],
             ),
           )

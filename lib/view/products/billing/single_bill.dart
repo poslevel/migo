@@ -99,16 +99,16 @@ class _SingleBillState extends State<SingleBill> {
                     border: Border.all(color: const Color(0xff1F212E)),
                   ),
                   clipBehavior: Clip.hardEdge,
-                  child: ListView.builder(
-                    itemCount: seletedBill.items!.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => const BillDetailRow(
-                      // TODO: errors sambhal
-                      property: seletedBill.items[index].title,
-                      value: seletedBill.items[index].unitPrice,
-                    ),
-                  ),
+                  // child: ListView.builder(
+                  //   itemCount: seletedBill.items!.length,
+                  //   shrinkWrap: true,
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  //   itemBuilder: (context, index) => const BillDetailRow(
+                  //     // TODO: errors sambhal
+                  //     property: seletedBill.items[index].title,
+                  //     value: seletedBill.items[index].unitPrice,
+                  //   ),
+                  // ),
                 ),
               ],
             ),

@@ -20,7 +20,7 @@ class InvoiceController extends GetxController {
   var productList = <Product>[].obs;
   var salesList = <Invoice>[].obs;
   // for sales history purpose
-  var selectedInvoice = 0.obs;
+  var selectedInvoice = (-1).obs;
 
   @override
   void onInit() {
