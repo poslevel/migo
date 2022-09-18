@@ -4,8 +4,7 @@
 </p>
 
 <p align="center">
-<img src="./assets/migo_logo.png" alt="Project logo"></a>
-<p  align="center">A POS Software that works everywhere seamlessly</p>
+<h2 align="center">A POS Software that works everywhere seamlessly</h2>
 
 <div align="center">
 
@@ -62,6 +61,40 @@ We will be creating a POS software which will be a web app, a desktop app that r
 <a name="limitations"></a>
 
 ## 🚧 Dependencies / Limitations
+
+```dart
+  cupertino_icons: ^1.0.2
+  # Cool icons
+  iconsax: ^0.0.8
+  # state management using get
+  get: ^4.6.5
+  get_storage:
+  # To check connectivity
+  connectivity_plus: ^2.3.6+1
+  # For charts
+  fl_chart: ^0.55.1
+  syncfusion_flutter_charts: ^20.2.49
+  charts_flutter: ^0.12.0
+  # sqllite
+  sqflite: ^2.0.3+1
+  # UI related
+  toggle_switch: ^2.0.1
+  # to launch url
+  url_launcher: ^6.1.5
+  # powerful Http client for Dart
+  dio: ^4.0.6
+  # for printing or converting things to pdf
+  printing: ^5.9.3
+  # for using razor pay
+  razorpay_flutter: ^1.3.2
+  permission_handler: ^10.0.0
+  quantity_input: ^1.0.2
+  flutter_launcher_icons: ^0.10.0
+  quick_actions: ^1.0.0
+  share_plus: ^4.1.0
+  easy_table: ^2.0.1
+  introduction_screen: ^3.0.2
+```
 
 <a name="future_scope"></a>
 

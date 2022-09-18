@@ -73,6 +73,7 @@ class InvoiceController extends GetxController {
 
         item.add(it);
       }
+
       Map<String, dynamic> sample = {
         'client_name': customerName,
         'client_email': customerEmail,
