@@ -181,7 +181,7 @@ class _BillingState extends State<Billing> with SingleTickerProviderStateMixin {
                 tabController: _tabController,
                 invoiceController: invoiceController,
               ),
-              const PaymentsPage(),
+              PaymentsPage(invoiceController: invoiceController),
             ],
           ),
         ),
