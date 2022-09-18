@@ -85,6 +85,13 @@ We will be creating a POS software which will be a web app, a desktop app that r
 
 <a name="usage"></a>
 
+## 👷‍♂️ Setup
+
+
+```sh
+flutter pub get
+```
+
 ## 👷‍♂️ Usage
 
 ```sh
@@ -95,6 +102,13 @@ flutter run
 
 ```sh
 flutter format .
+```
+
+## 🧪 Test
+
+```sh
+flutter analyze .
+flutter test
 ```
 
 <a name="tech_stack"></a>
