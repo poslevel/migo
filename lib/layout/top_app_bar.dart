@@ -82,7 +82,6 @@ class _TopAppBarState extends State<TopAppBar> {
         );
         if (value == "Logout") {
           _authManager.logOut();
-          Get.to(() => const LoginView());
         }
         if (value == "Notifications") {
           Get.to(() => const NotificationsPage());
