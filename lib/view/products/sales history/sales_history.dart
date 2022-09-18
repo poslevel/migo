@@ -8,6 +8,7 @@ import 'package:migo/layout/layout.dart';
 import 'package:migo/models/invoice/invoice.dart';
 import 'package:migo/view/products/billing/billing.dart';
 import 'package:migo/view/products/billing/single_bill.dart';
+import 'package:migo/view/products/sales%20history/mobile_single_bill.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/buttons.dart';
 
@@ -127,6 +128,12 @@ class BillCard extends StatelessWidget {
       onTap: () {
         invoiceController.setSelectedInvoice(index);
         debugPrint(invoiceController.selectedInvoice.value.toString());
+        if (Responsive.isMobile(context)) {
+          Get.to(() => MobileSingleBill(
+                index: invoiceController.selectedInvoice.value,
+                invoiceController: invoiceController,
+              ));
+        }
       },
       child: Container(
         decoration: const BoxDecoration(
