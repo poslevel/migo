@@ -62,7 +62,7 @@ class InvoiceController extends GetxController {
   Future<String?> createInvoice() async {
     try {
       isLoading(true);
-      List<Items> item = [];
+      List<Map<String, dynamic>> item = [];
       for (int i = 0; i < productList.length; i++) {
         Map<String, dynamic> it = {
           'title': productList[i].name,
@@ -71,7 +71,7 @@ class InvoiceController extends GetxController {
           'net_amount': productList[i].sellingPrice,
         };
 
-        item.add(Items.fromJson(it));
+        item.add(it);
       }
       Map<String, dynamic> sample = {
         'client_name': customerName,
