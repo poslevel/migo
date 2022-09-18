@@ -31,9 +31,9 @@ class ProductCard extends StatelessWidget {
                       //   scale: Responsive.isMobile(context) ? 1 : 1.2,
                       // ),
                       FadeInImage(
-                        image: NetworkImage("https://i.imgur.com/JZtfCYf.png"),
+                        image: NetworkImage(product.image.toString()),
                         placeholder:
-                            AssetImage("assets/placeholder_product.png"),
+                            const AssetImage("assets/placeholder_product.png"),
                         fit: BoxFit.fitWidth,
                         placeholderFit: BoxFit.fitWidth,
                         width: 200,
@@ -99,7 +99,7 @@ class ProductCard extends StatelessWidget {
               ),
             ),
           ),
-          ProductDescriptionLinkOpener(url: product.description.toString()),
+          ProductDescriptionLinkOpener(url: product.url.toString()),
         ],
       ),
     );

@@ -146,7 +146,8 @@ class ProductsToBeBilledList extends StatelessWidget {
                 ),
                 PrimaryButton(
                   onPressed: () {
-                    tabController.animateTo(Responsive.isMobile(context)?2:1);
+                    tabController
+                        .animateTo(Responsive.isMobile(context) ? 2 : 1);
                   },
                   buttonTitle: "Continue",
                   horzPad: 20,
@@ -159,8 +160,6 @@ class ProductsToBeBilledList extends StatelessWidget {
     );
   }
 }
-
-
 
 class _ProductsGrid extends StatefulWidget {
   final ProductController productController;
@@ -391,8 +390,9 @@ class _ProductCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     FadeInImage(
-                      image: NetworkImage("https://i.imgur.com/JZtfCYf.png"),
-                      placeholder: AssetImage("assets/placeholder_product.png"),
+                      image: NetworkImage(product.image.toString()),
+                      placeholder:
+                          const AssetImage("assets/placeholder_product.png"),
                       fit: BoxFit.fitWidth,
                       placeholderFit: BoxFit.fitWidth,
                       width: 200,
@@ -484,7 +484,7 @@ class _ProductCard extends StatelessWidget {
             ),
           ),
         ),
-        ProductDescriptionLinkOpener(url: product.description.toString()),
+        ProductDescriptionLinkOpener(url: product.url.toString()),
       ],
     );
   }
