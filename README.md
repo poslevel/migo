@@ -4,8 +4,7 @@
 </p>
 
 <p align="center">
-<img src="./assets/migo_logo.png" alt="Project logo"></a>
-<p  align="center">A POS Software that works everywhere seamlessly</p>
+<h2 align="center">A POS Software that works everywhere seamlessly</h2>
 
 <div align="center">
 
