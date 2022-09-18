@@ -70,7 +70,14 @@ We will be creating a POS software which will be a web app, a desktop app that r
 
 - Better analytics 📈📊
 
+## Documentation
+- To run the flutter app [Read](#usage)
 
+- The serverside of the application is hosted on ```Heroku```
+  - To Access ```Admin``` : [https://backpos.herokuapp.com/admin/](https://backpos.herokuapp.com/admin/)
+  - To Read API Docs : 
+    - ```Swagger``` : [https://backpos.herokuapp.com/_platform/docs/v1/swagger/](https://backpos.herokuapp.com/_platform/docs/v1/swagger/)
+    - ``` Postman``` : [https://documenter.getpostman.com/view/20830684/2s7Ymz8N6s](https://documenter.getpostman.com/view/20830684/2s7Ymz8N6s)
 
 <a name="getting_started"></a>
 
