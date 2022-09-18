@@ -96,11 +96,12 @@ flutter format .
 
 - Flutter
   - Dart
-- Django
-  - python
+- Django Rest Framework
+  - Python
+  - PostgreSQL
 - Heroku
 - Postman
-- swagger
+- Swagger
 
 <a name="authors"></a>
 
