@@ -45,6 +45,7 @@ class _SalesHistoryState extends State<SalesHistory> {
                 ? MediaQuery.of(context).size.height - 150
                 : MediaQuery.of(context).size.height - 240,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Obx(() {
