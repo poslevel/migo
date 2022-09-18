@@ -24,7 +24,10 @@ class PaymentsPage extends StatefulWidget {
 
 class _PaymentsPageState extends State<PaymentsPage> {
   // ignore: unnecessary_const, unused_field
-  static const platform = const MethodChannel("razorpay_flutter");
+  final InvoiceController invoiceGenerateController =
+      Get.put(InvoiceController());
+
+  static const platform = MethodChannel("razorpay_flutter");
 
   var _razorpay = Razorpay();
 
@@ -44,17 +47,20 @@ class _PaymentsPageState extends State<PaymentsPage> {
   }
 
   void openCheckout() async {
+    String? orderId = await invoiceGenerateController.createInvoice();
     var options = {
       'key': 'rzp_test_9rAnsAfrRv0Epc',
       'amount': 11,
       'name': 'MiGo',
-      'description': 'Fine T-Shirt',
+      'description': '',
       'retry': {'enabled': true, 'max_count': 1},
+      'order_id': orderId,
       'send_sms_hash': true,
       'prefill': {'contact': '7887537943', 'email': 'hayat.tamboli@gmail.com'},
       'external': {
         'wallets': ['paytm']
-      }
+      },
+      'theme': {"backdrop_color": "#ffF1C17a"}
     };
 
     try {
