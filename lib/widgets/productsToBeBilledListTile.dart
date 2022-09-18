@@ -141,14 +141,14 @@ class _ProductToBeBilledListTileState extends State<ProductToBeBilledListTile> {
               //   "assets/mi_watch_img.png",
               //   scale: 2.5,
               // ),
-              FadeInImage(
-                image: NetworkImage("https://i.imgur.com/JZtfCYf.png"),
-                placeholder: AssetImage("assets/placeholder_product.png"),
-                fit: BoxFit.fitWidth,
-                placeholderFit: BoxFit.fitWidth,
-                width: 80,
-                height: 80,
-              ),
+              // FadeInImage(
+              //   image: NetworkImage(widget.invoiceController.productList[widget.index].image.toString()),
+              //   placeholder: AssetImage("assets/placeholder_product.png"),
+              //   fit: BoxFit.fitWidth,
+              //   placeholderFit: BoxFit.fitWidth,
+              //   width: 80,
+              //   height: 80,
+              // ),
               PrimaryButton(
                 onPressed: () {
                   var priceToBeDeducted = int.parse(widget
