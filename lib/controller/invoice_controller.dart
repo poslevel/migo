@@ -1,3 +1,5 @@
+// ignore_for_file: equal_elements_in_set
+
 import 'package:get/get.dart';
 import 'package:migo/models/invoice/invoice.dart';
 
@@ -41,6 +43,38 @@ class InvoiceController extends GetxController {
       var invoices = await _invoiceService.getAllInvoice();
       if (invoices != null) {
         salesList.value = invoices;
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<String?> createInvoice() async {
+    try {
+      isLoading(true);
+      Map<String, dynamic> sample = {
+        'client_name': customerName,
+        'client_email': customerEmail,
+        'client_number': customerName,
+        'client_address1': customerAddress,
+        'client_address2': "",
+        'client_zipcode': "",
+        'client_place': "",
+        'client_country': "",
+        'invoice_type': "invoice",
+        'net_amount': totalAmt.toInt(),
+        'items': [],
+      };
+      var details =
+          await _invoiceService.addInvoice(InvoiceCreation.fromJson(sample));
+      print("==================================" +
+          details.toString() +
+          "===========================");
+      if (details != null) {
+        print("-------------------------------------------------------" +
+            details.invoiceNumber.toString() +
+            "----------------------------------------- ");
+        return details.invoiceNumber.toString();
       }
     } finally {
       isLoading(false);
