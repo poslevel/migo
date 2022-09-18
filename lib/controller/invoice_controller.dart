@@ -62,6 +62,17 @@ class InvoiceController extends GetxController {
   Future<String?> createInvoice() async {
     try {
       isLoading(true);
+      List<Items> item = [];
+      for (int i = 0; i < productList.length; i++) {
+        Map<String, dynamic> it = {
+          'title': productList[i].name,
+          'quantity': 1,
+          'unit_price': productList[i].sellingPrice,
+          'net_amount': productList[i].sellingPrice,
+        };
+
+        item.add(Items.fromJson(it));
+      }
       Map<String, dynamic> sample = {
         'client_name': customerName,
         'client_email': customerEmail,
@@ -73,22 +84,18 @@ class InvoiceController extends GetxController {
         'client_country': "",
         'invoice_type': "invoice",
         'net_amount': totalAmt.toInt(),
-        'items': [],
+        'items': item,
       };
+
       var details =
           await _invoiceService.addInvoice(InvoiceCreation.fromJson(sample));
-      print("==================================" +
-          details.toString() +
-          "===========================");
       if (details != null) {
-        print("-------------------------------------------------------" +
-            details.invoiceNumber.toString() +
-            "----------------------------------------- ");
         return details.invoiceNumber.toString();
       }
     } finally {
       isLoading(false);
     }
+    return null;
   }
 
   void setTotal(int val) async {
