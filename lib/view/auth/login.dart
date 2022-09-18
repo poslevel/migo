@@ -172,8 +172,8 @@ class _LoginViewState extends State<LoginView> {
                           return 'Please enter some text';
                         } else if (value.length < 7) {
                           return 'at least enter 6 characters';
-                        } else if (value.length > 13) {
-                          return 'maximum character is 13';
+                        } else if (value.length > 17) {
+                          return 'maximum character is 17';
                         }
                         return null;
                       },

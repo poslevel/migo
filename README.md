@@ -1,8 +1,10 @@
 <p align="center">
-<img src="./assets/migo_logo.png" alt="Project logo"></a>
+<img src="./assets/file_cover.png" alt="Project logo"></a>
 </p>
-<h1 align="center">MiGo</h1>
+</p>
 
+<p align="center">
+<img src="./assets/migo_logo.png" alt="Project logo"></a>
 <p  align="center">A POS Software that works everywhere seamlessly</p>
 
 <div align="center">
