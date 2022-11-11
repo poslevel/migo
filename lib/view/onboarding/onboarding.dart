@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:migo/view/products/productpage.dart';
+import 'package:migo/view/products/main/product_page.dart';
 import 'package:migo/view/responsive.dart';
 
 class Onboarding extends StatefulWidget {
@@ -18,7 +18,7 @@ class _OnboardingState extends State<Onboarding> {
 
   void _onIntroEnd(context) {
     onboardingOnce.write('onboarded', true);
-    Get.to(() => ProductsPage());
+    Get.to(() => const ProductsPage());
   }
 
   Widget _buildImage(String assetName, [double width = 350]) {
@@ -29,7 +29,7 @@ class _OnboardingState extends State<Onboarding> {
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(fontSize: 19.0);
 
-    const pageDecoration = const PageDecoration(
+    const pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
       bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
@@ -39,7 +39,7 @@ class _OnboardingState extends State<Onboarding> {
 
     return IntroductionScreen(
       key: introKey,
-      globalBackgroundColor: Color(0xff0C0D16),
+      globalBackgroundColor: const Color(0xff0C0D16),
       globalHeader: Align(
         alignment: Alignment.topRight,
         child: SafeArea(

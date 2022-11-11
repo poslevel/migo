@@ -7,6 +7,7 @@ class ProductController extends GetxController {
   RxInt quantity = 0.obs;
   var isLoading = true.obs;
   var productList = <Product>[].obs;
+  var searchList = <Product>[].obs;
 
   @override
   void onInit() {
@@ -33,6 +34,7 @@ class ProductController extends GetxController {
       var products = await _productService.fetchAllProducts();
       if (products != null) {
         productList.value = products;
+        searchList.value = products;
       }
     } finally {
       isLoading(false);

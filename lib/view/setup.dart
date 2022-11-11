@@ -4,7 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:migo/models/authManager.dart';
 import 'package:migo/view/auth/login.dart';
 import 'package:migo/view/onboarding/onboarding.dart';
-import 'package:migo/view/products/productpage.dart';
+import 'package:migo/view/products/main/product_page.dart';
 
 class OnStart extends StatelessWidget {
   const OnStart({Key? key}) : super(key: key);

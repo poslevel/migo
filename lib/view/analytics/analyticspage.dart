@@ -1,16 +1,17 @@
 // ignore_for_file: depend_on_referenced_packages, prefer_interpolation_to_compose_strings, prefer_adjacent_string_concatenation
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:migo/layout/layout.dart';
+import 'package:migo/view/layout/layout.dart';
 import 'package:migo/view/responsive.dart';
-import 'package:migo/widgets/billing_page_divider.dart';
+import 'package:migo/view/products/billing/widgets/page_divider.dart';
 import 'package:migo/widgets/buttons.dart';
 import 'package:migo/widgets/charts/products_sold_line_chart.dart';
 import 'package:migo/widgets/charts/revenue_line_chart.dart';
 import 'package:migo/widgets/charts/customers_line_chart.dart';
 import 'package:migo/widgets/charts/piechart.dart';
-import 'package:migo/widgets/printable_data.dart';
+import 'package:migo/view/analytics/widgets/report_printable_data.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -27,7 +28,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
   Widget build(BuildContext context) {
     return AppLayout(
       activeTab: 1,
-      pageName: "Analytics",
+      pageName: "analytics".tr,
       content: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(!Responsive.isMobile(context) ? 0 : 8.0),
@@ -72,10 +73,10 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                       textColor: const Color(0xff1F212E),
                       bgColor: const Color(0xffBEE4FF),
                     ),
-                  )
+                  ),
                 ],
               ),
-              const BillingPageDivider(),
+              const PageDivider(),
               const SizedBox(height: 32),
               const Text("Status",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
@@ -96,7 +97,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
     doc.addPage(pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
-          return buildPrintableData(image);
+          return buildPrintableReport(image);
         }));
     await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async => doc.save());
@@ -120,7 +121,8 @@ class AnalyticsStatus extends StatelessWidget {
           const RevenueStatus(),
           const CustomersStatus(),
           const ProductSoldStatus(),
-          if (Responsive.isDesktop(context)) const ProductsSoldByCategoryChart(),
+          if (Responsive.isDesktop(context))
+            const ProductsSoldByCategoryChart(),
         ],
       ),
     );

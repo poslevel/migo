@@ -8,17 +8,20 @@ class Product {
   int? stockAmount;
   String? url;
   String? image;
+  int? qty;
 
-  Product(
-      {this.id,
-      this.name,
-      this.description,
-      this.category,
-      this.price,
-      this.sellingPrice,
-      this.stockAmount,
-      this.url,
-      this.image});
+  Product({
+    this.id,
+    this.name,
+    this.description,
+    this.category,
+    this.price,
+    this.sellingPrice,
+    this.stockAmount,
+    this.url,
+    this.image,
+    this.qty,
+  });
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -30,6 +33,7 @@ class Product {
     stockAmount = json['stock_amount'];
     url = json['url'];
     image = json['image'];
+    qty = json['qty'];
   }
 
   Map<String, dynamic> toJson() {
@@ -43,6 +47,7 @@ class Product {
     data['stock_amount'] = stockAmount;
     data['url'] = url;
     data['image'] = image;
+    data['qty'] = qty;
     return data;
   }
 }

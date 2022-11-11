@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/simple_ui_controller.dart';
 import 'package:migo/view/auth/login.dart';
-import 'package:migo/view/products/productpage.dart';
+import 'package:migo/view/products/main/product_page.dart';
 import 'package:migo/view/responsive.dart';
 import 'package:migo/widgets/buttons.dart';
 

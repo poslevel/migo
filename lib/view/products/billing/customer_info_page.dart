@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:migo/controller/invoice_controller.dart';
 import 'package:migo/view/responsive.dart';
-import 'package:migo/widgets/billing_page_divider.dart';
+import 'package:migo/view/products/billing/widgets/page_divider.dart';
 import 'package:migo/widgets/buttons.dart';
 
 class CustomerInfoPage extends StatefulWidget {
@@ -31,14 +31,13 @@ class CustomerInfoPage extends StatefulWidget {
 }
 
 class _CustomerInfoPageState extends State<CustomerInfoPage> {
-  var delivery = false;
   @override
   Widget build(BuildContext context) {
     return Form(
       key: widget.formkey,
       child: Column(
         children: [
-          const BillingPageDivider(),
+          const PageDivider(),
           Expanded(
             child: SingleChildScrollView(
               child: SizedBox(
@@ -46,12 +45,22 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
                     ? MediaQuery.of(context).size.width / 2
                     : null,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const Text(
+                      "Customer Information",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                    ),
+                    const Divider(
+                      color: Colors.white,
+                    ),
                     Padding(
-                      padding: const EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(8),
                       child: TextFormField(
+                        autofocus: true,
                         decoration: const InputDecoration(
-                            icon: Icon(Iconsax.user_octagon),
+                            prefixIcon: Icon(Iconsax.user_octagon),
                             label: Text("Customer Name"),
                             hintText: "Jhon Doe"),
                         controller: widget.nameController,
@@ -64,10 +73,10 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(8),
                       child: TextFormField(
                         decoration: const InputDecoration(
-                          icon: Icon(Iconsax.sms),
+                          prefixIcon: Icon(Iconsax.sms),
                           label: Text("E-mail"),
                           hintText: "jhon.doe@example.com",
                         ),
@@ -85,10 +94,10 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(8),
                       child: TextFormField(
                         decoration: const InputDecoration(
-                            icon: Icon(Iconsax.call),
+                            prefixIcon: Icon(Iconsax.call),
                             label: Text("Phone Number"),
                             hintText: "9553052451"),
                         controller: widget.phonenumberController,
@@ -105,33 +114,15 @@ class _CustomerInfoPageState extends State<CustomerInfoPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(8),
                       child: TextFormField(
                         maxLines: 3,
                         decoration: const InputDecoration(
-                            icon: Icon(Iconsax.location),
+                            prefixIcon: Icon(Iconsax.location),
                             label: Text("Address"),
                             hintText: "Where does your customer live"),
                         controller: widget.addressController,
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          shape: const CircleBorder(),
-                          activeColor: Theme.of(context)
-                              .buttonTheme
-                              .colorScheme!
-                              .primary,
-                          value: delivery,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              delivery = value!;
-                            });
-                          },
-                        ),
-                        const Text("Get it delivered to the customer")
-                      ],
                     ),
                     PrimaryButton(
                       onPressed: () {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:migo/controller/product_controller.dart';
 import 'package:migo/models/authManager.dart';
 import 'package:migo/view/setup.dart';
 
 class SplashView extends StatelessWidget {
   final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
+  final ProductController productController = Get.put(ProductController());
 
   SplashView({super.key});
 
@@ -12,6 +14,7 @@ class SplashView extends StatelessWidget {
     _authmanager.checkLoginStatus();
 
     //Simulate other services for 3 seconds
+    productController.fetchAllProducts();
     await Future.delayed(const Duration(seconds: 3));
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:migo/layout/layout.dart';
+import 'package:get/get.dart';
+import 'package:migo/view/layout/layout.dart';
 
 class ProductReplacement extends StatelessWidget {
   const ProductReplacement({super.key});
@@ -9,7 +10,7 @@ class ProductReplacement extends StatelessWidget {
     return AppLayout(
       activeTab: 1,
       content: Container(),
-      pageName: "Product Replacement",
+      pageName: "product_replacement".tr,
     );
   }
 }

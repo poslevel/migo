@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Items {
   String? title;
   int? quantity;
@@ -158,7 +160,7 @@ class InvoiceCreation {
 
 class InvoiceApiHandler {
   int? count;
-  int? next;
+  dynamic next;
   int? previous;
   List<Invoice>? results;
 
@@ -166,6 +168,13 @@ class InvoiceApiHandler {
 
   InvoiceApiHandler.fromJson(Map<String, dynamic> json) {
     count = json['count'];
+    // debugPrint("🎅🎅" + json['next']);
+    // if (json['next'] is int) {
+    //   debugPrint("👼👼👼json['next'] is int");
+    // }
+    // if (json['next'] is String) {
+    //   debugPrint("👼👼👼 json['next'] is String");
+    // }
     next = json['next'];
     previous = json['previous'];
     if (json['results'] != null) {

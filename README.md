@@ -8,7 +8,7 @@
 
 <div align="center">
 
-[![Hackathon](https://img.shields.io/badge/hackathon-Ode2Create%202.0-orange.svg)](https://hacknu2-0.github.io/)
+[![Hackathon](https://img.shields.io/badge/hackathon-Ode2Code%202.0-orange.svg)](https://hacknu2-0.github.io/)
 
 </div>
 

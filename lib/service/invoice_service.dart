@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get_connect/connect.dart' hide Response;
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:dio/dio.dart';
@@ -18,7 +19,7 @@ class InvoiceService extends GetConnect with CacheManager {
     Response response =
         await dio.post(invoiceCreation, data: json.encode(model.toJson()));
     if (response.statusCode == HttpStatus.created) {
-      print(response.data.toString());
+      debugPrint(response.data.toString());
       return Invoice.fromJson(response.data);
     } else {
       return null;

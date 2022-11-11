@@ -66,9 +66,13 @@ class InvoiceController extends GetxController {
       for (int i = 0; i < productList.length; i++) {
         Map<String, dynamic> it = {
           'title': productList[i].name,
-          'quantity': 1,
+          'quantity': productList[i].qty,
           'unit_price': productList[i].sellingPrice,
-          'net_amount': productList[i].sellingPrice,
+          'net_amount': (int.parse(productList[i]
+                      .sellingPrice!
+                      .substring(0, productList[i].sellingPrice!.length - 3)) *
+                  productList[i].qty!)
+              .toString(),
         };
 
         item.add(it);
@@ -95,6 +99,7 @@ class InvoiceController extends GetxController {
       }
     } finally {
       isLoading(false);
+      fetchAllInvoice();
     }
     return null;
   }
